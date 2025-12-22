@@ -1,74 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
-import { Calendar, MapPin, Clock, ArrowRight, Filter } from "lucide-react";
+import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-
-const upcomingEvents = [
-  {
-    id: 1,
-    title: "Tech Innovation Summit 2025",
-    date: "Jan 15, 2025",
-    time: "9:00 AM",
-    location: "Main Auditorium",
-    type: "Conference",
-    featured: true,
-    description:
-      "Join us for an inspiring day of tech talks, networking, and innovation showcases featuring industry leaders and researchers.",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=400&fit=crop",
-  },
-  {
-    id: 2,
-    title: "AI & Machine Learning Workshop",
-    date: "Jan 22, 2025",
-    time: "2:00 PM",
-    location: "Lab 302",
-    type: "Workshop",
-    featured: false,
-    description: "Hands-on workshop covering neural networks and deep learning fundamentals with practical exercises.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=400&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Robotics Competition",
-    date: "Feb 5, 2025",
-    time: "10:00 AM",
-    location: "Engineering Block",
-    type: "Competition",
-    featured: false,
-    description: "Annual robotics challenge with teams competing in autonomous navigation and obstacle courses.",
-    image: "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f?w=800&h=400&fit=crop",
-  },
-];
-
-const pastEvents = [
-  {
-    id: 4,
-    title: "Hackathon 2024",
-    date: "Nov 10, 2024",
-    type: "Hackathon",
-    description: "48-hour coding marathon with 50+ participants and industry mentors.",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=400&fit=crop",
-  },
-  {
-    id: 5,
-    title: "IoT Workshop Series",
-    date: "Oct 15, 2024",
-    type: "Workshop",
-    description: "Three-part workshop on building IoT solutions with Arduino and Raspberry Pi.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop",
-  },
-  {
-    id: 6,
-    title: "Industry Talk: Future of Tech",
-    date: "Sep 20, 2024",
-    type: "Talk",
-    description: "Guest speakers from leading tech companies sharing insights on emerging technologies.",
-    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=400&fit=crop",
-  },
-];
+import { upcomingEvents, pastEvents } from "@/data/events";
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
@@ -196,10 +134,12 @@ const Events = () => {
                             <span>{event.location}</span>
                           </div>
                         </div>
-                        <Button variant="outline_glow" className="w-fit group">
-                          Register Now
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        <Link to={`/events/${event.slug}`}>
+                          <Button variant="outline_glow" className="w-fit group">
+                            View Details
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </motion.div>
@@ -216,29 +156,31 @@ const Events = () => {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="rounded-2xl bg-card border border-border/50 overflow-hidden card-hover"
                   >
-                    <div className="aspect-video overflow-hidden">
-                      <img
-                        src={event.image}
-                        alt={event.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="px-3 py-1 rounded-full bg-secondary text-xs font-medium">
-                          {event.type}
-                        </span>
-                        <span className="text-muted-foreground text-sm">
-                          {event.date}
-                        </span>
+                    <Link to={`/events/${event.slug}`}>
+                      <div className="aspect-video overflow-hidden">
+                        <img
+                          src={event.image}
+                          alt={event.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      <h3 className="font-display font-semibold text-lg mb-2">
-                        {event.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm">
-                        {event.description}
-                      </p>
-                    </div>
+                      <div className="p-6">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="px-3 py-1 rounded-full bg-secondary text-xs font-medium">
+                            {event.type}
+                          </span>
+                          <span className="text-muted-foreground text-sm">
+                            {event.date}
+                          </span>
+                        </div>
+                        <h3 className="font-display font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+                          {event.title}
+                        </h3>
+                        <p className="text-muted-foreground text-sm">
+                          {event.description}
+                        </p>
+                      </div>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
