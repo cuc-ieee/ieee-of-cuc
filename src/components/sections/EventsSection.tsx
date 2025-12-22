@@ -1,39 +1,10 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const events = [
-  {
-    title: "Tech Innovation Summit 2025",
-    date: "Jan 15, 2025",
-    time: "9:00 AM",
-    location: "Main Auditorium",
-    type: "Conference",
-    featured: true,
-    description:
-      "Join us for an inspiring day of tech talks, networking, and innovation showcases.",
-  },
-  {
-    title: "AI & Machine Learning Workshop",
-    date: "Jan 22, 2025",
-    time: "2:00 PM",
-    location: "Lab 302",
-    type: "Workshop",
-    featured: false,
-    description: "Hands-on workshop covering neural networks and deep learning fundamentals.",
-  },
-  {
-    title: "Robotics Competition",
-    date: "Feb 5, 2025",
-    time: "10:00 AM",
-    location: "Engineering Block",
-    type: "Competition",
-    featured: false,
-    description: "Annual robotics challenge with teams competing in autonomous navigation.",
-  },
-];
+import { upcomingEvents } from "@/data/events";
 
 export function EventsSection() {
   const ref = useRef(null);
@@ -68,7 +39,7 @@ export function EventsSection() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {events.map((event, index) => (
+          {upcomingEvents.slice(0, 3).map((event, index) => (
             <motion.div
               key={event.title}
               initial={{ opacity: 0, y: 30 }}
@@ -87,7 +58,7 @@ export function EventsSection() {
                   </span>
                 </div>
               )}
-              <div className="p-6">
+              <Link to={`/events/${event.slug}`} className="block p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="px-3 py-1 rounded-full bg-secondary text-xs font-medium">
                     {event.type}
@@ -113,7 +84,7 @@ export function EventsSection() {
                     <span>{event.location}</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -124,10 +95,12 @@ export function EventsSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center"
         >
-          <Button variant="outline_glow" size="lg" className="group">
-            View All Events
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <Link to="/events">
+            <Button variant="outline_glow" size="lg" className="group">
+              View All Events
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
