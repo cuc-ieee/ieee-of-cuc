@@ -7,7 +7,7 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Events", href: "/events" },
-  { label: "Projects", href: "/projects" },
+  { label: "Committee", href: "/committee" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
@@ -27,12 +27,18 @@ export function DesktopNav() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-4 transition-all duration-500 ${
-        scrolled ? "bg-background/80 backdrop-blur-lg border-b border-border/50" : "bg-transparent"
+        scrolled
+          ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
+          : "bg-transparent"
       }`}
     >
       <Link to="/" className="flex items-center gap-3">
-        <img src="/logo/logo.png" alt="IEEE Curtin Colombo" className="w-50 h-20 rounded-lg" />
-        </Link>
+        <img
+          src="/logo/logo.png"
+          alt="IEEE Curtin Colombo"
+          className="w-50 h-20 rounded-lg"
+        />
+      </Link>
 
       <div className="flex items-center gap-8">
         {navItems.map((item) => (
@@ -40,7 +46,9 @@ export function DesktopNav() {
             key={item.label}
             to={item.href}
             className={`text-sm font-medium tracking-wide relative group transition-colors duration-300 ${
-              location.pathname === item.href ? "text-primary" : "text-muted-foreground hover:text-primary"
+              location.pathname === item.href
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
             }`}
           >
             {item.label}
@@ -79,13 +87,22 @@ export function MobileNav() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-3 transition-all duration-500 ${
-          scrolled || isOpen ? "bg-background/90 backdrop-blur-lg border-b border-border/50" : "bg-transparent"
+          scrolled || isOpen
+            ? "bg-background/90 backdrop-blur-lg border-b border-border/50"
+            : "bg-transparent"
         }`}
       >
         <Link to="/" className="flex items-center gap-3">
-        <img src="/logo/logo.png" alt="IEEE Curtin Colombo" className="w-30 h-10 rounded-lg" />
+          <img
+            src="/logo/logo.png"
+            alt="IEEE Curtin Colombo"
+            className="w-30 h-10 rounded-lg"
+          />
         </Link>
-        <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-foreground hover:text-primary transition-colors">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-2 text-foreground hover:text-primary transition-colors"
+        >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </motion.nav>
@@ -100,14 +117,29 @@ export function MobileNav() {
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navItems.map((item, index) => (
-                <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link to={item.href} className="font-display text-2xl text-foreground hover:text-primary transition-colors">
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    to={item.href}
+                    className="font-display text-2xl text-foreground hover:text-primary transition-colors"
+                  >
                     {item.label}
                   </Link>
                 </motion.div>
               ))}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: navItems.length * 0.1 }}>
-                <Link to="/membership" className="mt-4 bg-primary text-primary-foreground px-8 py-3 rounded-lg font-display font-semibold">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+              >
+                <Link
+                  to="/membership"
+                  className="mt-4 bg-primary text-primary-foreground px-8 py-3 rounded-lg font-display font-semibold"
+                >
                   Join IEEE
                 </Link>
               </motion.div>
