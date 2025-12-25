@@ -38,7 +38,7 @@ export function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative flex items-center py-20 lg:py-0"
+      className="relative flex items-center py-20"
     >
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
