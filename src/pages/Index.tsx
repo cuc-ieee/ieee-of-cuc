@@ -28,7 +28,7 @@ const Index = () => {
         <MobileNav />
 
         {/* Main Content with Snap Scrolling */}
-        <main className="h-screen w-full overflow-y-auto snap-y snap-mandatory">
+        <main>
           <HeroSection />
           <AboutSection />
           <EventsSection />

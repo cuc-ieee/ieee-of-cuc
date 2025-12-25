@@ -61,7 +61,6 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
   }
 
   body {
@@ -75,12 +74,7 @@
 }
 
 @layer components {
-  /* Snap Scroll Sections */
-  .snap-section {
-    @apply min-h-screen w-full;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
+  
 
   /* Glow Effects */
   .glow-primary {
