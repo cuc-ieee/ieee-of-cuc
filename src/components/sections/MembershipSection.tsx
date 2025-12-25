@@ -21,7 +21,7 @@ export function MembershipSection() {
     <section
       id="membership"
       ref={ref}
-      className="snap-section relative flex items-center py-20 lg:py-0 overflow-hidden"
+      className="relative flex items-center py-20 lg:py-0 overflow-hidden"
     >
       {/* Background Effects */}
       <div className="absolute inset-0">

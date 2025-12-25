@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="snap-section relative flex flex-col items-center justify-center overflow-hidden grid-pattern"
+      className="relative flex flex-col items-center justify-center overflow-hidden grid-pattern"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
