@@ -26,7 +26,7 @@ export function DesktopNav() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-4 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-8 transition-all duration-500 ${
         scrolled
           ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
           : "bg-transparent"
@@ -86,7 +86,7 @@ export function MobileNav() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-3 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-5 transition-all duration-500 ${
           scrolled || isOpen
             ? "bg-background/90 backdrop-blur-lg border-b border-border/50"
             : "bg-transparent"
