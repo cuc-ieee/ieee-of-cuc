@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Target, Lightbulb, Globe, Award } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Target, Lightbulb, Globe, Award, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -35,11 +37,7 @@ export function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="relative flex items-center py-20"
-    >
+    <section id="about" ref={ref} className="relative flex items-center py-20">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
@@ -68,16 +66,13 @@ export function AboutSection() {
               real-world application through hands-on workshops, industry
               connections, and collaborative projects.
             </p>
-
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 border border-border/50">
-                <div className="w-2 h-2 rounded-full bg-primary pulse-glow" />
-                <span className="text-sm">IEEE Sri Lanka Section</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 border border-border/50">
-                <div className="w-2 h-2 rounded-full bg-accent pulse-glow" />
-                <span className="text-sm">Curtin Colombo</span>
-              </div>
+            <div className="text-center pt-4">
+                <Link to="/about">
+                    <Button variant="outline_glow" size="lg" className="group">
+                        Learn More
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                </Link>
             </div>
           </motion.div>
 

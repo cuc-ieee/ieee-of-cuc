@@ -196,7 +196,7 @@ const About = () => {
                 </p>
                 <div className="text-center mt-12">
                     <a href="/committee" className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:shadow-[0_0_20px_hsl(210_100%_50%/0.4)] transition-all duration-300">
-                        Learn More
+                        View More
                     </a>
                 </div>
               </motion.div>
