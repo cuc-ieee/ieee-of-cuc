@@ -101,7 +101,7 @@ const About = () => {
         </section>
 
         {/* Story Section */}
-        <section ref={ref} className="py-20">
+        <section ref={ref} className="py-20 bg-card/30">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -152,6 +152,53 @@ const About = () => {
                     <p className="text-muted-foreground text-sm mt-1">{stat.label}</p>
                   </div>
                 ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Meet the Committee Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            {/* Mobile Title */}
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-12 text-center lg:hidden">
+              Meet the <span className="gradient-text">Committee</span>
+            </h2>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                className="flex justify-center"
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <img
+                  src="https://placehold.co/600x350"
+                  alt="IEEE Curtin Colombo Committee"
+                  className="rounded-lg shadow-lg"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                {/* Desktop Title */}
+                <h2 className="hidden lg:block font-display text-3xl md:text-4xl font-bold mb-6">
+                  Meet the <span className="gradient-text">Committee</span>
+                </h2>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Our student branch is led by a dedicated team of individuals passionate about technology and community building.
+                </p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  The committee works tirelessly to organize events, manage projects, and create a welcoming environment for all members.
+                </p>
+                <div className="text-center mt-12">
+                    <a href="/committee" className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:shadow-[0_0_20px_hsl(210_100%_50%/0.4)] transition-all duration-300">
+                        Learn More
+                    </a>
+                </div>
               </motion.div>
             </div>
           </div>
