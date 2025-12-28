@@ -16,10 +16,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Instagram, href: "https://www.instagram.com/ieee.cuc?igsh=MXN3bHk4c2twZ2hzbg==", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/", label: "LinkedIn" },
+  { icon: Facebook, href: "https://www.facebook.com/share/1C5KHFgoPz/?mibextid=wwXIfr", label: "Facebook" },
 ];
 
 export function Footer() {
