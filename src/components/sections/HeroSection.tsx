@@ -17,7 +17,7 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto px-4 text-center pt-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,27 +85,13 @@ export function HeroSection() {
               <span className="font-display text-2xl md:text-3xl font-bold text-foreground">
                 {stat.value}
               </span>
-              <span className="text-muted-foreground text-sm">{stat.label}</span>
+              <span className="text-muted-foreground text-sm">
+                {stat.label}
+              </span>
             </div>
           ))}
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <a
-          href="#about"
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-        >
-          <span className="text-xs tracking-widest uppercase">Scroll</span>
-          <ChevronDown className="w-5 h-5 animate-bounce" />
-        </a>
-      </motion.div>
     </section>
   );
 }
