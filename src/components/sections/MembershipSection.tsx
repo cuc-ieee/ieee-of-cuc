@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { Check, Sparkles, BookOpen, Network, Award, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -89,12 +90,16 @@ export function MembershipSection() {
                 resources, and a community of innovators.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="hero" size="xl">
-                  Register Now
-                </Button>
-                <Button variant="glass" size="xl">
-                  Learn More
-                </Button>
+                <a href="https://ieee.org" target="_blank" rel="noopener noreferrer">
+                    <Button variant="hero" size="xl">
+                      Register Now
+                    </Button>
+                </a>
+                <Link to="/membership">
+                    <Button variant="glass" size="xl">
+                      Learn More
+                    </Button>
+                </Link>
               </div>
             </div>
           </motion.div>
