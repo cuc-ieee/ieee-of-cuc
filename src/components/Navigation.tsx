@@ -26,13 +26,21 @@ export function DesktopNav() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-8 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-5 transition-all duration-500 ${
         scrolled
           ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
           : "bg-transparent"
       }`}
     >
-      <Link to="/" className="flex items-center gap-3">
+      <Link
+        to="/"
+        className="flex items-center gap-3"
+        onClick={() => {
+          if (location.pathname === "/") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }}
+      >
         <img
           src="/logo/logo.png"
           alt="IEEE Curtin Colombo"
