@@ -31,11 +31,8 @@ export function DesktopNav() {
       }`}
     >
       <Link to="/" className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-          <span className="font-display font-bold text-primary-foreground text-lg">I</span>
-        </div>
-        <span className="font-display font-semibold text-lg tracking-wide">IEEE Curtin Colombo</span>
-      </Link>
+        <img src="/logo/logo.png" alt="IEEE Curtin Colombo" className="w-50 h-20 rounded-lg" />
+        </Link>
 
       <div className="flex items-center gap-8">
         {navItems.map((item) => (
@@ -85,11 +82,8 @@ export function MobileNav() {
           scrolled || isOpen ? "bg-background/90 backdrop-blur-lg border-b border-border/50" : "bg-transparent"
         }`}
       >
-        <Link to="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <span className="font-display font-bold text-primary-foreground text-sm">I</span>
-          </div>
-          <span className="font-display font-semibold text-sm tracking-wide">IEEE Curtin</span>
+        <Link to="/" className="flex items-center gap-3">
+        <img src="/logo/logo.png" alt="IEEE Curtin Colombo" className="w-30 h-10 rounded-lg" />
         </Link>
         <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-foreground hover:text-primary transition-colors">
           {isOpen ? <X size={24} /> : <Menu size={24} />}
