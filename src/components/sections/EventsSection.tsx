@@ -14,7 +14,7 @@ export function EventsSection() {
     <section
       id="events"
       ref={ref}
-      className="snap-section relative flex items-center py-20 lg:py-0"
+      className="relative flex items-center py-20"
     >
       {/* Background Accent */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-gradient-to-l from-primary/5 to-transparent rounded-l-full" />
