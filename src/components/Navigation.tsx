@@ -32,21 +32,9 @@ export function DesktopNav() {
           : "bg-transparent"
       }`}
     >
-      <Link
-        to="/"
-        className="flex items-center gap-3"
-        onClick={() => {
-          if (location.pathname === "/") {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }
-        }}
-      >
-        <img
-          src="/logo/logo.png"
-          alt="IEEE Curtin Colombo"
-          className="w-50 h-20 rounded-lg"
-        />
-      </Link>
+      <Link to="/" className="flex items-center gap-3">
+        <img src="/logo/logo.png" alt="IEEE Curtin Colombo" className="w-auto h-10 rounded-lg" />
+        </Link>
 
       <div className="flex items-center gap-8">
         {navItems.map((item) => (
@@ -94,7 +82,7 @@ export function MobileNav() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-5 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-3 transition-all duration-500 ${
           scrolled || isOpen
             ? "bg-background/90 backdrop-blur-lg border-b border-border/50"
             : "bg-transparent"
