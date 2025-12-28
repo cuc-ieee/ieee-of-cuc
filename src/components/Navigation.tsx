@@ -101,11 +101,7 @@ export function MobileNav() {
         }`}
       >
         <Link to="/" className="flex items-center gap-3">
-          <img
-            src="/logo/logo.png"
-            alt="IEEE Curtin Colombo"
-            className="w-30 h-10 rounded-lg"
-          />
+        <img src="/logo/logo-mobile.png" alt="IEEE Curtin Colombo" className="w-auto h-8 rounded-lg" />
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
