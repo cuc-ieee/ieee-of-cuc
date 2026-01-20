@@ -18,14 +18,7 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center pt-14">
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-6"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide">
-            Advancing Technology for Humanity
-          </span>
-        </motion.div>
+        
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
