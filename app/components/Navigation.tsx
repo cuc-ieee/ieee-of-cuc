@@ -15,6 +15,13 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
+const isNavItemActive = (pathname: string, href: string) => {
+  if (href === "/") {
+    return pathname === href;
+  }
+  return pathname.startsWith(href);
+};
+
 export function DesktopNav() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -35,13 +42,16 @@ export function DesktopNav() {
           : "bg-transparent"
       }`}
     >
-      <Link href="/" className="flex items-center gap-3">
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="flex items-center gap-3"
+      >
         <img
           src="/logo/logo.png"
           alt="IEEE Curtin Colombo"
           className="w-auto h-10 rounded-lg"
         />
-      </Link>
+      </button>
 
       <div className="flex items-center gap-8">
         {navItems.map((item) => (
@@ -49,7 +59,7 @@ export function DesktopNav() {
             key={item.label}
             href={item.href}
             className={`text-sm font-medium tracking-wide relative group transition-colors duration-300 ${
-              pathname === item.href
+              isNavItemActive(pathname, item.href)
                 ? "text-primary"
                 : "text-muted-foreground hover:text-primary"
             }`}
@@ -95,7 +105,7 @@ export function MobileNav() {
       >
         <Link href="/" className="flex items-center gap-2">
           <img
-            src="/logo/logo.png"
+            src="/logo/logo-mobile.png"
             alt="IEEE Curtin Colombo"
             className="w-auto h-8 rounded-lg"
           />
@@ -117,15 +127,15 @@ export function MobileNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 lg:hidden bg-background pt-20"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center lg:hidden bg-background"
           >
-            <div className="flex flex-col items-center gap-6 py-8">
+            <div className="flex flex-col items-center gap-6">
               {navItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
                   className={`text-lg font-medium transition-colors ${
-                    pathname === item.href
+                    isNavItemActive(pathname, item.href)
                       ? "text-primary"
                       : "text-muted-foreground hover:text-primary"
                   }`}
