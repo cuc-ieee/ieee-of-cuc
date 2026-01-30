@@ -93,10 +93,12 @@ export function MembershipSection() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="hero" size="xl" asChild>
-                  <Link href="/membership">Register Now</Link>
+                  <Link href="https://ieee.org" target="_blank">
+                    Register Now
+                  </Link>
                 </Button>
                 <Button variant="glass" size="xl" asChild>
-                  <Link href="/about">Learn More</Link>
+                  <Link href="/membership">Learn More</Link>
                 </Button>
               </div>
             </div>
