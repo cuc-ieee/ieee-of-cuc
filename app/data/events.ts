@@ -20,6 +20,7 @@ export interface Event {
   registrationLink?: string;
   outcomes?: string[];
   gallery?: string[];
+  participation?: string;
 }
 
 export const upcomingEvents: Event[] = [
@@ -53,6 +54,7 @@ export const upcomingEvents: Event[] = [
       { time: "4:45 PM", activity: "Q&A Session", title: "Q&A Session" },
     ],
     registrationLink: "#",
+    participation: "Open to all Curtin Colombo students",
   },
   {
     id: "2",
@@ -129,6 +131,7 @@ export const pastEvents: Event[] = [
       "Winner: Team TechBots",
       "Great showcase of innovation",
     ],
+    participation: "IEEE members only",
   },
   {
     id: "5",

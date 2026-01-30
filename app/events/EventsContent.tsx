@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Clock, ArrowRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
@@ -125,6 +125,12 @@ export default function EventsContent() {
                           <MapPin className="w-4 h-4 text-primary" />
                           <span>{event.location}</span>
                         </div>
+                        {event.participation && (
+                          <div className="flex items-center gap-2">
+                            <Users className="w-4 h-4 text-primary" />
+                            <span>{event.participation}</span>
+                          </div>
+                        )}
                       </div>
                       {event.fullDescription && (
                         <Link href={`/events/${event.slug}`}>
@@ -173,9 +179,15 @@ export default function EventsContent() {
                       <h3 className="font-display font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
                         {event.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-muted-foreground text-sm mb-3">
                         {event.description}
                       </p>
+                      {event.participation && (
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Users className="w-4 h-4 text-primary" />
+                          <span>{event.participation}</span>
+                        </div>
+                      )}
                     </div>
                   </Link>
                 </motion.div>
