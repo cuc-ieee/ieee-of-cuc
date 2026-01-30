@@ -126,12 +126,17 @@ export default function EventsContent() {
                           <span>{event.location}</span>
                         </div>
                       </div>
-                      <Link href={`/events/${event.slug}`}>
-                        <Button variant="outline_glow" className="w-fit group">
-                          View Details
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      </Link>
+                      {event.fullDescription && (
+                        <Link href={`/events/${event.slug}`}>
+                          <Button
+                            variant="outline_glow"
+                            className="w-fit group"
+                          >
+                            View Details
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </motion.div>

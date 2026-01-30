@@ -28,6 +28,7 @@ export const upcomingEvents: Event[] = [
     title: "AI & Machine Learning Workshop",
     slug: "ai-ml-workshop",
     description: "Dive deep into the world of artificial intelligence and machine learning. Learn practical applications and hands-on implementation of ML algorithms.",
+    fullDescription: "This workshop offers a comprehensive introduction to the exciting fields of Artificial Intelligence (AI) and Machine Learning (ML). Participants will gain a solid understanding of fundamental concepts, explore real-world applications, and get hands-on experience with popular ML frameworks like TensorFlow. The session is designed for beginners and intermediate learners who want to build a strong foundation in AI/ML. By the end of the workshop, you will be able to understand the entire machine learning workflow, from data preprocessing to model deployment, and you'll have built your first predictive model. Join us to demystify AI and unlock its potential.",
     date: "15 Jan 2026",
     time: "2:00 PM - 5:00 PM",
     location: "Curtin Colombo Campus, Room 301",
