@@ -282,6 +282,12 @@ export default function EventDetailContent({ event }: Props) {
                       <span className="font-medium text-right">{event.location}</span>
                     </div>
                   )}
+                  {event.participation && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Participation</span>
+                      <span className="font-medium text-right">{event.participation}</span>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </div>
