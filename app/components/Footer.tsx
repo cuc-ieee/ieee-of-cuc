@@ -1,5 +1,6 @@
 import { Instagram, Linkedin, Facebook, Twitter } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks = {
   quickLinks: [
@@ -30,17 +31,10 @@ export function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="font-display font-bold text-primary-foreground text-lg">
-                  I
-                </span>
-              </div>
-              <span className="font-display font-semibold text-lg">
-                IEEE Curtin Colombo
-              </span>
+            <div className="flex items-center gap-3 mb-5">
+              <Image src="/logo/logo2.png" alt="IEEE Curtin Colombo" width={250} height={50} />
             </div>
-            <p className="text-muted-foreground text-sm mb-4">
+            <p className="text-muted-foreground text-sm mb-6">
               Advancing technology for humanity through innovation, education,
               and community.
             </p>
@@ -108,7 +102,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="pt-8 border-t border-border/50 text-center text-sm text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} IEEE Curtin Colombo Student Branch. All
+            © {new Date().getFullYear()} IEEE Student Branch of Curtin Colombo. All
             rights reserved.
           </p>
         </div>
