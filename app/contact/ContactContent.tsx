@@ -5,6 +5,8 @@ import { Mail, MapPin, Phone, Send, Instagram, Linkedin, Facebook, Youtube, Mess
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
@@ -15,6 +17,64 @@ const socialLinks = [
 ];
 
 export default function ContactContent() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      toast({
+        title: "Success!",
+        description: "Your message has been sent. We'll get back to you soon!",
+      });
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full bg-background">
       <DesktopNav />
@@ -138,7 +198,7 @@ export default function ContactContent() {
               <h2 className="font-display text-2xl font-bold mb-6">
                 Send a <span className="gradient-text">Message</span>
               </h2>
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-medium mb-2">
@@ -146,6 +206,9 @@ export default function ContactContent() {
                     </label>
                     <input
                       type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
                       placeholder="John"
                       className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
                       required
@@ -157,6 +220,9 @@ export default function ContactContent() {
                     </label>
                     <input
                       type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
                       placeholder="Doe"
                       className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
                       required
@@ -169,6 +235,9 @@ export default function ContactContent() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="john@example.com"
                     className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
                     required
@@ -178,7 +247,13 @@ export default function ContactContent() {
                   <label className="block text-sm font-medium mb-2">
                     Subject *
                   </label>
-                  <select className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground focus:outline-none focus:border-primary/50 transition-colors">
+                  <select
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                    required
+                  >
                     <option value="">Select a topic</option>
                     <option value="membership">Membership Inquiry</option>
                     <option value="events">Events & Workshops</option>
@@ -192,14 +267,23 @@ export default function ContactContent() {
                     Message *
                   </label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={5}
                     placeholder="Your message..."
                     className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
                     required
                   />
                 </div>
-                <Button variant="hero" size="lg" className="w-full group">
-                  Send Message
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full group"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Send Message"}
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </form>
