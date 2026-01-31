@@ -7,31 +7,31 @@ import { Footer } from "../components/Footer";
 
 const committeeMembers = [
   {
-    name: "Sarah Fernando",
+    name: "Rovindu Tharin",
     role: "Chairperson",
-    department: "Computer Science",
+    department: "Mechatronics Engineer",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
     linkedin: "#",
-    email: "chair@ieee.curtin.edu.lk",
+    email: "mrtharinsilva@gmail.com",
   },
   {
-    name: "Dinesh Perera",
+    name: "Sanindu Talwaththa",
     role: "Vice Chairperson",
-    department: "Electrical Engineering",
+    department: "Electrical and Electronic Engineering",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
     linkedin: "#",
     email: "vicechair@ieee.curtin.edu.lk",
   },
   {
-    name: "Amaya Silva",
+    name: "Yasiru Fernando",
     role: "Secretary",
-    department: "Information Technology",
+    department: "Mechatronics",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
     linkedin: "#",
     email: "secretary@ieee.curtin.edu.lk",
   },
   {
-    name: "Kavindu Jayawardena",
+    name: "Rashmitha Fernando",
     role: "Treasurer",
     department: "Computer Engineering",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
@@ -54,6 +54,23 @@ const committeeMembers = [
     linkedin: "#",
     email: "events@ieee.curtin.edu.lk",
   },
+  {
+    name: "Sarah Fernando",
+    role: "Chairperson",
+    department: "Computer Science",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    linkedin: "#",
+    email: "chair@ieee.curtin.edu.lk",
+  },
+  {
+    name: "Sarah Fernando",
+    role: "Chairperson",
+    department: "Computer Science",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    linkedin: "#",
+    email: "chair@ieee.curtin.edu.lk",
+  },
+  
 ];
 
 export default function CommitteeContent() {
@@ -78,10 +95,10 @@ export default function CommitteeContent() {
               Leadership
             </span>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Our <span className="gradient-text">Committee</span>
+              Our <span className="gradient-text">Executive Committee</span>
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl">
-              Meet the dedicated team leading IEEE Curtin Colombo Student Branch
+              Meet the dedicated team leading IEEE Student Branch of Curtin University Colombo
               towards excellence and innovation.
             </p>
           </motion.div>
@@ -94,7 +111,7 @@ export default function CommitteeContent() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {committeeMembers.map((member, index) => (
               <motion.div
-                key={member.name}
+                key={`${member.email}-${index}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
