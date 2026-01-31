@@ -292,19 +292,23 @@ export default function ContactContent() {
         </div>
       </section>
 
-      {/* Map Section */}
+            {/* Map Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="rounded-2xl overflow-hidden border border-border/50 h-80 bg-card flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-              <p className="text-muted-foreground">
-                Interactive map would be displayed here
-              </p>
-            </div>
+          <div className="rounded-2xl overflow-hidden border border-border/50 h-80 bg-card">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.305911878678!2d79.849452074861!3d6.91863369308097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2598e4891314b%3A0xc54d930bba52fae8!2sCurtin%20University%20Colombo!5e1!3m2!1sen!2slk!4v1769868205900!5m2!1sen!2slk"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>
+      
 
       <Footer />
     </div>
