@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Facebook, Twitter } from "lucide-react";
+import { Instagram, Linkedin, Facebook, Youtube, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -17,11 +17,13 @@ const footerLinks = {
   ],
 };
 
+// Updated social links
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all", label: "LinkedIn" },
   { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "Youtube" },
+  { icon: MessageCircle, href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ", label: "Whatsapp" },
 ];
 
 export function Footer() {
@@ -43,6 +45,8 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-9 h-9 rounded-lg bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
                 >

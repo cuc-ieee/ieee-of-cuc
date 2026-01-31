@@ -1,16 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Send, Instagram, Linkedin, Facebook, Twitter, Clock } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Instagram, Linkedin, Facebook, Youtube, MessageCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all", label: "LinkedIn" },
   { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "Youtube" },
+  { icon: MessageCircle, href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ", label: "Whatsapp" },
 ];
 
 export default function ContactContent() {
@@ -114,6 +115,8 @@ export default function ContactContent() {
                     <a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       aria-label={social.label}
                       className="w-11 h-11 rounded-xl bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
                     >
