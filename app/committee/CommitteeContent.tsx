@@ -23,15 +23,15 @@ const committeeMembers = [
     email: "vicechair@ieee.curtin.edu.lk",
   },
   {
-    name: "Amaya Silva",
+    name: "Yasiru Fernando",
     role: "Secretary",
-    department: "Information Technology",
+    department: "Mechatronics",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
     linkedin: "#",
     email: "secretary@ieee.curtin.edu.lk",
   },
   {
-    name: "Kavindu Jayawardena",
+    name: "Rashmitha Fernando",
     role: "Treasurer",
     department: "Computer Engineering",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",

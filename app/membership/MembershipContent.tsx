@@ -92,9 +92,11 @@ export default function MembershipContent() {
               Unlock exclusive benefits and join a global community of over
               400,000 professionals advancing technology for humanity.
             </p>
-            <Button variant="hero" size="xl" className="group">
-              Join Now
-              <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Button variant="hero" size="xl" className="group" asChild>
+              <Link href="https://www.ieee.org" target="_blank" rel="noopener noreferrer">
+                Join Now
+                <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </motion.div>
         </div>
@@ -209,8 +211,10 @@ export default function MembershipContent() {
               careers through IEEE membership.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl">
-                Register Now
+              <Button variant="hero" size="xl" asChild>
+                <Link href="https://www.ieee.org/membership/" target="_blank" rel="noopener noreferrer">
+                  Register Now
+                </Link>
               </Button>
               <Button variant="glass" size="xl" asChild>
                 <Link href="/contact">Contact Us</Link>
