@@ -8,20 +8,26 @@ import { Footer } from "@/components/Footer";
 import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
 
-export default function EventGalleryContent({ event }: { event: GalleryEvent }) {
+export default function EventGalleryContent({
+  event,
+}: {
+  event: GalleryEvent;
+}) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handlePrev = () => {
     if (selectedImage === null) return;
     const currentIndex = event.images.indexOf(selectedImage);
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : event.images.length - 1;
+    const prevIndex =
+      currentIndex > 0 ? currentIndex - 1 : event.images.length - 1;
     setSelectedImage(event.images[prevIndex]);
   };
 
   const handleNext = () => {
     if (selectedImage === null) return;
     const currentIndex = event.images.indexOf(selectedImage);
-    const nextIndex = currentIndex < event.images.length - 1 ? currentIndex + 1 : 0;
+    const nextIndex =
+      currentIndex < event.images.length - 1 ? currentIndex + 1 : 0;
     setSelectedImage(event.images[nextIndex]);
   };
 
@@ -31,7 +37,10 @@ export default function EventGalleryContent({ event }: { event: GalleryEvent }) 
       <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden grid-pattern">
+      <section className="relative pt-32 pb-10 overflow-hidden grid-pattern">
+        <div className="absolute inset-0">
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+        </div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
