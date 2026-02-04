@@ -4,11 +4,12 @@ import EventGalleryContent from "./EventGalleryContent";
 import type { Metadata } from "next";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const event = galleryEvents.find((e) => e.slug === params.slug);
+  const { slug } = await params;
+  const event = galleryEvents.find((e) => e.slug === slug);
 
   if (!event) {
     return {
@@ -22,8 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function EventGalleryPage({ params }: { params: { slug: string } }) {
-  const event = galleryEvents.find((e) => e.slug === params.slug);
+export default async function EventGalleryPage({ params }: Props) {
+  const { slug } = await params;
+  const event = galleryEvents.find((e) => e.slug === slug);
 
   if (!event) {
     notFound();
