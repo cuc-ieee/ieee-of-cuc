@@ -68,7 +68,7 @@ export default function EventGalleryContent({
         <div className="container mx-auto px-4">
           <motion.div
             layout
-            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           >
             <AnimatePresence>
               {event.images.map((image, index) => (
