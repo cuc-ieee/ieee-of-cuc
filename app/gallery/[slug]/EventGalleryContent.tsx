@@ -37,10 +37,15 @@ export default function EventGalleryContent({
       <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-10 overflow-hidden grid-pattern">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        </div>
+      <section className="relative pt-28 pb-20 overflow-hidden grid-pattern">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${event.images[0]})`,
+            filter: "blur(7px)",
+          }}
+        />
+        <div className="absolute inset-0 bg-background/70" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -57,7 +62,7 @@ export default function EventGalleryContent({
               </Link>
             </div>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="gradient-text">{event.title}</span>
+              <span className="gradient-text">{event.title}</span> Gallery
             </h1>
           </motion.div>
         </div>
