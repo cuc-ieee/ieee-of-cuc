@@ -91,12 +91,22 @@ export function MobileNav() {
   }, []);
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   return (
     <>
-      <div
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-4 transition-all duration-500 ${
           scrolled
             ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
@@ -113,12 +123,12 @@ export function MobileNav() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="p-2 text-foreground"
+          className="p-2 text-foreground hover:text-primary transition-colors"
           aria-label="Toggle menu"
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-      </div>
+      </motion.nav>
 
       <AnimatePresence>
         {isOpen && (
@@ -126,29 +136,36 @@ export function MobileNav() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center lg:hidden bg-background"
+            className="fixed inset-0 z-40 lg:hidden pt-16 bg-background/95 backdrop-blur-lg"
           >
-            <div className="flex flex-col items-center gap-6">
-              {navItems.map((item) => (
-                <Link
+            <div className="flex flex-col items-center justify-center h-full gap-8">
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.label}
-                  href={item.href}
-                  className={`text-lg font-medium transition-colors ${
-                    isNavItemActive(pathname, item.href)
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary"
-                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    href={item.href}
+                    className="font-display text-2xl text-foreground hover:text-primary transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
-              <Link
-                href="/membership"
-                className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:shadow-[0_0_20px_hsl(210_100%_50%/0.4)] transition-all duration-300 mt-4"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
               >
-                Join IEEE
-              </Link>
+                <Link
+                  href="/membership"
+                  className="mt-4 bg-primary text-primary-foreground px-8 py-3 rounded-lg font-display font-semibold"
+                >
+                  Join IEEE
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
