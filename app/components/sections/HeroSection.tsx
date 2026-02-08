@@ -39,7 +39,7 @@ export function HeroSection() {
           className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
         >
           <span className="text-foreground">IEEE</span>{" "}
-          <span className="gradient-text">Curtin Colombo</span>
+          <span className="gradient-text">Curtin University Colombo</span>
           <br />
           <span className="text-foreground">Student Branch</span>
         </motion.h1>

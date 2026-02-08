@@ -24,13 +24,13 @@ const values = [
     icon: Target,
     title: "Mission",
     description:
-      "To foster technological innovation and excellence for the benefit of humanity, while creating meaningful opportunities for students at Curtin Colombo.",
+      "To foster technological innovation and excellence for the benefit of humanity, while creating meaningful opportunities for students at Curtin University Colombo.",
   },
   {
     icon: Lightbulb,
     title: "Vision",
     description:
-      "To be the leading student technical organization in Sri Lanka, nurturing future leaders in engineering and technology.",
+      "One of the upcoming leading student technical organizations in Sri Lanka, nurturing future leaders in engineering and technology.",
   },
   {
     icon: Globe,
@@ -69,7 +69,7 @@ const benefits = [
     icon: Zap,
     title: "Career Growth",
     description:
-      "Resume building, interview prep, and internship opportunities.",
+      "Resume building, interview preparation, and internship opportunities.",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function AboutContent() {
               Shaping the <span className="gradient-text">Future</span>
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl">
-              IEEE Curtin Colombo Student Branch is a vibrant community
+              IEEE Curtin University Colombo Student Branch is a vibrant community
               dedicated to advancing technology and fostering innovation among
               students.
             </p>
@@ -123,13 +123,13 @@ export default function AboutContent() {
               </h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Established as part of the world's largest technical
-                professional organization, IEEE Curtin Colombo Student Branch
+                professional organization, IEEE Curtin University Colombo Student Branch
                 serves as a bridge between academic knowledge and real-world
                 application.
               </p>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Affiliated with IEEE Sri Lanka Section and Curtin Colombo
-                University, we provide unparalleled opportunities for growth,
+                Affiliated with IEEE Sri Lanka Section and Curtin University Colombo
+                , we provide unparalleled opportunities for growth,
                 learning, and networking through hands-on workshops, industry
                 connections, and collaborative projects.
               </p>
@@ -185,7 +185,7 @@ export default function AboutContent() {
             >
               <img
                 src="https://placehold.co/600x350"
-                alt="IEEE Curtin Colombo Committee"
+                alt="IEEE Curtin University Colombo Committee"
                 className="rounded-lg shadow-lg"
               />
             </motion.div>
@@ -276,7 +276,7 @@ export default function AboutContent() {
               What We <span className="gradient-text">Offer</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Discover the benefits of being part of IEEE Curtin Colombo.
+              Discover the benefits of being part of IEEE Curtin University Colombo.
             </p>
           </motion.div>
 

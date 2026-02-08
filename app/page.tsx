@@ -8,12 +8,12 @@ import { ContactSection } from "./components/sections/ContactSection";
 import { Footer } from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "IEEE Curtin Colombo Student Branch | Advancing Technology for Humanity",
+  title: "IEEE Curtin University Colombo Student Branch | Advancing Technology for Humanity",
   description:
-    "IEEE Curtin Colombo Student Branch - Empowering the next generation of engineers and innovators through technology, collaboration, and excellence in Sri Lanka.",
+    "IEEE Curtin University Colombo Student Branch - Empowering the next generation of engineers and innovators through technology, collaboration, and excellence in Sri Lanka.",
   keywords: [
     "IEEE",
-    "Curtin Colombo",
+    "Curtin University Colombo",
     "Student Branch",
     "Engineering",
     "Technology",

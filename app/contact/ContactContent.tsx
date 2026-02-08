@@ -138,7 +138,7 @@ export default function ContactContent() {
                   <div>
                     <h3 className="font-semibold mb-1">Location</h3>
                     <p className="text-muted-foreground">
-                      Curtin Colombo Campus<br />
+                      Curtin University Colombo Campus<br />
                       321, Main Street<br />
                       Colombo 07, Sri Lanka
                     </p>

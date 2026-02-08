@@ -48,7 +48,7 @@ export function DesktopNav() {
       >
         <img
           src="/logo/logo.png"
-          alt="IEEE Curtin Colombo"
+          alt="IEEE Curtin University Colombo"
           className="w-auto h-10 rounded-lg"
         />
       </button>
@@ -116,7 +116,7 @@ export function MobileNav() {
         <Link href="/" className="flex items-center gap-2">
           <img
             src="/logo/logo-mobile.png"
-            alt="IEEE Curtin Colombo"
+            alt="IEEE Curtin University Colombo"
             className="w-auto h-8 rounded-lg"
           />
         </Link>
