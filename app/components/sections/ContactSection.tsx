@@ -113,7 +113,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium">Curtin Colombo, Sri Lanka</p>
+                  <p className="font-medium">Curtin University Colombo, Sri Lanka</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">

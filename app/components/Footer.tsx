@@ -34,7 +34,7 @@ export function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
-              <Image src="/logo/logo2.png" alt="IEEE Curtin Colombo" width={250} height={50} />
+              <Image src="/logo/logo2.png" alt="IEEE Curtin University Colombo" width={250} height={50} />
             </div>
             <p className="text-muted-foreground text-sm mb-6">
               Advancing technology for humanity through innovation, education,
@@ -97,7 +97,7 @@ export function Footer() {
             <h4 className="font-display font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>ieee@curtin.edu.lk</li>
-              <li>Curtin Colombo</li>
+              <li>Curtin University Colombo</li>
               <li>Sri Lanka</li>
             </ul>
           </div>
@@ -106,7 +106,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="pt-8 border-t border-border/50 text-center text-sm text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} IEEE Student Branch of Curtin Colombo. All
+            © {new Date().getFullYear()} IEEE Student Branch of Curtin University Colombo. All
             rights reserved.
           </p>
         </div>

@@ -56,14 +56,14 @@ export function AboutSection() {
               <span className="gradient-text">Future of Technology</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-              IEEE Curtin Colombo Student Branch is a vibrant community of
+              IEEE Curtin University Colombo Student Branch is a vibrant community of
               passionate students dedicated to advancing technology and
               fostering innovation. As part of the world's largest technical
               professional organization, we provide unparalleled opportunities
               for growth, learning, and networking.
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Affiliated with IEEE Sri Lanka Section and Curtin Colombo
+              Affiliated with IEEE Sri Lanka Section and Curtin University Colombo
               University, we bridge the gap between academic knowledge and
               real-world application through hands-on workshops, industry
               connections, and collaborative projects.

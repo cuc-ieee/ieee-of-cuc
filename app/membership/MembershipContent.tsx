@@ -54,7 +54,7 @@ const steps = [
   {
     number: "03",
     title: "Complete Registration",
-    description: "Fill in your details and select Curtin Colombo as your institution.",
+    description: "Fill in your details and select Curtin University Colombo as your institution.",
   },
   {
     number: "04",
