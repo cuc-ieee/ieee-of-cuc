@@ -4,9 +4,20 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import { Target, Lightbulb, Globe, Award, Users, Cpu, Sparkles, Zap } from "lucide-react";
+import {
+  Target,
+  Lightbulb,
+  Globe,
+  Award,
+  Users,
+  Cpu,
+  Sparkles,
+  Zap,
+  ArrowRight,
+} from "lucide-react";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
+import { Button } from "@/components/ui/button";
 
 const values = [
   {
@@ -39,22 +50,26 @@ const benefits = [
   {
     icon: Cpu,
     title: "Technical Skills",
-    description: "Hands-on workshops in AI, robotics, IoT, and emerging technologies.",
+    description:
+      "Hands-on workshops in AI, robotics, IoT, and emerging technologies.",
   },
   {
     icon: Users,
     title: "Networking",
-    description: "Connect with industry professionals, researchers, and fellow students.",
+    description:
+      "Connect with industry professionals, researchers, and fellow students.",
   },
   {
     icon: Sparkles,
     title: "Innovation",
-    description: "Access to resources, labs, and mentorship for your project ideas.",
+    description:
+      "Access to resources, labs, and mentorship for your project ideas.",
   },
   {
     icon: Zap,
     title: "Career Growth",
-    description: "Resume building, interview prep, and internship opportunities.",
+    description:
+      "Resume building, interview prep, and internship opportunities.",
   },
 ];
 
@@ -86,8 +101,9 @@ export default function AboutContent() {
               Shaping the <span className="gradient-text">Future</span>
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl">
-              IEEE Curtin Colombo Student Branch is a vibrant community dedicated
-              to advancing technology and fostering innovation among students.
+              IEEE Curtin Colombo Student Branch is a vibrant community
+              dedicated to advancing technology and fostering innovation among
+              students.
             </p>
           </motion.div>
         </div>
@@ -106,20 +122,21 @@ export default function AboutContent() {
                 Our <span className="gradient-text">Story</span>
               </h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Established as part of the world's largest technical professional
-                organization, IEEE Curtin Colombo Student Branch serves as a bridge
-                between academic knowledge and real-world application.
+                Established as part of the world's largest technical
+                professional organization, IEEE Curtin Colombo Student Branch
+                serves as a bridge between academic knowledge and real-world
+                application.
               </p>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Affiliated with IEEE Sri Lanka Section and Curtin Colombo University,
-                we provide unparalleled opportunities for growth, learning, and
-                networking through hands-on workshops, industry connections, and
-                collaborative projects.
+                Affiliated with IEEE Sri Lanka Section and Curtin Colombo
+                University, we provide unparalleled opportunities for growth,
+                learning, and networking through hands-on workshops, industry
+                connections, and collaborative projects.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Our community of passionate students works together to push the
-                boundaries of technology while developing the skills needed to become
-                tomorrow's leaders in engineering and innovation.
+                boundaries of technology while developing the skills needed to
+                become tomorrow's leaders in engineering and innovation.
               </p>
             </motion.div>
 
@@ -142,7 +159,9 @@ export default function AboutContent() {
                   <span className="font-display text-3xl font-bold gradient-text">
                     {stat.value}
                   </span>
-                  <p className="text-muted-foreground text-sm mt-1">{stat.label}</p>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </motion.div>
@@ -180,17 +199,19 @@ export default function AboutContent() {
                 Meet the <span className="gradient-text">Committee</span>
               </h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Our student branch is led by a dedicated team of individuals passionate about technology and community building.
+                Our student branch is led by a dedicated team of individuals
+                passionate about technology and community building.
               </p>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                The committee works tirelessly to organize events, manage projects, and create a welcoming environment for all members.
+                The committee works tirelessly to organize events, manage
+                projects, and create a welcoming environment for all members.
               </p>
               <div className="text-center mt-12">
-                <Link
-                  href="/committee"
-                  className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:shadow-[0_0_20px_hsl(210_100%_50%/0.4)] transition-all duration-300"
-                >
-                  View More
+                <Link href="/committee">
+                  <Button variant="default" size="lg" className="group">
+                    View More
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
                 </Link>
               </div>
             </motion.div>
