@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { Mail, MapPin, Phone, Send, Instagram, Linkedin, Facebook, Youtube, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { CopyToClipboardWrapper } from "@/components/CopyToClipboardWrapper";
 
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
@@ -98,28 +99,40 @@ export function ContactSection() {
             </p>
 
             <div className="space-y-6 mb-8">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <div className="flex items-center gap-4 group">
+                <CopyToClipboardWrapper
+                  textToCopy="curtincolombo.ieee@gmail.com"
+                  label="Email"
+                  className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors cursor-pointer"
+                >
                   <Mail className="w-5 h-5 text-primary" />
-                </div>
+                </CopyToClipboardWrapper>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
                   <p className="font-medium">curtincolombo.ieee@gmail.com</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <div className="flex items-center gap-4 group">
+                <CopyToClipboardWrapper
+                  textToCopy="No. 80 Nawam Mawatha, Colombo 00200"
+                  label="Location"
+                  className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors cursor-pointer"
+                >
                   <MapPin className="w-5 h-5 text-primary" />
-                </div>
+                </CopyToClipboardWrapper>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
                   <p className="font-medium">Curtin University Colombo, Sri Lanka</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <div className="flex items-center gap-4 group">
+                <CopyToClipboardWrapper
+                  textToCopy="+94 72 792 2261"
+                  label="Phone Number"
+                  className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors cursor-pointer"
+                >
                   <Phone className="w-5 h-5 text-primary" />
-                </div>
+                </CopyToClipboardWrapper>
                 <div>
                   <p className="text-sm text-muted-foreground">Phone (secretary)</p>
                   <p className="font-medium">+94 72 792 2261</p>
