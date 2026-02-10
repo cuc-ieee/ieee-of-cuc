@@ -2,7 +2,16 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Check, BookOpen, Network, Award, Rocket, Sparkles, Globe, ExternalLink } from "lucide-react";
+import {
+  Check,
+  BookOpen,
+  Network,
+  Award,
+  Rocket,
+  Sparkles,
+  Globe,
+  ExternalLink,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
@@ -11,32 +20,38 @@ const membershipBenefits = [
   {
     icon: BookOpen,
     title: "IEEE Xplore Access",
-    description: "Full access to the world's largest technical literature database with over 5 million documents.",
+    description:
+      "Full access to the world's largest technical literature database with over 5 million documents.",
   },
   {
     icon: Network,
     title: "Global Networking",
-    description: "Connect with 400,000+ members across 160 countries and access exclusive events.",
+    description:
+      "Connect with 400,000+ members across 160 countries and access exclusive events.",
   },
   {
     icon: Award,
     title: "Certifications",
-    description: "Earn industry-recognized certifications and showcase your skills to employers.",
+    description:
+      "Earn industry-recognized certifications and showcase your skills to employers.",
   },
   {
     icon: Rocket,
     title: "Career Resources",
-    description: "Access job boards, resume reviews, interview prep, and career development tools.",
+    description:
+      "Access job boards, resume reviews, interview prep, and career development tools, catered/curated specifically for you.",
   },
   {
     icon: Sparkles,
     title: "Competitions",
-    description: "Participate in hackathons, robotics competitions, and innovation challenges.",
+    description:
+      "Participate in hackathons, robotics competitions, and innovation challenges. Members get early access to participate in the competitions.",
   },
   {
     icon: Globe,
     title: "Conferences",
-    description: "Discounted access to IEEE conferences, workshops, and technical symposiums.",
+    description:
+      "Discounted access to IEEE conferences, workshops, and technical symposiums, both locally and globally.",
   },
 ];
 
@@ -54,12 +69,14 @@ const steps = [
   {
     number: "03",
     title: "Complete Registration",
-    description: "Fill in your details and select Curtin University Colombo as your institution.",
+    description:
+      "Fill in your details and select Curtin University Colombo as your institution.",
   },
   {
     number: "04",
     title: "Join Our Branch",
-    description: "Contact us to be added to our local student branch activities.",
+    description:
+      "Contact us to be added to our local student branch activities.",
   },
 ];
 
@@ -93,7 +110,11 @@ export default function MembershipContent() {
               400,000 professionals advancing technology for humanity.
             </p>
             <Button variant="hero" size="xl" className="group" asChild>
-              <Link href="https://www.ieee.org" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.ieee.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Join Now
                 <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -190,6 +211,27 @@ export default function MembershipContent() {
               </motion.div>
             ))}
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-center mt-12"
+          >
+            <p className="text-muted-foreground max-w-xl mx-auto mb-6">
+              For additional guidance, open our IEEE Student Membership Guide pdf:
+            </p>
+            <Button variant="outline" size="lg" asChild>
+              <Link
+                href="/MembershipPage/IEEEStudentMembershipGuide.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open Guide
+                <ExternalLink className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
@@ -212,7 +254,11 @@ export default function MembershipContent() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="xl" asChild>
-                <Link href="https://www.ieee.org/membership/" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://www.ieee.org/membership/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Register Now
                 </Link>
               </Button>

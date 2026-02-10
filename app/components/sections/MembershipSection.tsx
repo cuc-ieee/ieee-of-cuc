@@ -11,9 +11,9 @@ const benefits = [
   { icon: BookOpen, text: "Access to IEEE Xplore digital library" },
   { icon: Network, text: "Global networking opportunities" },
   { icon: Award, text: "Industry-recognized certifications" },
-  { icon: Rocket, text: "Exclusive workshops & training" },
+  { icon: Rocket, text: "Exclusive workshops, training & industry visits" },
   { icon: Sparkles, text: "Competition participation" },
-  { icon: Check, text: "Career development resources" },
+  { icon: Check, text: "Curated career development resources" },
 ];
 
 export function MembershipSection() {
