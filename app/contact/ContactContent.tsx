@@ -154,8 +154,9 @@ export default function ContactContent() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-muted-foreground">ieee@curtin.edu.lk</p>
-                    <p className="text-muted-foreground">support@ieeecc.org</p>
+                    <p className="text-muted-foreground">
+                      curtincolombo.ieee@gmail.com
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -167,9 +168,9 @@ export default function ContactContent() {
                     <p className="text-muted-foreground">
                       Curtin University Colombo Campus
                       <br />
-                      321, Main Street
+                      No. 80 Nawam Mawatha,
                       <br />
-                      Colombo 07, Sri Lanka
+                      Colombo 02, Sri Lanka
                     </p>
                   </div>
                 </div>
@@ -178,8 +179,8 @@ export default function ContactContent() {
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-muted-foreground">+94 11 234 5678</p>
+                    <h3 className="font-semibold mb-1">Phone (secretary)</h3>
+                    <p className="text-muted-foreground">+94 72 792 2261</p>
                   </div>
                 </div>
               </div>

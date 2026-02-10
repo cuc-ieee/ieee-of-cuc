@@ -104,7 +104,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium">ieee@curtin.edu.lk</p>
+                  <p className="font-medium">curtincolombo.ieee@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -121,8 +121,8 @@ export function ContactSection() {
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-medium">+94 11 234 5678</p>
+                  <p className="text-sm text-muted-foreground">Phone (secretary)</p>
+                  <p className="font-medium">+94 72 792 2261</p>
                 </div>
               </div>
             </div>
