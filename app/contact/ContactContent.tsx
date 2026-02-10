@@ -1,7 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Send, Instagram, Linkedin, Facebook, Youtube, MessageCircle, Clock } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Instagram,
+  Linkedin,
+  Facebook,
+  Youtube,
+  MessageCircle,
+  Clock,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
@@ -9,11 +20,23 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const socialLinks = [
-  { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all", label: "LinkedIn" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/ieee.cuc",
+    label: "Instagram",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all",
+    label: "LinkedIn",
+  },
   { icon: Facebook, href: "#", label: "Facebook" },
   { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "Youtube" },
-  { icon: MessageCircle, href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ", label: "Whatsapp" },
+  {
+    icon: MessageCircle,
+    href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ",
+    label: "Whatsapp",
+  },
 ];
 
 export default function ContactContent() {
@@ -27,7 +50,11 @@ export default function ContactContent() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -138,8 +165,10 @@ export default function ContactContent() {
                   <div>
                     <h3 className="font-semibold mb-1">Location</h3>
                     <p className="text-muted-foreground">
-                      Curtin University Colombo Campus<br />
-                      321, Main Street<br />
+                      Curtin University Colombo Campus
+                      <br />
+                      321, Main Street
+                      <br />
                       Colombo 07, Sri Lanka
                     </p>
                   </div>
@@ -151,18 +180,6 @@ export default function ContactContent() {
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
                     <p className="text-muted-foreground">+94 11 234 5678</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Office Hours</h3>
-                    <p className="text-muted-foreground">
-                      Monday - Friday: 9:00 AM - 5:00 PM<br />
-                      Saturday: 10:00 AM - 2:00 PM
-                    </p>
                   </div>
                 </div>
               </div>
@@ -292,7 +309,7 @@ export default function ContactContent() {
         </div>
       </section>
 
-            {/* Map Section */}
+      {/* Map Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="rounded-2xl overflow-hidden border border-border/50 h-80 bg-card">
@@ -308,7 +325,6 @@ export default function ContactContent() {
           </div>
         </div>
       </section>
-      
 
       <Footer />
     </div>
