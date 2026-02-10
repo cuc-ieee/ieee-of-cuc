@@ -147,10 +147,10 @@ export default function AboutContent() {
               className="grid grid-cols-2 gap-4"
             >
               {[
-                { value: "2018", label: "Founded" },
-                { value: "200+", label: "Members" },
-                { value: "50+", label: "Events" },
-                { value: "10+", label: "Awards" },
+                { value: "2025", label: "Founded" },
+                { value: "50+", label: "Members" },
+                { value: "5+", label: "Events" },
+                { value: "3+", label: "Workshops" },
               ].map((stat) => (
                 <div
                   key={stat.label}
