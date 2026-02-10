@@ -11,13 +11,13 @@ import {
   Facebook,
   Youtube,
   MessageCircle,
-  Clock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { CopyToClipboardWrapper } from "@/components/CopyToClipboardWrapper";
 
 const socialLinks = [
   {
@@ -148,10 +148,14 @@ export default function ContactContent() {
               </h2>
 
               <div className="space-y-6 mb-10">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 group">
+                  <CopyToClipboardWrapper
+                    textToCopy="curtincolombo.ieee@gmail.com"
+                    label="Email"
+                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors cursor-pointer"
+                  >
                     <Mail className="w-5 h-5 text-primary" />
-                  </div>
+                  </CopyToClipboardWrapper>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
                     <p className="text-muted-foreground">
@@ -159,10 +163,14 @@ export default function ContactContent() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 group">
+                  <CopyToClipboardWrapper
+                    textToCopy="No. 80 Nawam Mawatha, Colombo 00200"
+                    label="Location"
+                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors cursor-pointer"
+                  >
                     <MapPin className="w-5 h-5 text-primary" />
-                  </div>
+                  </CopyToClipboardWrapper>
                   <div>
                     <h3 className="font-semibold mb-1">Location</h3>
                     <p className="text-muted-foreground">
@@ -174,10 +182,14 @@ export default function ContactContent() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 group">
+                  <CopyToClipboardWrapper
+                    textToCopy="+94 72 792 2261"
+                    label="Phone Number"
+                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors cursor-pointer"
+                  >
                     <Phone className="w-5 h-5 text-primary" />
-                  </div>
+                  </CopyToClipboardWrapper>
                   <div>
                     <h3 className="font-semibold mb-1">Phone (secretary)</h3>
                     <p className="text-muted-foreground">+94 72 792 2261</p>
