@@ -9,8 +9,8 @@ const committeeMembers = [
   {
     name: "Rovindu Tharin",
     role: "Chairperson",
-    department: "Mechatronics Engineer",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    department: "Mechatronics Engineering",
+    image: "/ExoCom/rovindu.jpeg",
     linkedin: "#",
     email: "mrtharinsilva@gmail.com",
   },
@@ -18,59 +18,90 @@ const committeeMembers = [
     name: "Sanindu Talwaththa",
     role: "Vice Chairperson",
     department: "Electrical and Electronic Engineering",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    image: "/ExoCom/sanidu.jpeg",
     linkedin: "#",
     email: "vicechair@ieee.curtin.edu.lk",
   },
   {
     name: "Yasiru Fernando",
     role: "Secretary",
-    department: "Mechatronics",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    department: "Mechatronics Engineering",
+    image: "/ExoCom/yasiru.jpeg",
     linkedin: "#",
     email: "secretary@ieee.curtin.edu.lk",
   },
   {
     name: "Rashmitha Fernando",
     role: "Treasurer",
-    department: "Computer Engineering",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+    department: "Electrical and Electronic Engineering",
+    image: "/ExoCom/rashmitha.jpeg",
     linkedin: "#",
     email: "treasurer@ieee.curtin.edu.lk",
   },
   {
-    name: "Nethmi Wickramasinghe",
-    role: "Technical Lead",
-    department: "Software Engineering",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+    name: "Kenolee",
+    role: "Assistant Secretary",
+    department: "Engineering",
+    image: "/ExoCom/kenolee.jpeg",
     linkedin: "#",
-    email: "tech@ieee.curtin.edu.lk",
+    email: "assistantsecretary@ieee.curtin.edu.lk",
   },
   {
-    name: "Ravindu Gunawardena",
-    role: "Events Coordinator",
-    department: "Electronics",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
+    name: "Adithya",
+    role: "Assistant Treasurer",
+    department: "Mechatronics Engineering",
+    image: "/ExoCom/adi.jpeg",
     linkedin: "#",
-    email: "events@ieee.curtin.edu.lk",
+    email: "assistanttreasurer@ieee.curtin.edu.lk",
   },
   {
-    name: "Sarah Fernando",
-    role: "Chairperson",
-    department: "Computer Science",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    name: "Yameen Shariz",
+    role: "Webmaster",
+    department: "Mechatronics Engineering",
+    image: "/ExoCom/yameen.jpeg",
     linkedin: "#",
-    email: "chair@ieee.curtin.edu.lk",
+    email: "webmaster@ieee.curtin.edu.lk",
   },
   {
-    name: "Sarah Fernando",
-    role: "Chairperson",
-    department: "Computer Science",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    name: "Hashin",
+    role: "Treasurer",
+    department: "Mechatronics Engineering",
+    image: "/ExoCom/hashin.jpeg",
     linkedin: "#",
-    email: "chair@ieee.curtin.edu.lk",
+    email: "treasurer@ieee.curtin.edu.lk",
   },
-  
+  {
+    name: "Mithil",
+    role: "Treasurer",
+    department: "Electrical and Electronic Engineering",
+    image: "/ExoCom/mithil.jpeg",
+    linkedin: "#",
+    email: "treasurer@ieee.curtin.edu.lk",
+  },
+  {
+    name: "Chiranga",
+    role: "Treasurer",
+    department: "Mechatronics Engineering",
+    image: "/ExoCom/chiranga.jpeg",
+    linkedin: "#",
+    email: "treasurer@ieee.curtin.edu.lk",
+  },
+  {
+    name: "Tatiana",
+    role: "Treasurer",
+    department: "Engineering",
+    image: "/ExoCom/tatiana.jpeg",
+    linkedin: "#",
+    email: "treasurer@ieee.curtin.edu.lk",
+  },
+  {
+    name: "Hirusha",
+    role: "Treasurer",
+    department: "Electrical and Electronic Engineering",
+    image: "/ExoCom/hirusha.jpeg",
+    linkedin: "#",
+    email: "treasurer@ieee.curtin.edu.lk",
+  },
 ];
 
 export default function CommitteeContent() {
@@ -98,8 +129,8 @@ export default function CommitteeContent() {
               Our <span className="gradient-text">Executive Committee</span>
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl">
-              Meet the dedicated team leading IEEE Student Branch of Curtin University Colombo
-              towards excellence and innovation.
+              Meet the dedicated team leading IEEE Student Branch of Curtin
+              University Colombo towards excellence and innovation.
             </p>
           </motion.div>
         </div>
