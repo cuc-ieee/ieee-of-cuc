@@ -7,6 +7,7 @@ import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { galleryEvents } from "../data/gallery";
 import { Button } from "@/components/ui/button";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 export default function GalleryContent() {
   return (
@@ -55,7 +56,7 @@ export default function GalleryContent() {
                 <h2 className="font-display text-3xl font-bold mb-8 text-center">
                   {event.title} 
                 </h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid sm:grid-cols-3 gap-4">
                   {event.images.slice(0, 3).map((image, imgIndex) => (
                     <motion.div
                       key={imgIndex}
@@ -66,7 +67,7 @@ export default function GalleryContent() {
                       className="group aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer relative"
                     >
                       <img
-                        src={image}
+                        src={getCloudinaryUrl(image, { width: 800, height: 600 })}
                         alt={`${event.title} image ${imgIndex + 1}`}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />

@@ -7,6 +7,7 @@ import { DesktopNav, MobileNav } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 export default function EventGalleryContent({
   event,
@@ -41,7 +42,7 @@ export default function EventGalleryContent({
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${event.images[0]})`,
+            backgroundImage: `url(${getCloudinaryUrl(event.images[0], { width: 1920 })})`,
             filter: "blur(7px)",
           }}
         />
@@ -88,7 +89,7 @@ export default function EventGalleryContent({
                   className="group aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer relative"
                 >
                   <img
-                    src={image}
+                    src={getCloudinaryUrl(image, { width: 600, height: 450 })}
                     alt={`${event.title} image ${index + 1}`}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -145,7 +146,7 @@ export default function EventGalleryContent({
               className="max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
             >
               <img
-                src={selectedImage}
+                src={getCloudinaryUrl(selectedImage, { width: 1920 })}
                 alt="Enlarged gallery view"
                 className="max-w-full max-h-full object-contain rounded-2xl"
               />
