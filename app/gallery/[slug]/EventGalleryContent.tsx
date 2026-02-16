@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { DesktopNav, MobileNav } from "@/components/Navigation";
@@ -15,6 +15,28 @@ export default function EventGalleryContent({
   event: GalleryEvent;
 }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Preload adjacent images when viewing lightbox
+  useEffect(() => {
+    if (selectedImage === null) return;
+
+    const currentIndex = event.images.indexOf(selectedImage);
+    const prevIndex =
+      currentIndex > 0 ? currentIndex - 1 : event.images.length - 1;
+    const nextIndex =
+      currentIndex < event.images.length - 1 ? currentIndex + 1 : 0;
+
+    // Preload previous and next images
+    const preloadPrev = new Image();
+    preloadPrev.src = getCloudinaryUrl(event.images[prevIndex], {
+      width: 2000,
+    });
+
+    const preloadNext = new Image();
+    preloadNext.src = getCloudinaryUrl(event.images[nextIndex], {
+      width: 2000,
+    });
+  }, [selectedImage, event.images]);
 
   const handlePrev = () => {
     if (selectedImage === null) return;
@@ -72,31 +94,26 @@ export default function EventGalleryContent({
       {/* Gallery Grid */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <motion.div
-            layout
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-          >
-            <AnimatePresence>
-              {event.images.map((image, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {event.images.map((image, index) => {
+              return (
                 <motion.div
                   key={index}
-                  layout
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   onClick={() => setSelectedImage(image)}
-                  className="group aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer relative"
+                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]"
                 >
                   <img
-                    src={getCloudinaryUrl(image, { width: 600, height: 450 })}
+                    src={getCloudinaryUrl(image, { width: 800 })}
                     alt={`${event.title} image ${index + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -137,20 +154,16 @@ export default function EventGalleryContent({
             >
               <ChevronRight className="w-6 h-6" />
             </button>
-            <motion.div
+            <motion.img
               layout
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
-            >
-              <img
-                src={getCloudinaryUrl(selectedImage, { width: 1920 })}
-                alt="Enlarged gallery view"
-                className="max-w-full max-h-full object-contain rounded-2xl"
-              />
-            </motion.div>
+              src={getCloudinaryUrl(selectedImage, { width: 2000 })}
+              alt="Enlarged gallery view"
+              className="max-w-[90vw] max-h-[90vh] w-auto h-auto object-contain rounded-2xl"
+            />
           </motion.div>
         )}
       </AnimatePresence>
