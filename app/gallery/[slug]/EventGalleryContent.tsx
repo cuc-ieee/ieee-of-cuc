@@ -107,7 +107,7 @@ export default function EventGalleryContent({
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   onClick={() => setSelectedImage(image)}
-                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]"
+                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-square"
                 >
                   <img
                     src={getCloudinaryUrl(image, { width: 800 })}
