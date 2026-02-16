@@ -96,7 +96,7 @@ export const pastEvents: Event[] = [
     date: "21 Dec 2025",
     time: "4:00 PM - 5:30 PM",
     location: "Online",
-    image: "/events/techxchange/ep1/hero.png",
+    image: "/events/techxchange/ep1/hero.jpg",
     category: ["Series"],
     status: "past",
     isPast: true,

@@ -64,7 +64,11 @@ export default function EventGalleryContent({
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${event.heroImage.startsWith("/") ? event.heroImage : getCloudinaryUrl(event.images[0], { width: 1920 })})`,
+            backgroundImage: `url(${
+              event.heroImage && event.heroImage.startsWith("/")
+                ? event.heroImage
+                : getCloudinaryUrl(event.images[0], { width: 1920 })
+            })`,
             filter: "blur(7px)",
           }}
         />
