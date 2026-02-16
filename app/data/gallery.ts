@@ -2,7 +2,7 @@ export interface GalleryEvent {
   id: string;
   title: string;
   slug: string;
-  heroImage: string;
+  heroImage?: string;
   images: string[];
 }
 
@@ -11,7 +11,7 @@ export const galleryEvents: GalleryEvent[] = [
     "id": "1",
     "title": "3 Minute Research Challenge",
     "slug": "3mrc",
-    "heroImage": "/events/3mrc/hero.JPG",
+    "heroImage": "/events/3mrc/hero.jpg",
     "images": [
       "1_wawox1",
       "2_sbi9nw",
@@ -357,6 +357,50 @@ export const galleryEvents: GalleryEvent[] = [
       "13_334_oz3ucg",
       "13_335_zvjsbr",
       "13_336_jqystx"
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Annual General Meeting",
+    "slug": "agm",
+    "images": [
+      "1_grretx",
+      "2_ukniuh",
+      "3_nfgsh2",
+      "4_w0n4m3",
+      "5_r2dikc",
+      "6_liga8t",
+      "7_tw99re",
+      "8_hb26el",
+      "9_xy7xom",
+      "10_u42hw7",
+      "11_qhokd8",
+      "12_pn9c9h",
+      "13_crmdjd",
+      "14_vk8b0f",
+      "15_ut8gwa",
+      "16_s2ufgo",
+      "17_j83ccs",
+      "18_bakv7c",
+      "19_ljtgvf",
+      "20_bvjd7l",
+      "IMG-20251122-WA0226_grj3bc",
+      "IMG-20251122-WA0229_o6u6ya",
+      "IMG-20251122-WA0231_h9hx2q",
+      "IMG-20251122-WA0232_hqxrh1",
+      "IMG-20251122-WA0235_ndov3c",
+      "IMG-20251122-WA0236_ifhazj",
+      "IMG-20251122-WA0311_eqpw3l",
+      "IMG-20251122-WA0333_dlx7xw",
+      "IMG-20251122-WA0355_e0vwbf",
+      "IMG-20251122-WA0361_qeijmp",
+      "IMG-20251122-WA0365_n42g7n",
+      "IMG-20251122-WA0367_ghswfu",
+      "IMG-20251122-WA0371_ctnp5c",
+      "IMG-20251122-WA0393_i8l58m",
+      "IMG-20251122-WA0398_e9k02e",
+      "IMG-20251122-WA0401_qed2e6",
+      "IMG-20251122-WA0428_t8glnp"
     ]
   }
 ];
