@@ -184,7 +184,7 @@ export default function AboutContent() {
               transition={{ duration: 0.8 }}
             >
               <img
-                src="https://placehold.co/600x350"
+                src="/Aboutus/Excom.jpg"
                 alt="IEEE Curtin University Colombo Committee"
                 className="rounded-lg shadow-lg"
               />
