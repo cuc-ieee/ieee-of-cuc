@@ -89,8 +89,8 @@ export const pastEvents: Event[] = [
   },
   {
     id: "P2",
-    title: "TechXchnage episode 1",
-    slug: "techxchnage-episode-1",
+    title: "TechXchange episode 1",
+    slug: "techxchange-episode-1",
     description: "Episode 1 of a series exploring how advancements in chips, robotics, and AI are driving the next revolution in modern engineering and real-world technology.",
     fullDescription: "This event explored how advancements in chips, robotics, and artificial intelligence are shaping the future of modern engineering, offering participants a clearer understanding of emerging technologies and their real-world impact. The session was delivered by Ms. Gayani Rathnasekara, who holds a PhD in Electrical and Computing Engineering from Florida International University, USA, and she provided valuable insights into cutting-edge research, industry trends, and the importance of mentorship for aspiring engineers.",
     date: "21 Dec 2025",
