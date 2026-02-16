@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Clock, ArrowLeft, Users, CheckCircle } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Clock,
+  ArrowLeft,
+  Users,
+  CheckCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../../components/Navigation";
 import { Footer } from "../../components/Footer";
@@ -44,9 +51,14 @@ export default function EventDetailContent({ event }: Props) {
             </Link>
 
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
-                {event.type}
-              </span>
+              {event.category?.map((cat, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium"
+                >
+                  {cat}
+                </span>
+              ))}
               {event.featured && (
                 <span className="px-3 py-1 rounded-full bg-accent/20 text-accent text-sm font-medium">
                   Featured Event
@@ -112,63 +124,24 @@ export default function EventDetailContent({ event }: Props) {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="prose prose-invert max-w-none"
               >
-                <h2 className="font-display text-2xl font-semibold mb-4">About This Event</h2>
+                <h2 className="font-display text-2xl font-semibold mb-4">
+                  About This Event
+                </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   {event.fullDescription || event.description}
                 </p>
               </motion.div>
-
-              {/* Highlights */}
-              {event.highlights && event.highlights.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
-                >
-                  <h2 className="font-display text-2xl font-semibold mb-6">Event Highlights</h2>
-                  <div className="space-y-3">
-                    {event.highlights.map((highlight, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Agenda */}
-              {event.agenda && event.agenda.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <h2 className="font-display text-2xl font-semibold mb-6">Event Agenda</h2>
-                  <div className="space-y-4">
-                    {event.agenda.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex gap-4 p-4 rounded-xl bg-card border border-border/50"
-                      >
-                        <div className="flex-shrink-0 w-24 text-primary font-medium">
-                          {item.time}
-                        </div>
-                        <div className="text-foreground">{item.title}</div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
 
               {/* Outcomes (for past events) */}
               {event.outcomes && event.outcomes.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
                 >
-                  <h2 className="font-display text-2xl font-semibold mb-6">Event Outcomes</h2>
+                  <h2 className="font-display text-2xl font-semibold mb-6">
+                    Event Outcomes
+                  </h2>
                   <div className="space-y-3">
                     {event.outcomes.map((outcome, index) => (
                       <div key={index} className="flex items-start gap-3">
@@ -185,12 +158,17 @@ export default function EventDetailContent({ event }: Props) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                  <h2 className="font-display text-2xl font-semibold mb-6">Event Gallery</h2>
+                  <h2 className="font-display text-2xl font-semibold mb-6">
+                    Event Gallery
+                  </h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {event.gallery.map((img, index) => (
-                      <div key={index} className="rounded-xl overflow-hidden aspect-video">
+                      <div
+                        key={index}
+                        className="rounded-xl overflow-hidden aspect-video"
+                      >
                         <img
                           src={img}
                           alt={`${event.title} gallery ${index + 1}`}
@@ -213,9 +191,12 @@ export default function EventDetailContent({ event }: Props) {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="rounded-2xl bg-card border border-border/50 p-6"
                 >
-                  <h3 className="font-display text-xl font-semibold mb-4">Register Now</h3>
+                  <h3 className="font-display text-xl font-semibold mb-4">
+                    Register Now
+                  </h3>
                   <p className="text-muted-foreground text-sm mb-6">
-                    Secure your spot for this exciting event. Limited seats available!
+                    Secure your spot for this exciting event. Limited seats
+                    available!
                   </p>
                   <Button variant="glow" className="w-full">
                     Register for Event
@@ -233,7 +214,9 @@ export default function EventDetailContent({ event }: Props) {
                 >
                   <div className="flex items-center gap-2 mb-4">
                     <Users className="w-5 h-5 text-primary" />
-                    <h3 className="font-display text-xl font-semibold">Speakers</h3>
+                    <h3 className="font-display text-xl font-semibold">
+                      Speakers
+                    </h3>
                   </div>
                   <div className="space-y-4">
                     {event.speakers.map((speaker, index) => (
@@ -244,8 +227,12 @@ export default function EventDetailContent({ event }: Props) {
                           </span>
                         </div>
                         <div>
-                          <div className="font-medium text-sm">{speaker.name}</div>
-                          <div className="text-muted-foreground text-xs">{speaker.role}</div>
+                          <div className="font-medium text-sm">
+                            {speaker.name}
+                          </div>
+                          <div className="text-muted-foreground text-xs">
+                            {speaker.role}
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -260,12 +247,18 @@ export default function EventDetailContent({ event }: Props) {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="rounded-2xl bg-card border border-border/50 p-6"
               >
-                <h3 className="font-display text-xl font-semibold mb-4">Event Details</h3>
+                <h3 className="font-display text-xl font-semibold mb-4">
+                  Event Details
+                </h3>
                 <div className="space-y-4 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Category</span>
-                    <span className="font-medium">{event.type}</span>
-                  </div>
+                  {event.category && event.category.length > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Categories</span>
+                      <span className="font-medium">
+                        {event.category.join(", ")}
+                      </span>
+                    </div>
+                  )}
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Date</span>
                     <span className="font-medium">{event.date}</span>
@@ -279,13 +272,19 @@ export default function EventDetailContent({ event }: Props) {
                   {event.location && (
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Venue</span>
-                      <span className="font-medium text-right">{event.location}</span>
+                      <span className="font-medium text-right">
+                        {event.location}
+                      </span>
                     </div>
                   )}
                   {event.participation && (
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Participation</span>
-                      <span className="font-medium text-right">{event.participation}</span>
+                      <span className="text-muted-foreground">
+                        Participation
+                      </span>
+                      <span className="font-medium text-right">
+                        {event.participation}
+                      </span>
                     </div>
                   )}
                 </div>

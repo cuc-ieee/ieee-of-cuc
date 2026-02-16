@@ -13,11 +13,7 @@ export function EventsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="events"
-      ref={ref}
-      className="relative flex items-center py-20"
-    >
+    <section id="events" ref={ref} className="relative flex items-center py-20">
       {/* Background Accent */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-gradient-to-l from-primary/5 to-transparent rounded-l-full" />
 
@@ -61,10 +57,15 @@ export function EventsSection() {
                 </div>
               )}
               <Link href={`/events/${event.slug}`} className="block p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-3 py-1 rounded-full bg-secondary text-xs font-medium">
-                    {event.type}
-                  </span>
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  {event.category?.map((cat, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 rounded-full bg-secondary text-xs font-medium"
+                    >
+                      {cat}
+                    </span>
+                  ))}
                 </div>
                 <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-primary transition-colors">
                   {event.title}
