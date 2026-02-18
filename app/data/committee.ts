@@ -101,7 +101,7 @@ export const committeeMembers: CommitteeMember[] = [
     role: "Head of Membership Development",
     department: "Electrical and Electronic Engineering",
     image: "/ExoCom/hirusha.jpeg",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/hirusha-perera-487432341?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     email: "pererarowan@gmail.com",
   },
 ];
