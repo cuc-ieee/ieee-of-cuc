@@ -30,7 +30,7 @@ const socialLinks = [
     href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all",
     label: "LinkedIn",
   },
-  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Facebook, href: "https://www.facebook.com/share/18JZ8M3B7p/", label: "Facebook" },
   { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "Youtube" },
   {
     icon: MessageCircle,
