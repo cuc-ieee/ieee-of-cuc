@@ -3,7 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ieee.curtin.edu.lk"),
+  metadataBase: new URL("https://ieeeofcuc.com"),
   title: {
     default: "IEEE Curtin University Colombo Student Branch | Advancing Technology for Humanity",
     template: "%s | IEEE Curtin University Colombo",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ieee.curtin.edu.lk",
+    url: "https://ieeeofcuc.com",
     siteName: "IEEE Curtin University Colombo Student Branch",
     title: "IEEE Curtin University Colombo Student Branch",
     description:
