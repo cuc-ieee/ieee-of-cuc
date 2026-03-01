@@ -571,7 +571,6 @@ export const galleryEvents: GalleryEvent[] = [
       "_DSC5922_r3anoc",
       "DSC05642_m9hbro",
       "DSC05644_msvysa"
-
     ]
   }
 ];
