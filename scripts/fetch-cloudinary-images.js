@@ -209,6 +209,30 @@ export const galleryEvents: GalleryEvent[] = ${JSON.stringify(events, null, 2)};
 }
 
 /**
+ * Update only the PLCFI event in app/data/gallery.ts using PLCFI/1 then PLCFI/2 order.
+ */
+function updatePlcfiImagesInGallery(plcfiImages) {
+  const galleryPath = path.join(__dirname, '..', 'app', 'data', 'gallery.ts');
+  const gallerySource = fs.readFileSync(galleryPath, 'utf-8');
+
+  const plcfiBlockRegex = /(\{\s*"id":\s*"3",\s*"title":\s*"PLCFI",\s*"slug":\s*"plcfi",\s*"images":\s*)\[[\s\S]*?\](\s*\})/;
+
+  if (!plcfiBlockRegex.test(gallerySource)) {
+    throw new Error('Could not find PLCFI block in app/data/gallery.ts');
+  }
+
+  const imagesJson = JSON.stringify(plcfiImages, null, 6)
+    .replace(/^\[/, '[\n      ')
+    .replace(/\]$/, '\n    ]')
+    .replace(/\n\s{6}/g, '\n      ');
+
+  const updatedGallerySource = gallerySource.replace(plcfiBlockRegex, `$1${imagesJson}$2`);
+  fs.writeFileSync(galleryPath, updatedGallerySource, 'utf-8');
+
+  return galleryPath;
+}
+
+/**
  * Main function
  */
 async function main() {
@@ -220,6 +244,26 @@ async function main() {
       throw new Error(
         '❌ Missing Cloudinary credentials. Please set CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET in your .env.local file.'
       );
+    }
+
+    if (process.argv.includes('--plcfi')) {
+      console.log('🎯 PLCFI mode enabled: fetching only PLCFI/1 and PLCFI/2\n');
+
+      const subFolders = ['PLCFI/1', 'PLCFI/2'];
+      const orderedIds = [];
+
+      for (const subFolder of subFolders) {
+        console.log(`  Fetching from: ${subFolder}`);
+        const resources = await fetchImagesFromFolder(subFolder, subFolder);
+        const sortedIds = resources.map(item => item.public_id).sort(naturalSort);
+        orderedIds.push(...sortedIds);
+        console.log(`  ✅ ${subFolder}: ${sortedIds.length} images`);
+      }
+
+      const updatedPath = updatePlcfiImagesInGallery(orderedIds);
+      console.log(`\n✅ Updated PLCFI images in: ${updatedPath}`);
+      console.log(`📸 Total PLCFI images: ${orderedIds.length}`);
+      return;
     }
 
     // Fetch all folders
