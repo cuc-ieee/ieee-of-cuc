@@ -11,7 +11,7 @@ export const galleryEvents: GalleryEvent[] = [
     "id": "1",
     "title": "3 Minute Research Challenge",
     "slug": "3mrc",
-    "heroImage": "/events/3mrc/hero.jpg",
+    "heroImage": "/images/events/3mrc/hero.jpg",
     "images": [
       "1_wawox1",
       "2_sbi9nw",
