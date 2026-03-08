@@ -102,6 +102,21 @@ export const pastEvents: Event[] = [
     status: "past",
     isPast: true,
   },
+  {
+    id: "P3",
+    title: "PLCFI",
+    slug: "plcfi",
+    description: "A high-level technical workshop by IEEE Curtin Colombo and SLIR that provided hands-on training in Siemens S7-200 PLCs, Ladder Logic programming, and core industrial automation practice.",
+    fullDescription: "PLCFI was a high-level technical workshop organised by the IEEE Student Branch of Curtin University, Colombo, in collaboration with the Sri Lanka Institute of Robotics (SLIR). The event provided intensive hands-on training on Siemens S7-200 PLC hardware, with a focus on Ladder Logic programming and industrial automation. With over 80 participants, the workshop equipped students with practical day-one automation skills while offering recognised professional certification, helping bridge the gap between academic learning and real-world industry practice.",
+    date: "27 Feb 2026",
+    time: "1:30 PM onwards",
+    participation: "Curtin University Colombo students",
+    location: "Curtin University Colombo, Room LT201",
+    image: "/events/plcfi/hero.jpg",
+    category: ["Workshop", "PRES hours"],
+    status: "past",
+    isPast: true,
+  },
 ];
 
 export const allEvents: Event[] = [...upcomingEvents, ...pastEvents];
