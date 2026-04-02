@@ -76,8 +76,10 @@ export const pastEvents: Event[] = [
     id: "P1",
     title: "3-minute research challenge (3MRC)",
     slug: "3mrc",
-    description: "An inter-university competition where students present their research in a 3-minute pitch to an audience of academics, industry leaders, and peers.",
-    fullDescription: "This research challenge was an inter-university event where students presented their research in 3 minutes to an audience of academics, industry leaders, and peers, helping them strengthen impactful communication and build professional networks. The event also included two workshops—an introductory session and another led by an academic guest speaker—to support participants in refining their presentations. The final competition was judged by five experts from both industrial and academic fields, and cash prizes were awarded to the top three winners.",
+    description:
+      "An inter-university competition where students present their research in a 3-minute pitch to an audience of academics, industry leaders, and peers.",
+    fullDescription:
+      "This research challenge was an inter-university event where students presented their research in 3 minutes to an audience of academics, industry leaders, and peers, helping them strengthen impactful communication and build professional networks. The event also included two workshops—an introductory session and another led by an academic guest speaker—to support participants in refining their presentations. The final competition was judged by five experts from both industrial and academic fields, and cash prizes were awarded to the top three winners.",
     date: "17 Jan 2026",
     time: "8:30 PM onwards",
     participation: "Inter-university",
@@ -91,8 +93,10 @@ export const pastEvents: Event[] = [
     id: "P2",
     title: "TechXchange episode 1",
     slug: "techxchange-episode-1",
-    description: "Episode 1 of a series exploring how advancements in chips, robotics, and AI are driving the next revolution in modern engineering and real-world technology.",
-    fullDescription: "This event explored how advancements in chips, robotics, and artificial intelligence are shaping the future of modern engineering, offering participants a clearer understanding of emerging technologies and their real-world impact. The session was delivered by Ms. Gayani Rathnasekara, who holds a PhD in Electrical and Computing Engineering from Florida International University, USA, and she provided valuable insights into cutting-edge research, industry trends, and the importance of mentorship for aspiring engineers.",
+    description:
+      "Episode 1 of a series exploring how advancements in chips, robotics, and AI are driving the next revolution in modern engineering and real-world technology.",
+    fullDescription:
+      "This event explored how advancements in chips, robotics, and artificial intelligence are shaping the future of modern engineering, offering participants a clearer understanding of emerging technologies and their real-world impact. The session was delivered by Ms. Gayani Rathnasekara, who holds a PhD in Electrical and Computing Engineering from Florida International University, USA, and she provided valuable insights into cutting-edge research, industry trends, and the importance of mentorship for aspiring engineers.",
     date: "21 Dec 2025",
     time: "4:00 PM - 5:30 PM",
     participation: "Open to Public",
@@ -106,13 +110,15 @@ export const pastEvents: Event[] = [
     id: "P3",
     title: "PLCFI",
     slug: "plcfi",
-    description: "A high-level technical workshop by IEEE Curtin Colombo and SLIR that provided hands-on training in Siemens S7-200 PLCs, Ladder Logic programming, and core industrial automation practice.",
-    fullDescription: "PLCFI was a high-level technical workshop organised by the IEEE Student Branch of Curtin University, Colombo, in collaboration with the Sri Lanka Institute of Robotics (SLIR). The event provided intensive hands-on training on Siemens S7-200 PLC hardware, with a focus on Ladder Logic programming and industrial automation. With over 80 participants, the workshop equipped students with practical day-one automation skills while offering recognised professional certification, helping bridge the gap between academic learning and real-world industry practice.",
+    description:
+      "A high-level technical workshop by IEEE Curtin Colombo and SLIR that provided hands-on training in Siemens S7-200 PLCs, Ladder Logic programming, and core industrial automation practice.",
+    fullDescription:
+      "PLCFI was a high-level technical workshop organised by the IEEE Student Branch of Curtin University, Colombo, in collaboration with the Sri Lanka Institute of Robotics (SLIR). The event provided intensive hands-on training on Siemens S7-200 PLC hardware, with a focus on Ladder Logic programming and industrial automation. With over 80 participants, the workshop equipped students with practical day-one automation skills while offering recognised professional certification, helping bridge the gap between academic learning and real-world industry practice.",
     date: "27 Feb 2026",
     time: "1:30 PM onwards",
     participation: "Curtin University Colombo students",
     location: "Curtin University Colombo, Room LT201",
-    image: "/events/plcfi/hero.jpg",
+    image: "/Events/plcfi/hero.jpg",
     category: ["Workshop", "PRES hours"],
     status: "past",
     isPast: true,
