@@ -4,8 +4,14 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ieeeofcuc.com"),
+  icons: {
+    icon: [{ url: "/logo/logo-mobile.png", type: "image/png" }],
+    shortcut: ["/logo/logo-mobile.png"],
+    apple: [{ url: "/logo/logo-mobile.png", type: "image/png" }],
+  },
   title: {
-    default: "IEEE Curtin University Colombo Student Branch | Advancing Technology for Humanity",
+    default:
+      "IEEE Curtin University Colombo Student Branch | Advancing Technology for Humanity",
     template: "%s | IEEE Curtin University Colombo",
   },
   description:
