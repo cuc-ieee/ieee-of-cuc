@@ -18,6 +18,7 @@ import { Footer } from "../components/Footer";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { CopyToClipboardWrapper } from "@/components/CopyToClipboardWrapper";
+import { submitContactForm } from "@/lib/contact";
 
 const socialLinks = [
   {
@@ -30,7 +31,11 @@ const socialLinks = [
     href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all",
     label: "LinkedIn",
   },
-  { icon: Facebook, href: "https://www.facebook.com/share/18JZ8M3B7p/", label: "Facebook" },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/share/18JZ8M3B7p/",
+    label: "Facebook",
+  },
   { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "Youtube" },
   {
     icon: MessageCircle,
@@ -67,20 +72,7 @@ export default function ContactContent() {
     setLoading(true);
 
     try {
-      // For static export, use an external endpoint (e.g., Firebase Cloud Function)
-      // Replace with your deployed function URL
-      const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL || "https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/contactForm";
-      const response = await fetch(contactEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
+      await submitContactForm(formData);
 
       toast({
         title: "Success!",
@@ -95,9 +87,14 @@ export default function ContactContent() {
         message: "",
       });
     } catch (error) {
+      const description =
+        error instanceof Error
+          ? error.message
+          : "Failed to send message. Please try again.";
+
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description,
         variant: "destructive",
       });
     } finally {

@@ -3,17 +3,44 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, MapPin, Phone, Send, Instagram, Linkedin, Facebook, Youtube, MessageCircle } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Instagram,
+  Linkedin,
+  Facebook,
+  Youtube,
+  MessageCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { CopyToClipboardWrapper } from "@/components/CopyToClipboardWrapper";
+import { submitContactForm } from "@/lib/contact";
 
 const socialLinks = [
-  { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all", label: "LinkedIn" },
-  { icon: Facebook, href: "https://www.facebook.com/share/18JZ8M3B7p/", label: "Facebook" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/ieee.cuc",
+    label: "Instagram",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all",
+    label: "LinkedIn",
+  },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/share/18JZ8M3B7p/",
+    label: "Facebook",
+  },
   { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "Youtube" },
-  { icon: MessageCircle, href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ", label: "Whatsapp" },
+  {
+    icon: MessageCircle,
+    href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ",
+    label: "Whatsapp",
+  },
 ];
 
 const initialFormState = {
@@ -31,7 +58,11 @@ export function ContactSection() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -44,20 +75,7 @@ export function ContactSection() {
     setLoading(true);
 
     try {
-      // For static export, use an external endpoint (e.g., Firebase Cloud Function)
-      // Replace with your deployed function URL
-      const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL || "https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/contactForm";
-      const response = await fetch(contactEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
+      await submitContactForm(formData);
 
       toast({
         title: "Success!",
@@ -66,9 +84,14 @@ export function ContactSection() {
 
       setFormData(initialFormState);
     } catch (error) {
+      const description =
+        error instanceof Error
+          ? error.message
+          : "Failed to send message. Please try again.";
+
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description,
         variant: "destructive",
       });
     } finally {
@@ -125,7 +148,9 @@ export function ContactSection() {
                 </CopyToClipboardWrapper>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium">Curtin University Colombo, Sri Lanka</p>
+                  <p className="font-medium">
+                    Curtin University Colombo, Sri Lanka
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-4 group">
@@ -137,7 +162,9 @@ export function ContactSection() {
                   <Phone className="w-5 h-5 text-primary" />
                 </CopyToClipboardWrapper>
                 <div>
-                  <p className="text-sm text-muted-foreground">Phone (secretary)</p>
+                  <p className="text-sm text-muted-foreground">
+                    Phone (secretary)
+                  </p>
                   <p className="font-medium">+94 72 792 2261</p>
                 </div>
               </div>

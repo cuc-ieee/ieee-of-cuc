@@ -46,6 +46,7 @@
     "@tanstack/react-query": "^5.83.0",
     "@types/react-helmet": "^6.1.11",
     "class-variance-authority": "^0.7.1",
+    "clippyjs": "^0.1.0",
     "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
