@@ -41,7 +41,7 @@ export default function CommitteeContent() {
       {/* Committee Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
             {committeeMembers.map((member, index) => (
               <motion.div
                 key={`${member.email}-${index}`}
