@@ -20,6 +20,10 @@ interface Props {
 }
 
 export default function EventDetailContent({ event }: Props) {
+  const descriptionParagraphs = Array.isArray(event.fullDescription)
+    ? event.fullDescription
+    : [event.fullDescription || event.description];
+
   return (
     <div className="min-h-screen w-full bg-background">
       <DesktopNav />
@@ -127,9 +131,16 @@ export default function EventDetailContent({ event }: Props) {
                 <h2 className="font-display text-2xl font-semibold mb-4">
                   About This Event
                 </h2>
-                <p className="text-muted-foreground text-lg leading-relaxed">
-                  {event.fullDescription || event.description}
-                </p>
+                <div className="space-y-4">
+                  {descriptionParagraphs.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-muted-foreground text-lg leading-relaxed"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </motion.div>
 
               {/* Outcomes (for past events) */}
@@ -198,9 +209,21 @@ export default function EventDetailContent({ event }: Props) {
                     Secure your spot for this exciting event. Limited seats
                     available!
                   </p>
-                  <Button variant="glow" className="w-full">
-                    Register for Event
-                  </Button>
+                  {event.registrationLink ? (
+                    <Button asChild variant="glow" className="w-full">
+                      <Link
+                        href={event.registrationLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Register for Event
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button variant="glow" className="w-full" disabled>
+                      Registration Opens Soon
+                    </Button>
+                  )}
                 </motion.div>
               )}
 

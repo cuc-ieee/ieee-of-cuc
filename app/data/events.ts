@@ -3,7 +3,7 @@ export interface Event {
   title: string;
   slug: string;
   description: string;
-  fullDescription?: string;
+  fullDescription?: string | string[];
   date: string;
   time: string;
   location: string;
@@ -21,24 +21,33 @@ export interface Event {
 }
 
 export const upcomingEvents: Event[] = [
-  // {
-  //   id: "U1",
-  //   title: "AI & Machine Learning Workshop",
-  //   slug: "ai-ml-workshop",
-  //   description: "Dive deep into the world of artificial intelligence and machine learning. Learn practical applications and hands-on implementation of ML algorithms.",
-  //   fullDescription: "This workshop offers a comprehensive introduction to the exciting fields of Artificial Intelligence (AI) and Machine Learning (ML). Participants will gain a solid understanding of fundamental concepts, explore real-world applications, and get hands-on experience with popular ML frameworks like TensorFlow. The session is designed for beginners and intermediate learners who want to build a strong foundation in AI/ML. By the end of the workshop, you will be able to understand the entire machine learning workflow, from data preprocessing to model deployment, and you'll have built your first predictive model. Join us to demystify AI and unlock its potential.",
-  //   date: "15 Jan 2026",
-  //   time: "2:00 PM - 5:00 PM",
-  //   participation: "Open to all Curtin University Colombo students",
-  //   location: "Curtin University Colombo Campus, Room 301",
-  //   image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80",
-  //   featured: true,
-  //   category: ["Workshop", "AI/ML"],
-  //   capacity: 50,
-  //   status: "upcoming",
-  //   isPast: false,
-  //   registrationLink: "#",
-  // },
+  {
+    id: "U1",
+    title: "DetectX - AI and computer vision workshop (Phase 2)",
+    slug: "detectx-ai-computer-vision-workshop-2",
+    description: "Step into the future of intelligent systems. DetectX Phase 2 takes you beyond theory — tackling a real-world business problem using AI, Computer Vision, and the YOLO model, in an agentic, industry-backed hands-on workshop.",
+    fullDescription: [
+      "DetectX Phase 2 is an intensive, industry-collaborative workshop where participants move from concept to code — solving a client-oriented business problem using cutting-edge Computer Vision and AI-native engineering practices.",
+      "The session kicks off with an introductory pitch on AI Native Engineering and its intersection with Computer Vision, followed by a focused conceptual session covering core AI and CV principles, and a deep dive into the YOLO (You Only Look Once) object detection model — one of the most widely used real-time CV architectures in production systems today.",
+      "Participants will then be grouped into clusters of 10, working collaboratively through a structured development phase guided by 4–5 resource persons from Virtusa, a global leader in digital engineering. The development phase features two evaluation checkpoints to track progress and push problem-solving further.",
+      "The technical environment is hybrid — VS Code with Agentic mode takes centre stage, with Google Colab available as a cloud fallback to handle the hardware demands of running YOLO models. Expect a session built around real workflows, not toy examples.",
+      "As a highlight, DetectX Phase 2 features a special IoT demo integrating Computer Vision with a Dobot robotic arm — a live showcase of how agentic programming bridges the digital and physical world.",
+      "Prior to the main event, all registered participants will have access to an online briefing session held 2–3 days before the workshop. This session will walk you through an introduction to AI and Computer Vision, cover all the prerequisites and setup requirements, and ensure you're fully prepared and ready to hit the ground running on the day of the workshop. The session will also be recorded and shared with all participants, so if you miss it, you won't be left behind. No one comes in cold.",
+      "Whether you're strengthening your CV foundations or stepping into agentic AI development for the first time, this workshop is built to challenge you, connect you with industry professionals, and give you a taste of what AI engineering looks like in the real world.",
+      "Prerequisites: Python and VS Code must be configured on your laptop prior to the session.",
+    ],
+    date: "16 May 2026",
+    time: "10:00 AM onwards",
+    participation: "Open to all university students",
+    location: "Curtin University Colombo Campus, Room LT201",
+    image: "/Events/DetectX/Phase2/hero.jpg",
+    featured: false,
+    category: ["Workshop", "AI", "Computer Vision"],
+    capacity: 100,
+    status: "upcoming",
+    isPast: false,
+    registrationLink: "https://forms.gle/xF7xcCcPd95v5gw59",
+  },
   // {
   //   id: "2",
   //   title: "IoT Hackathon 2026",
