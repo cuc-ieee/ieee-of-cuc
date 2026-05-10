@@ -30,7 +30,7 @@ export default function EventDetailContent({ event }: Props) {
       <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-12 overflow-hidden">
+      <section className="relative pt-24 md:pb-12 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={event.image}
@@ -75,7 +75,7 @@ export default function EventDetailContent({ event }: Props) {
               )}
             </div>
 
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            <h1 className="font-display text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-6">
               {event.title}
             </h1>
 
