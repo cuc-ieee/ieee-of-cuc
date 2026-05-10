@@ -224,6 +224,11 @@ export default function EventDetailContent({ event }: Props) {
                       Registration Opens Soon
                     </Button>
                   )}
+                  {event.registrationClosingDate && (
+                    <p className="text-red-500 text-sm mt-4 text-center font-semibold">
+                      Closes: {event.registrationClosingDate}
+                    </p>
+                  )}
                 </motion.div>
               )}
 
