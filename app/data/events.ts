@@ -15,6 +15,7 @@ export interface Event {
   isPast?: boolean;
   speakers?: { name: string; role: string; avatar?: string }[];
   registrationLink?: string;
+  registrationClosingDate?: string;
   outcomes?: string[];
   gallery?: string[];
   participation?: string;
@@ -47,6 +48,7 @@ export const upcomingEvents: Event[] = [
     status: "upcoming",
     isPast: false,
     registrationLink: "https://forms.gle/xF7xcCcPd95v5gw59",
+    registrationClosingDate: "12 May 2026 at 11:59 PM",
   },
   // {
   //   id: "2",
