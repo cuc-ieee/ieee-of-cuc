@@ -1,16 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Clock, ArrowRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { upcomingEvents, pastEvents } from "@/data/events";
 
+type SortOption = "newest" | "oldest" | "az" | "za";
+
+const parseEventDate = (date: string) => {
+  const match = date.match(/(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})/);
+  if (!match) return 0;
+
+  const parsed = new Date(`${match[3]} ${match[2]} ${match[1]}`);
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+};
+
+const sortEvents = <T extends { title: string; date: string }>(
+  items: T[],
+  sortBy: SortOption,
+) => {
+  const sorted = [...items];
+
+  if (sortBy === "newest") {
+    return sorted.sort(
+      (a, b) => parseEventDate(b.date) - parseEventDate(a.date),
+    );
+  }
+
+  if (sortBy === "oldest") {
+    return sorted.sort(
+      (a, b) => parseEventDate(a.date) - parseEventDate(b.date),
+    );
+  }
+
+  if (sortBy === "az") {
+    return sorted.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  return sorted.sort((a, b) => b.title.localeCompare(a.title));
+};
+
 export default function EventsContent() {
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
+  const [sortBy, setSortBy] = useState<SortOption>("newest");
+
+  const visibleEvents = useMemo(() => {
+    const events = activeTab === "upcoming" ? upcomingEvents : pastEvents;
+    return sortEvents(events, sortBy);
+  }, [activeTab, sortBy]);
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -46,27 +94,46 @@ export default function EventsContent() {
       {/* Tab Navigation */}
       <section>
         <div className="container mx-auto px-4">
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => setActiveTab("upcoming")}
-              className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                activeTab === "upcoming"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/50 text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Upcoming Events
-            </button>
-            <button
-              onClick={() => setActiveTab("past")}
-              className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                activeTab === "past"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/50 text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Past Events
-            </button>
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-center">
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={() => setActiveTab("upcoming")}
+                className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                  activeTab === "upcoming"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary/50 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Upcoming Events
+              </button>
+              <button
+                onClick={() => setActiveTab("past")}
+                className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                  activeTab === "past"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary/50 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Past Events
+              </button>
+            </div>
+
+            <div className="md:ml-auto md:w-[220px]">
+              <Select
+                value={sortBy}
+                onValueChange={(value) => setSortBy(value as SortOption)}
+              >
+                <SelectTrigger className="h-12 rounded-xl border border-border/60 bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary/20 focus:ring-offset-2">
+                  <SelectValue placeholder="Sort events" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl border border-border bg-popover shadow-lg">
+                  <SelectItem value="newest">Newest to oldest</SelectItem>
+                  <SelectItem value="oldest">Oldest to newest</SelectItem>
+                  <SelectItem value="az">A to Z</SelectItem>
+                  <SelectItem value="za">Z to A</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </section>
@@ -75,9 +142,9 @@ export default function EventsContent() {
       <section className="py-12">
         <div className="container mx-auto px-4">
           {activeTab === "upcoming" ? (
-            upcomingEvents.length > 0 ? (
+            visibleEvents.length > 0 ? (
               <div className="space-y-8">
-                {upcomingEvents.map((event, index) => (
+                {visibleEvents.map((event, index) => (
                   <motion.div
                     key={event.id}
                     initial={{ opacity: 0, y: 30 }}
@@ -166,9 +233,9 @@ export default function EventsContent() {
                 </p>
               </div>
             )
-          ) : pastEvents.length > 0 ? (
+          ) : visibleEvents.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {pastEvents.map((event, index) => (
+              {visibleEvents.map((event, index) => (
                 <motion.div
                   key={event.id}
                   initial={{ opacity: 0, y: 30 }}
