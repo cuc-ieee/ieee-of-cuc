@@ -1,100 +1,178 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Users, Calendar, Lightbulb } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/Container";
+import { ArrowLink } from "@/components/ArrowLink";
+
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
+const statStrip = [
+  "Workshops",
+  "Industry visits",
+  "Webinars",
+  "Competitions",
+  "Community",
+];
 
 export function HeroSection() {
+  const reduce = useReducedMotion();
+
   return (
-    <section
-      id="hero"
-      className="min-h-screen relative flex flex-col items-center justify-center overflow-hidden grid-pattern"
-    >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-primary/5 rounded-full" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-primary/5 rounded-full" />
-      </div>
+    <section className="relative overflow-hidden">
+      <div className="blueprint pointer-events-none absolute inset-0" aria-hidden />
+      <div className="vignette pointer-events-none absolute inset-0" aria-hidden />
+      <div className="pointer-events-none absolute right-[-10%] top-[-20%] h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(closest-side,hsl(var(--blue-bright)/0.08),transparent)]" aria-hidden />
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center pt-14">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-6"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide">
-            Advancing Technology for Humanity
-          </span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-        >
-          <span className="text-foreground">IEEE</span>{" "}
-          <span className="gradient-text">Curtin University Colombo</span>
-          <br />
-          <span className="text-foreground">Student Branch</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10"
-        >
-          Empowering the next generation of engineers and innovators through
-          technology, collaboration, and excellence.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-        >
-          <Button variant="hero" size="xl" asChild>
-            <Link href="/membership">Become a Member</Link>
-          </Button>
-          <Button variant="outline_glow" size="xl" asChild>
-            <Link href="/events">Explore Events</Link>
-          </Button>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="grid grid-cols-3 gap-4 md:gap-8 max-w-xl mx-auto"
-        >
-          {[
-            { icon: Users, value: "50+", label: "Members" },
-            { icon: Calendar, value: "5+", label: "Events" },
-            { icon: Lightbulb, value: "3+", label: "Workshops" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center p-4 rounded-xl bg-card/50 border border-border/50"
+      <Container className="relative flex min-h-svh flex-col justify-end pb-0 pt-28 lg:pt-32">
+        <div className="grid flex-1 items-center gap-12 pb-14 lg:grid-cols-12 lg:gap-10 lg:pb-16">
+          {/* Left — masthead */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: easeOut }}
+              className="mb-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[0.6875rem] uppercase tracking-widest2 text-ink-faint"
             >
-              <stat.icon className="w-5 h-5 text-primary mb-2" />
-              <span className="font-display text-2xl md:text-3xl font-bold text-foreground">
-                {stat.value}
-              </span>
-              <span className="text-muted-foreground text-sm">
-                {stat.label}
-              </span>
+              <span>IEEE Student Branch</span>
+              <span className="h-1 w-1 rounded-full bg-blue" aria-hidden />
+              <span>Curtin University Colombo</span>
+              <span className="hidden sm:inline">6.9186° N · 79.8494° E</span>
+            </motion.div>
+
+            <h1 className="font-display leading-[0.95] tracking-tight text-ink-strong">
+              <motion.span
+                initial={reduce ? false : { opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.08, ease: easeOut }}
+                className="block font-orbitron text-[clamp(2.5rem,9vw,5.5rem)] font-bold text-blue"
+              >
+                IEEE
+              </motion.span>
+              <motion.span
+                initial={reduce ? false : { opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.18, ease: easeOut }}
+                className="mt-2 block text-[clamp(2rem,6vw,3.9rem)] font-medium"
+              >
+                Curtin University
+              </motion.span>
+              <motion.span
+                initial={reduce ? false : { opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.28, ease: easeOut }}
+                className="mt-1 block text-[clamp(2rem,6vw,3.9rem)] font-medium"
+              >
+                <span className="font-serif italic text-blue">Colombo</span> — Student Branch
+              </motion.span>
+            </h1>
+
+            <motion.p
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.42, ease: easeOut }}
+              className="mt-7 max-w-[46ch] text-base leading-relaxed text-ink-muted sm:text-lg"
+            >
+              A student-led engineering community in Sri Lanka — running hands-on
+              workshops, industry visits, webinars, and national competitions
+              under the world&rsquo;s largest technical professional organization.
+            </motion.p>
+
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.52, ease: easeOut }}
+              className="mt-9 flex flex-wrap items-center gap-5"
+            >
+              <Button asChild size="lg">
+                <Link href="/membership">Become a member</Link>
+              </Button>
+              <ArrowLink href="/events">Explore events</ArrowLink>
+            </motion.div>
+          </div>
+
+          {/* Right — image composition */}
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: easeOut }}
+            className="relative lg:col-span-5"
+          >
+            <div className="relative">
+              <div className="relative aspect-[4/5] overflow-hidden bg-surface">
+                {/* Primary image */}
+                <img
+                  src="/events/3mrc/hero.jpg"
+                  alt="Students presenting at the 3 Minute Research Challenge hosted by IEEE Curtin University Colombo"
+                  className="img-duotone absolute inset-0 h-full w-full object-cover"
+                  loading="eager"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-deep/80 via-transparent to-transparent" aria-hidden />
+              </div>
+
+              {/* Offset secondary image */}
+              <div className="absolute -bottom-8 -left-4 w-2/5 overflow-hidden border border-line bg-surface shadow-lift sm:-left-8">
+                <img
+                  src="/Events/plcfi/hero.jpg"
+                  alt="Hands-on PLC industrial automation workshop at Curtin University Colombo"
+                  className="img-duotone aspect-[4/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Caption */}
+              <div className="absolute bottom-4 right-4 border border-line/80 bg-background/80 px-3 py-2 backdrop-blur-sm">
+                <p className="font-mono text-[0.625rem] uppercase tracking-widest2 text-ink-muted">
+                  3MRC · Jan 2026
+                </p>
+              </div>
             </div>
-          ))}
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom strip — hint of what follows */}
+        <div className="relative z-10 border-t border-line-soft">
+          <div className="flex items-center justify-between gap-6 py-4">
+            <motion.div
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="hidden items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-widest2 text-ink-faint sm:flex"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute h-full w-full animate-ping rounded-full bg-blue/40" />
+                <span className="relative h-2 w-2 rounded-full bg-blue" />
+              </span>
+              Registering for the coming year
+            </motion.div>
+            <div className="flex flex-1 flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              {statStrip.map((item, i) => (
+                <span key={item} className="flex items-center gap-5">
+                  {i > 0 && (
+                    <span className="h-1 w-1 rounded-full bg-blue" aria-hidden />
+                  )}
+                  <span className="font-mono text-[0.6875rem] uppercase tracking-widest2 text-ink-muted">
+                    {item}
+                  </span>
+                </span>
+              ))}
+            </div>
+            <motion.a
+              href="#identity"
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="hidden items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-widest2 text-ink-faint transition-colors hover:text-blue md:flex"
+              aria-label="Scroll to next section"
+            >
+              Scroll
+              <ArrowDown className="h-3.5 w-3.5" />
+            </motion.a>
+          </div>
+        </div>
+      </Container>
     </section>
   );
 }

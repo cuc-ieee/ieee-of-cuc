@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { useToast } from "@/hooks/use-toast";
 
 interface CopyToClipboardWrapperProps {
   textToCopy: string;
@@ -16,7 +15,6 @@ export function CopyToClipboardWrapper({
   label,
   className,
 }: CopyToClipboardWrapperProps) {
-  const { toast } = useToast();
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipMessage, setTooltipMessage] = useState(`Copy ${label}`);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);

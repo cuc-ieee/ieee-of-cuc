@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { DesktopNav, MobileNav } from "./components/Navigation";
 import { HeroSection } from "./components/sections/HeroSection";
 import { AboutSection } from "./components/sections/AboutSection";
+import { StatementSection } from "./components/sections/StatementSection";
 import { EventsSection } from "./components/sections/EventsSection";
+import { GalleryPreview } from "./components/sections/GalleryPreview";
 import { MembershipSection } from "./components/sections/MembershipSection";
-import { ContactSection } from "./components/sections/ContactSection";
-import { Footer } from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "IEEE Curtin University Colombo Student Branch | Advancing Technology for Humanity",
+  title: "IEEE Curtin University Colombo Student Branch",
   description:
-    "IEEE Curtin University Colombo Student Branch - Empowering the next generation of engineers and innovators through technology, collaboration, and excellence in Sri Lanka.",
+    "A student-led engineering community in Colombo — running workshops, industry visits, webinars, and national competitions under IEEE.",
   keywords: [
     "IEEE",
     "Curtin University Colombo",
@@ -22,21 +21,15 @@ export const metadata: Metadata = {
   ],
 };
 
-// This page is statically generated at build time (SSG)
 export default function HomePage() {
   return (
-    <div className="min-h-screen w-full bg-background overflow-x-hidden">
-      <DesktopNav />
-      <MobileNav />
-
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <EventsSection />
-        <MembershipSection />
-        <ContactSection />
-        <Footer />
-      </main>
-    </div>
+    <>
+      <HeroSection />
+      <AboutSection />
+      <StatementSection />
+      <EventsSection />
+      <GalleryPreview />
+      <MembershipSection />
+    </>
   );
 }

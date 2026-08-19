@@ -1,99 +1,136 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Linkedin, Mail } from "lucide-react";
-import { DesktopNav, MobileNav } from "../components/Navigation";
-import { Footer } from "../components/Footer";
+import { Container } from "@/components/Container";
+import { PageHero } from "@/components/PageHero";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { committeeMembers } from "@/data/committee";
+import { Linkedin, Mail } from "lucide-react";
+
+const leads = committeeMembers.filter((m) =>
+  ["Chair", "Vice Chair"].includes(m.role),
+);
+const officers = committeeMembers.filter(
+  (m) => !["Chair", "Vice Chair"].includes(m.role),
+);
 
 export default function CommitteeContent() {
   return (
-    <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
+    <>
+      <PageHero
+        index="00"
+        eyebrow="Leadership"
+        title={
+          <>
+            The executive <span className="font-serif italic text-blue">committee.</span>
+          </>
+        }
+        lede="Twelve engineering students run the branch — every workshop, industry visit, and competition is organised by this team, for the membership."
+        meta={
+          <>
+            <span>{committeeMembers.length} committee members</span>
+            <span>Mechatronics · Electrical & Electronic Engineering</span>
+          </>
+        }
+      />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden grid-pattern">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-              Leadership
-            </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Our <span className="gradient-text">Executive Committee</span>
-            </h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
-              Meet the dedicated team leading IEEE Student Branch of Curtin
-              University Colombo towards excellence and innovation.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Leadership */}
+      <section className="border-b border-line-soft bg-surface-deep">
+        <Container className="py-16 sm:py-24">
+          <Reveal className="mb-10 flex items-center gap-3">
+            <span className="font-mono text-[0.6875rem] text-blue">01</span>
+            <span className="eyebrow">At the helm</span>
+          </Reveal>
 
-      {/* Committee Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            {committeeMembers.map((member, index) => (
-              <motion.div
-                key={`${member.email}-${index}`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group rounded-2xl bg-card border border-border/50 overflow-hidden card-hover"
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display font-semibold text-xl mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-primary font-medium text-sm mb-1">
-                    {member.role}
-                  </p>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {member.department}
-                  </p>
-                  <div className="flex gap-3">
-                    {member.linkedin && (
+          <Stagger className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+            {leads.map((member) => (
+              <StaggerItem key={member.email}>
+                <div className="group grid overflow-hidden border border-line bg-surface sm:grid-cols-2">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={member.image}
+                      alt={`Portrait of ${member.name}, ${member.role} of IEEE Curtin University Colombo`}
+                      className="img-duotone aspect-[4/5] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-between p-7 sm:p-8">
+                    <div>
+                      <p className="font-mono text-xs uppercase tracking-widest text-blue">
+                        {member.role}
+                      </p>
+                      <h2 className="mt-3 font-display text-2xl font-medium tracking-tight text-ink-strong sm:text-3xl">
+                        {member.name}
+                      </h2>
+                      <p className="mt-2 text-sm text-ink-muted">{member.department}</p>
+                    </div>
+                    <div className="mt-8 flex items-center gap-3 border-t border-line pt-5">
+                      {member.linkedin && (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${member.name}'s LinkedIn`}
+                          className="flex h-10 w-10 items-center justify-center border border-line text-ink-muted transition-colors hover:border-blue hover:text-blue"
+                        >
+                          <Linkedin className="h-4 w-4" />
+                        </a>
+                      )}
                       <a
-                        href={member.linkedin}
-                        className="w-9 h-9 rounded-lg bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
-                        aria-label={`${member.name}'s LinkedIn`}
+                        href={`mailto:${member.email}`}
+                        aria-label={`Email ${member.name}`}
+                        className="flex h-10 w-10 items-center justify-center border border-line text-ink-muted transition-colors hover:border-blue hover:text-blue"
                       >
-                        <Linkedin className="w-4 h-4" />
+                        <Mail className="h-4 w-4" />
                       </a>
-                    )}
-                    <a
-                      href={`mailto:${member.email}`}
-                      className="w-9 h-9 rounded-lg bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
-                      aria-label={`Email ${member.name}`}
-                    >
-                      <Mail className="w-4 h-4" />
-                    </a>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </StaggerItem>
             ))}
-          </div>
-        </div>
+          </Stagger>
+        </Container>
       </section>
 
-      <Footer />
-    </div>
+      {/* Officers */}
+      <section className="border-b border-line-soft bg-background">
+        <Container className="py-16 sm:py-24">
+          <Reveal className="mb-10 flex items-center gap-3">
+            <span className="font-mono text-[0.6875rem] text-blue">02</span>
+            <span className="eyebrow">Officers</span>
+          </Reveal>
+
+          <Stagger className="grid grid-cols-2 gap-x-5 gap-y-12 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-8">
+            {officers.map((member) => (
+              <StaggerItem key={member.email}>
+                <a
+                  href={member.linkedin || `mailto:${member.email}`}
+                  target={member.linkedin ? "_blank" : undefined}
+                  rel={member.linkedin ? "noopener noreferrer" : undefined}
+                  className="group block"
+                  aria-label={`${member.name}, ${member.role} — open profile`}
+                >
+                  <div className="relative overflow-hidden border border-line bg-surface">
+                    <img
+                      src={member.image}
+                      alt={`Portrait of ${member.name}, ${member.role}`}
+                      className="img-duotone aspect-[4/5] w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:brightness-100"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface-deep/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden />
+                  </div>
+                  <div className="mt-4">
+                    <p className="font-display text-base font-medium tracking-tight text-ink-strong transition-colors group-hover:text-blue sm:text-lg">
+                      {member.name}
+                    </p>
+                    <p className="mt-0.5 text-[0.8125rem] text-blue">{member.role}</p>
+                    <p className="mt-1 text-xs text-ink-muted">{member.department}</p>
+                  </div>
+                </a>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Container>
+      </section>
+    </>
   );
 }

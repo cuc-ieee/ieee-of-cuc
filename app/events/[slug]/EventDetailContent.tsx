@@ -1,19 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import {
-  Calendar,
-  MapPin,
-  Clock,
-  ArrowLeft,
-  Users,
-  CheckCircle,
-} from "lucide-react";
+import { Container } from "@/components/Container";
+import { EventMeta } from "@/components/EventMeta";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
-import { DesktopNav, MobileNav } from "../../components/Navigation";
-import { Footer } from "../../components/Footer";
 import type { Event } from "@/data/events";
+import { pastEvents, upcomingEvents } from "@/data/events";
+import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 interface Props {
   event: Event;
@@ -24,305 +18,255 @@ export default function EventDetailContent({ event }: Props) {
     ? event.fullDescription
     : [event.fullDescription || event.description];
 
-  return (
-    <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
+  const related = [...upcomingEvents, ...pastEvents]
+    .filter((e) => e.slug !== event.slug)
+    .filter((e) => (e.category ?? []).some((c) => (event.category ?? []).includes(c)))
+    .slice(0, 3);
 
-      {/* Hero Section */}
-      <section className="relative pt-24 md:pb-12 overflow-hidden">
-        <div className="absolute inset-0">
+  return (
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-line-soft">
+        <div className="relative h-[42vh] min-h-[20rem] w-full sm:h-[54vh]">
           <img
             src={event.image}
-            alt={event.title}
-            className="w-full h-full object-cover opacity-20"
+            alt=""
+            className="img-duotone absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/60 to-transparent" aria-hidden />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+        <Container className="relative -mt-16 pb-14 sm:-mt-24 sm:pb-20">
+          <Reveal>
             <Link
               href="/events"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
+              className="group inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink-strong"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Events
+              <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+              Back to events
             </Link>
 
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              {event.category?.map((cat, index) => (
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+              {event.category?.map((cat) => (
                 <span
-                  key={index}
-                  className="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium"
+                  key={cat}
+                  className="font-mono text-[0.6875rem] uppercase tracking-widest text-blue"
                 >
                   {cat}
                 </span>
               ))}
-              {event.featured && (
-                <span className="px-3 py-1 rounded-full bg-accent/20 text-accent text-sm font-medium">
-                  Featured Event
-                </span>
-              )}
               {event.isPast && (
-                <span className="px-3 py-1 rounded-full bg-muted text-muted-foreground text-sm font-medium">
-                  Past Event
+                <span className="font-mono text-[0.6875rem] uppercase tracking-widest text-ink-faint">
+                  Past event
                 </span>
               )}
             </div>
 
-            <h1 className="font-display text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-6">
+            <h1 className="mt-4 max-w-[22ch] font-display text-3xl font-medium leading-[1.05] tracking-tight text-ink-strong sm:text-5xl">
               {event.title}
             </h1>
 
-            <div className="flex flex-wrap gap-6 text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-primary" />
-                <span>{event.date}</span>
-              </div>
-              {event.time && (
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-primary" />
-                  <span>{event.time}</span>
-                </div>
-              )}
-              {event.location && (
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-primary" />
-                  <span>{event.location}</span>
-                </div>
+            <div className="mt-8 flex flex-wrap gap-6">
+              <EventMeta event={event} />
+              {event.participation && (
+                <p className="font-mono text-[0.75rem] uppercase tracking-wider text-ink-faint">
+                  For: {event.participation}
+                </p>
               )}
             </div>
-          </motion.div>
-        </div>
+          </Reveal>
+        </Container>
       </section>
 
-      {/* Main Content */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Left Column - Main Content */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Event Image */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="rounded-2xl overflow-hidden"
-              >
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full aspect-video object-cover"
-                />
-              </motion.div>
-
-              {/* Description */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="prose prose-invert max-w-none"
-              >
-                <h2 className="font-display text-2xl font-semibold mb-4">
-                  About This Event
-                </h2>
-                <div className="space-y-4">
-                  {descriptionParagraphs.map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className="text-muted-foreground text-lg leading-relaxed"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Outcomes (for past events) */}
-              {event.outcomes && event.outcomes.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
-                >
-                  <h2 className="font-display text-2xl font-semibold mb-6">
-                    Event Outcomes
-                  </h2>
-                  <div className="space-y-3">
-                    {event.outcomes.map((outcome, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">{outcome}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Gallery (for past events) */}
-              {event.gallery && event.gallery.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <h2 className="font-display text-2xl font-semibold mb-6">
-                    Event Gallery
-                  </h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {event.gallery.map((img, index) => (
-                      <div
-                        key={index}
-                        className="rounded-xl overflow-hidden aspect-video"
-                      >
-                        <img
-                          src={img}
-                          alt={`${event.title} gallery ${index + 1}`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+      {/* Body */}
+      <section className="bg-surface-deep">
+        <Container className="grid gap-14 py-16 sm:py-20 lg:grid-cols-12 lg:gap-16">
+          {/* Description */}
+          <div className="lg:col-span-8">
+            <Reveal>
+              <p className="eyebrow mb-6">About this event</p>
+            </Reveal>
+            <div className="space-y-5">
+              {descriptionParagraphs.map((paragraph, index) => (
+                <Reveal key={index} delay={index * 0.06}>
+                  <p className="max-w-[62ch] text-base leading-relaxed text-ink-muted sm:text-lg sm:leading-[1.75]">
+                    {paragraph}
+                  </p>
+                </Reveal>
+              ))}
             </div>
 
-            {/* Right Column - Sidebar */}
-            <div className="space-y-6">
-              {/* Registration Card (for upcoming events) */}
+            {event.outcomes && event.outcomes.length > 0 && (
+              <div className="mt-12 border-t border-line pt-10">
+                <Reveal>
+                  <p className="eyebrow mb-6">Outcomes</p>
+                </Reveal>
+                <ul className="space-y-4">
+                  {event.outcomes.map((outcome, index) => (
+                    <Reveal key={index} delay={index * 0.05}>
+                      <li className="flex items-start gap-3">
+                        <Check className="mt-1 h-4 w-4 shrink-0 text-blue" aria-hidden />
+                        <span className="text-base leading-relaxed text-ink-strong">
+                          {outcome}
+                        </span>
+                      </li>
+                    </Reveal>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Sidebar */}
+          <aside className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
               {!event.isPast && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="rounded-2xl bg-card border border-border/50 p-6"
-                >
-                  <h3 className="font-display text-xl font-semibold mb-4">
-                    Register Now
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-6">
-                    Secure your spot for this exciting event. Limited seats
-                    available!
-                  </p>
-                  {event.registrationLink ? (
-                    <Button asChild variant="glow" className="w-full">
-                      <Link
-                        href={event.registrationLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Register for Event
-                      </Link>
-                    </Button>
-                  ) : (
-                    <Button variant="glow" className="w-full" disabled>
-                      Registration Opens Soon
-                    </Button>
-                  )}
-                  {event.registrationClosingDate && (
-                    <p className="text-red-500 text-sm mt-4 text-center font-semibold">
-                      Closes: {event.registrationClosingDate}
+                <Reveal>
+                  <div className="border border-line bg-surface p-7">
+                    <p className="eyebrow mb-3">Registration</p>
+                    <p className="text-sm leading-relaxed text-ink-muted">
+                      Reserve a place before seats fill.
                     </p>
-                  )}
-                </motion.div>
+                    {event.registrationLink ? (
+                      <Button asChild className="mt-6 w-full" size="lg">
+                        <a
+                          href={event.registrationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Register for event
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button size="lg" className="mt-6 w-full" disabled>
+                        Registration opens soon
+                      </Button>
+                    )}
+                    {event.registrationClosingDate && (
+                      <p className="mt-4 text-xs text-ink-faint">
+                        Closes {event.registrationClosingDate}
+                      </p>
+                    )}
+                  </div>
+                </Reveal>
               )}
 
-              {/* Speakers */}
-              {event.speakers && event.speakers.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="rounded-2xl bg-card border border-border/50 p-6"
-                >
-                  <div className="flex items-center gap-2 mb-4">
-                    <Users className="w-5 h-5 text-primary" />
-                    <h3 className="font-display text-xl font-semibold">
-                      Speakers
-                    </h3>
-                  </div>
-                  <div className="space-y-4">
-                    {event.speakers.map((speaker, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                          <span className="text-primary font-semibold">
-                            {speaker.name.charAt(0)}
-                          </span>
-                        </div>
-                        <div>
-                          <div className="font-medium text-sm">
-                            {speaker.name}
-                          </div>
-                          <div className="text-muted-foreground text-xs">
-                            {speaker.role}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Event Details Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="rounded-2xl bg-card border border-border/50 p-6"
-              >
-                <h3 className="font-display text-xl font-semibold mb-4">
-                  Event Details
-                </h3>
-                <div className="space-y-4 text-sm">
-                  {event.category && event.category.length > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Categories</span>
-                      <span className="font-medium">
-                        {event.category.join(", ")}
-                      </span>
+              <Reveal delay={0.1}>
+                <dl className="mt-6 border-t border-line">
+                  {event.date && (
+                    <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+                      <dt className="eyebrow">Date</dt>
+                      <dd className="text-right text-sm font-medium text-ink-strong">
+                        {event.date}
+                      </dd>
                     </div>
                   )}
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Date</span>
-                    <span className="font-medium">{event.date}</span>
-                  </div>
                   {event.time && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Time</span>
-                      <span className="font-medium">{event.time}</span>
+                    <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+                      <dt className="eyebrow">Time</dt>
+                      <dd className="text-right text-sm font-medium text-ink-strong">
+                        {event.time}
+                      </dd>
                     </div>
                   )}
                   {event.location && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Venue</span>
-                      <span className="font-medium text-right">
+                    <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+                      <dt className="eyebrow">Venue</dt>
+                      <dd className="text-right text-sm font-medium text-ink-strong">
                         {event.location}
-                      </span>
+                      </dd>
                     </div>
                   )}
                   {event.participation && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">
-                        Participation
-                      </span>
-                      <span className="font-medium text-right">
+                    <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+                      <dt className="eyebrow">Audience</dt>
+                      <dd className="text-right text-sm font-medium text-ink-strong">
                         {event.participation}
-                      </span>
+                      </dd>
                     </div>
                   )}
-                </div>
-              </motion.div>
+                  {event.capacity && (
+                    <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+                      <dt className="eyebrow">Capacity</dt>
+                      <dd className="text-right text-sm font-medium text-ink-strong">
+                        {event.capacity} seats
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+              </Reveal>
+
+              {event.speakers && event.speakers.length > 0 && (
+                <Reveal delay={0.18}>
+                  <div className="mt-6 border-t border-line pt-6">
+                    <p className="eyebrow mb-5">Speakers</p>
+                    <ul className="space-y-5">
+                      {event.speakers.map((speaker) => (
+                        <li key={speaker.name} className="flex items-start gap-4">
+                          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-blue/40 bg-blue/10 font-display text-base font-medium text-blue">
+                            {speaker.name.charAt(0)}
+                          </span>
+                          <div>
+                            <p className="text-sm font-medium text-ink-strong">
+                              {speaker.name}
+                            </p>
+                            <p className="mt-0.5 text-xs leading-relaxed text-ink-muted">
+                              {speaker.role}
+                            </p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              )}
             </div>
-          </div>
-        </div>
+          </aside>
+        </Container>
       </section>
 
-      <Footer />
-    </div>
+      {/* Related */}
+      {related.length > 0 && (
+        <section className="border-t border-line-soft bg-background">
+          <Container className="py-16 sm:py-20">
+            <Reveal className="mb-8 flex items-end justify-between gap-6">
+              <h2 className="font-display text-2xl font-medium tracking-tight text-ink-strong sm:text-3xl">
+                Related <span className="font-serif italic text-blue">events</span>
+              </h2>
+              <Link
+                href="/events"
+                className="hidden items-center gap-1.5 text-sm font-medium text-blue transition-colors hover:text-blue-bright sm:inline-flex"
+              >
+                All events
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
+            <Stagger className="border-t border-line-soft">
+              {related.map((item) => (
+                <StaggerItem key={item.slug}>
+                  <a
+                    href={`/events/${item.slug}`}
+                    className="group grid grid-cols-1 items-center gap-2 border-b border-line-soft py-6 transition-colors duration-300 hover:bg-surface sm:grid-cols-[11rem_1fr_auto] sm:gap-6"
+                  >
+                    <span className="font-mono text-[0.75rem] uppercase tracking-wider text-ink-faint">
+                      {item.date}
+                    </span>
+                    <span className="font-display text-lg font-medium tracking-tight text-ink-strong transition-colors group-hover:text-blue sm:text-xl">
+                      {item.title}
+                    </span>
+                    <ArrowUpRight
+                      className="hidden h-5 w-5 text-ink-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue sm:block"
+                      aria-hidden
+                    />
+                  </a>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </Container>
+        </section>
+      )}
+    </>
   );
 }

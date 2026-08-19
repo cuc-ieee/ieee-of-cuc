@@ -1,110 +1,112 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import Link from "next/link";
-import { Check, Sparkles, BookOpen, Network, Award, Rocket } from "lucide-react";
+import { Container } from "@/components/Container";
+import { SectionHeading } from "@/components/SectionHeading";
+import { ArrowLink } from "@/components/ArrowLink";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const benefits = [
-  { icon: BookOpen, text: "Access to IEEE Xplore digital library" },
-  { icon: Network, text: "Global networking opportunities" },
-  { icon: Award, text: "Industry-recognized certifications" },
-  { icon: Rocket, text: "Exclusive workshops, training & industry visits" },
-  { icon: Sparkles, text: "Competition participation" },
-  { icon: Check, text: "Curated career development resources" },
+  {
+    title: "IEEE Xplore",
+    detail: "The full technical literature library — millions of papers.",
+  },
+  {
+    title: "Global network",
+    detail: "400,000+ members across 160 countries, including IEEE Sri Lanka Section.",
+  },
+  {
+    title: "Career & learning",
+    detail: "Certifications, conference discounts, and a curated job board.",
+  },
+  {
+    title: "Branch programmes",
+    detail: "Early access to workshops, industry visits, and competitions.",
+  },
 ];
 
 export function MembershipSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section
-      id="membership"
-      ref={ref}
-      className="relative flex items-center py-20 overflow-hidden"
-    >
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-      </div>
+    <section className="border-t border-line-soft bg-surface-deep">
+      <Container className="grid gap-14 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20 lg:py-32">
+        <div>
+          <SectionHeading
+            index="05"
+            eyebrow="Membership"
+            title={
+              <>
+                Join the <span className="font-serif italic text-blue">branch.</span>
+              </>
+            }
+            description="Membership means access to IEEE's global resources — and a place in a local community that ships real work."
+            rule={false}
+          />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-              Join Us
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Become an <span className="gradient-text">IEEE Member</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Unlock exclusive benefits and join a global community of over
-              400,000 professionals advancing technology.
-            </p>
-          </motion.div>
-
-          {/* Benefits Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12"
-          >
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit.text}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                className="flex items-center gap-3 p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-colors"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <benefit.icon className="w-5 h-5 text-primary" />
+          <Stagger className="-mt-2">
+            {benefits.map((benefit, i) => (
+              <StaggerItem key={benefit.title} className="border-b border-line-soft py-5 first:border-t">
+                <div className="flex items-baseline gap-5">
+                  <span className="font-mono text-xs text-ink-faint">0{i + 1}</span>
+                  <div>
+                    <h3 className="font-display text-lg font-medium tracking-tight text-ink-strong">
+                      {benefit.title}
+                    </h3>
+                    <p className="mt-1 max-w-[46ch] text-sm leading-relaxed text-ink-muted">
+                      {benefit.detail}
+                    </p>
+                  </div>
                 </div>
-                <span className="text-sm">{benefit.text}</span>
-              </motion.div>
+              </StaggerItem>
             ))}
-          </motion.div>
+          </Stagger>
 
-          {/* CTA Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative rounded-2xl p-8 md:p-12 bg-gradient-to-br from-card to-secondary/50 border border-border/50 overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <div className="relative z-10 text-center">
-              <h3 className="font-display text-2xl md:text-3xl font-bold mb-4">
-                Ready to Start Your Journey?
-              </h3>
-              <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                Join IEEE today and gain access to a world of opportunities,
-                resources, and a community of innovators.
+          <Reveal className="mt-9">
+            <p className="max-w-[52ch] text-sm leading-relaxed text-ink-muted">
+              Our branch is part of the IEEE Sri Lanka Section and the worldwide
+              IEEE community — the world&rsquo;s largest technical professional
+              organization.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center gap-5">
+              <Button asChild size="lg">
+                <Link href="/membership">Become a member</Link>
+              </Button>
+              <ArrowLink
+                href="/MembershipPage/IEEEStudentMembershipGuide.pdf"
+                external
+              >
+                Student membership guide
+              </ArrowLink>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Composed panel */}
+        <Reveal delay={0.15} className="lg:pl-6">
+          <div className="relative flex h-full min-h-[24rem] flex-col justify-between overflow-hidden border border-line bg-[linear-gradient(150deg,hsl(210_85%_30%/0.55),hsl(224_45%_6%_/0.6))] p-8 sm:p-12">
+            <div className="blueprint pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+            <div className="relative">
+              <p className="eyebrow">Founded 1884 · A global community</p>
+              <p className="mt-6 font-orbitron text-[clamp(3.5rem,10vw,6rem)] font-bold leading-none text-blue">
+                IEEE
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="hero" size="xl" asChild>
-                  <Link href="https://ieee.org" target="_blank">
-                    Register Now
-                  </Link>
-                </Button>
-                <Button variant="glass" size="xl" asChild>
-                  <Link href="/membership">Learn More</Link>
-                </Button>
+            </div>
+            <div className="relative mt-10">
+              <p className="max-w-[30ch] font-display text-xl font-medium leading-snug text-ink-strong">
+                The Institute of Electrical and Electronics Engineers.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                The world&rsquo;s largest technical professional organization,
+                advancing technology for humanity — and the network our branch
+                belongs to.
+              </p>
+              <div className="mt-7">
+                <ArrowLink href="https://www.ieee.org" external>
+                  About IEEE
+                </ArrowLink>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </div>
+          </div>
+        </Reveal>
+      </Container>
     </section>
   );
 }

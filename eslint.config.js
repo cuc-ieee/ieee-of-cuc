@@ -5,10 +5,10 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  { ignores: ["dist", ".next", "node_modules", "scripts", "*.config.ts", "*.config.js", "*.config.cjs", "next-sitemap.config.cjs", "next-env.d.ts", "postcss.config.js"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ["**/*.{ts,tsx}"],
+    files: ["app/**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -19,12 +19,12 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
   {
-    files: ["*.config.ts", "*.config.js", "*.config.cjs"],
+    files: ["*.config.ts", "*.config.js", "*.config.cjs", "next-sitemap.config.cjs"],
     rules: {
       "@typescript-eslint/no-require-imports": "off",
     },

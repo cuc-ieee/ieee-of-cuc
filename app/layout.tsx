@@ -1,6 +1,48 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import {
+  Inter,
+  Space_Grotesk,
+  Instrument_Serif,
+  IBM_Plex_Mono,
+  Orbitron,
+} from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { SiteHeader } from "./components/SiteHeader";
+import { SiteFooter } from "./components/Footer";
+
+const sans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const display = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ieeeofcuc.com"),
@@ -10,12 +52,11 @@ export const metadata: Metadata = {
     apple: [{ url: "/logo/logo-mobile.png", type: "image/png" }],
   },
   title: {
-    default:
-      "IEEE Curtin University Colombo Student Branch | Advancing Technology for Humanity",
+    default: "IEEE Curtin University Colombo Student Branch",
     template: "%s | IEEE Curtin University Colombo",
   },
   description:
-    "IEEE Curtin University Colombo Student Branch - Empowering the next generation of engineers and innovators through technology, collaboration, and excellence in Sri Lanka.",
+    "The IEEE Student Branch of Curtin University Colombo — a student-led engineering community in Sri Lanka running workshops, industry visits, webinars, and national competitions.",
   keywords: [
     "IEEE",
     "Curtin University Colombo",
@@ -24,6 +65,7 @@ export const metadata: Metadata = {
     "Technology",
     "Sri Lanka",
     "Innovation",
+    "IEEE Sri Lanka Section",
   ],
   authors: [{ name: "IEEE Curtin University Colombo Student Branch" }],
   creator: "IEEE Curtin University Colombo Student Branch",
@@ -34,7 +76,7 @@ export const metadata: Metadata = {
     siteName: "IEEE Curtin University Colombo Student Branch",
     title: "IEEE Curtin University Colombo Student Branch",
     description:
-      "Empowering the next generation of engineers and innovators through technology, collaboration, and excellence in Sri Lanka.",
+      "A student-led engineering community in Colombo running workshops, industry visits, webinars, and national competitions.",
     images: [
       {
         url: "/logo/logo.png",
@@ -48,7 +90,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IEEE Curtin University Colombo Student Branch",
     description:
-      "Empowering the next generation of engineers and innovators through technology, collaboration, and excellence in Sri Lanka.",
+      "A student-led engineering community in Colombo running workshops, industry visits, webinars, and national competitions.",
     images: ["/logo/logo.png"],
   },
   robots: {
@@ -57,15 +99,34 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0a0d15",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${sans.variable} ${display.variable} ${serif.variable} ${mono.variable} ${orbitron.variable}`}
+    >
       <body className="min-h-screen bg-background antialiased">
-        <Providers>{children}</Providers>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-blue focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+        >
+          Skip to content
+        </a>
+        <Providers>
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
+        </Providers>
       </body>
     </html>
   );

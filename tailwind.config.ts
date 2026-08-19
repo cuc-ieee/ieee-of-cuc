@@ -2,20 +2,16 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: ["./app/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        display: ["Orbitron", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        orbitron: ["var(--font-orbitron)", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,15 +47,29 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        ink: {
+          DEFAULT: "hsl(var(--ink-strong))",
+          muted: "hsl(var(--ink-muted))",
+          faint: "hsl(var(--ink-faint))",
+          strong: "hsl(var(--ink-strong))",
+        },
+        line: {
+          DEFAULT: "hsl(var(--line))",
+          soft: "hsl(var(--line-soft))",
+          strong: "hsl(var(--line-strong))",
+        },
+        surface: {
+          DEFAULT: "hsl(var(--surface))",
+          raised: "hsl(var(--surface-raised))",
+          deep: "hsl(var(--surface-deep))",
+        },
+        blue: {
+          DEFAULT: "hsl(var(--blue-bright))",
+          bright: "hsl(var(--blue-bright))",
+          deep: "hsl(var(--blue-deep))",
+        },
+        cyan: {
+          DEFAULT: "hsl(var(--cyan-bright))",
         },
       },
       borderRadius: {
@@ -67,50 +77,19 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(20px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        "fade-in-left": {
-          from: { opacity: "0", transform: "translateX(-40px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
-        },
-        "fade-in-right": {
-          from: { opacity: "0", transform: "translateX(40px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
-        },
-        "scale-in": {
-          from: { opacity: "0", transform: "scale(0.9)" },
-          to: { opacity: "1", transform: "scale(1)" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
+      maxWidth: {
+        prose: "65ch",
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.8s ease-out forwards",
-        "fade-in-left": "fade-in-left 0.8s ease-out forwards",
-        "fade-in-right": "fade-in-right 0.8s ease-out forwards",
-        "scale-in": "scale-in 0.6s ease-out forwards",
-        shimmer: "shimmer 2s infinite",
+      boxShadow: {
+        edge: "0 1px 0 0 hsl(var(--line))",
+        "edge-t": "inset 0 1px 0 0 hsl(var(--line))",
+        panel: "0 24px 60px -24px hsl(224 60% 2% / 0.9)",
+        lift: "0 12px 40px -12px hsl(224 60% 3% / 0.7)",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      letterSpacing: {
+        widest2: "0.24em",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("@tailwindcss/typography")],
 } satisfies Config;

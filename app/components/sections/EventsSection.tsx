@@ -1,111 +1,129 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import Link from "next/link";
-import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { upcomingEvents } from "@/data/events";
+import { Container } from "@/components/Container";
+import { SectionHeading } from "@/components/SectionHeading";
+import { ArrowLink } from "@/components/ArrowLink";
+import { EventMeta } from "@/components/EventMeta";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { upcomingEvents, pastEvents, type Event } from "@/data/events";
+import { ArrowUpRight } from "lucide-react";
+
+const parseDate = (date: string) => {
+  const m = date.match(/(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})/);
+  if (!m) return 0;
+  const d = new Date(`${m[3]} ${m[2]} ${m[1]}`);
+  return Number.isNaN(d.getTime()) ? 0 : d.getTime();
+};
+
+function pickProgramme(): Event[] {
+  const upcoming = [...upcomingEvents].sort(
+    (a, b) => parseDate(a.date) - parseDate(b.date),
+  );
+  if (upcoming.length > 0) return upcoming;
+  const sorted = [...pastEvents].sort(
+    (a, b) => parseDate(b.date) - parseDate(a.date),
+  );
+  const featured =
+    sorted.find((e) => !e.image.includes("placeholder")) ?? sorted[0];
+  return [featured, ...sorted.filter((e) => e !== featured)];
+}
 
 export function EventsSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const programme = pickProgramme();
+  const [featured, ...rest] = programme;
+  const showUpcoming = upcomingEvents.length > 0;
+
+  if (!featured) return null;
 
   return (
-    <section id="events" ref={ref} className="relative flex items-center py-20">
-      {/* Background Accent */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-gradient-to-l from-primary/5 to-transparent rounded-l-full" />
+    <section className="border-t border-line-soft bg-surface-deep">
+      <Container className="py-20 sm:py-28 lg:py-32">
+        <SectionHeading
+          index="03"
+          eyebrow="Programme"
+          title={
+            <>
+              {showUpcoming ? "Upcoming" : "Recent"} events,
+              <br />
+              <span className="font-serif italic text-blue">in the field.</span>
+            </>
+          }
+          description={
+            showUpcoming
+              ? "What we have planned next — workshops, competitions and industry sessions across the branch."
+              : "A look at the latest from the branch — workshops, industry visits and national competitions."
+          }
+        />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-            Events
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Upcoming <span className="gradient-text">Events</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Join our workshops, competitions, and networking sessions to enhance
-            your skills and connect with fellow innovators.
-          </p>
-        </motion.div>
+        {/* Featured */}
+        <Reveal>
+          <article className="group grid overflow-hidden border border-line bg-surface lg:grid-cols-12">
+            <div className="relative overflow-hidden lg:col-span-7">
+              <div className="aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[26rem]">
+                <img
+                  src={featured.image}
+                  alt={featured.title}
+                  className="img-duotone h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  loading="lazy"
+                />
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-deep/70 via-transparent to-transparent lg:bg-gradient-to-r" aria-hidden />
+            </div>
+            <div className="flex flex-col justify-center p-7 sm:p-10 lg:col-span-5 lg:p-12">
+              <p className="eyebrow mb-4 flex items-center gap-2">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-blue" aria-hidden />
+                Featured
+              </p>
+              <h3 className="font-display text-2xl font-medium leading-tight tracking-tight text-ink-strong sm:text-3xl">
+                {featured.title}
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-ink-muted sm:text-base">
+                {featured.description}
+              </p>
+              <EventMeta event={featured} className="mt-6" />
+              <div className="mt-8">
+                <ArrowLink href={`/events/${featured.slug}`}>Read more</ArrowLink>
+              </div>
+            </div>
+          </article>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {upcomingEvents.slice(0, 3).map((event, index) => (
-            <motion.div
-              key={event.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className={`group rounded-2xl overflow-hidden card-hover ${
-                event.featured
-                  ? "md:col-span-2 lg:col-span-1 bg-gradient-to-br from-primary/20 to-card border-primary/30"
-                  : "bg-card border-border/50"
-              } border`}
-            >
-              {event.featured && (
-                <div className="px-4 py-2 bg-primary/20 border-b border-primary/30">
-                  <span className="text-primary text-xs font-semibold tracking-wider uppercase">
-                    Featured Event
+        {/* List */}
+        {rest.length > 0 && (
+          <Stagger className="mt-4 border-t border-line-soft">
+            {rest.slice(0, 3).map((event) => (
+              <StaggerItem key={event.slug}>
+                <a
+                  href={`/events/${event.slug}`}
+                  className="group grid grid-cols-1 items-center gap-2 border-b border-line-soft py-6 transition-colors duration-300 hover:bg-surface sm:grid-cols-[11rem_1fr_auto] sm:gap-6"
+                >
+                  <span className="font-mono text-[0.75rem] uppercase tracking-wider text-ink-faint">
+                    {event.date}
                   </span>
-                </div>
-              )}
-              <Link href={`/events/${event.slug}`} className="block p-6">
-                <div className="flex flex-wrap items-center gap-2 mb-3">
-                  {event.category?.map((cat, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 rounded-full bg-secondary text-xs font-medium"
-                    >
-                      {cat}
+                  <span>
+                    <span className="block font-display text-lg font-medium tracking-tight text-ink-strong transition-colors group-hover:text-blue sm:text-xl">
+                      {event.title}
                     </span>
-                  ))}
-                </div>
-                <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-primary transition-colors">
-                  {event.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                  {event.description}
-                </p>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-primary" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-primary" />
-                    <span>{event.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    <span>{event.location}</span>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+                    {event.category && event.category.length > 0 && (
+                      <span className="mt-1 block text-xs uppercase tracking-wider text-ink-faint">
+                        {event.category.join(" · ")}
+                      </span>
+                    )}
+                  </span>
+                  <ArrowUpRight className="hidden h-5 w-5 text-ink-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue sm:block" aria-hidden />
+                </a>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        )}
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center"
-        >
-          <Link href="/events">
-            <Button variant="outline_glow" size="lg" className="group">
-              View All Events
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
-        </motion.div>
-      </div>
+        <Reveal className="mt-10 flex items-center justify-between gap-6">
+          <p className="font-mono text-[0.6875rem] uppercase tracking-widest2 text-ink-faint">
+            {programme.length} events in the archive
+          </p>
+          <ArrowLink href="/events">View all events</ArrowLink>
+        </Reveal>
+      </Container>
     </section>
   );
 }
