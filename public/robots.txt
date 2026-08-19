@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://ieeeofcuc.com
-
-# Sitemaps
-Sitemap: https://ieeeofcuc.com/sitemap.xml
