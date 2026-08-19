@@ -1,22 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "placehold.co",
-      },
-    ],
-    unoptimized: true, // For static export
+    unoptimized: true, // Images are already optimized via Cloudinary CDN
   },
-  // Ensure trailing slashes for consistent routing
-  trailingSlash: true,
 };
 
 export default nextConfig;
