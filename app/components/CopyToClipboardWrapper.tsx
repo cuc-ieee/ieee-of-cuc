@@ -26,6 +26,8 @@ export function CopyToClipboardWrapper({
       await navigator.clipboard.writeText(textToCopy);
       setTooltipMessage("Copied!");
     } catch (err) {
+      console.error("Failed to copy:", err);
+      setTooltipMessage("Copy failed");
     } finally {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);

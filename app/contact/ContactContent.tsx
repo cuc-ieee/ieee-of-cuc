@@ -67,10 +67,7 @@ export default function ContactContent() {
     setLoading(true);
 
     try {
-      // For static export, use an external endpoint (e.g., Firebase Cloud Function)
-      // Replace with your deployed function URL
-      const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL || "https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/contactForm";
-      const response = await fetch(contactEndpoint, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

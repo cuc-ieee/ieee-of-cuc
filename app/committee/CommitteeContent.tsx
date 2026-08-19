@@ -69,13 +69,15 @@ export default function CommitteeContent() {
                     {member.department}
                   </p>
                   <div className="flex gap-3">
-                    <a
-                      href={member.linkedin}
-                      className="w-9 h-9 rounded-lg bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
-                      aria-label={`${member.name}'s LinkedIn`}
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
+                    {member.linkedin && (
+                      <a
+                        href={member.linkedin}
+                        className="w-9 h-9 rounded-lg bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                        aria-label={`${member.name}'s LinkedIn`}
+                      >
+                        <Linkedin className="w-4 h-4" />
+                      </a>
+                    )}
                     <a
                       href={`mailto:${member.email}`}
                       className="w-9 h-9 rounded-lg bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
