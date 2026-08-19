@@ -52,18 +52,19 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
-        scrolled || open
-          ? "border-b border-line-soft bg-background/85 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
+          scrolled || open
+            ? "border-b border-line-soft bg-background/85 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent",
+        )}
+      >
       <div className="mx-auto flex h-16 w-full max-w-[76rem] items-center justify-between px-5 sm:px-8 lg:h-[4.5rem] lg:px-10">
         <Link
           href="/"
-          aria-label="IEEE Curtin University Colombo — Home"
+          aria-label="IEEE Student Branch of Curtin Colombo — Home"
           className="group flex items-center gap-3"
         >
           <Image
@@ -205,13 +206,89 @@ export function SiteHeader() {
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <p className="font-mono text-[0.6875rem] uppercase tracking-widest2 text-ink-faint">
-                  IEEE Student Branch · Curtin University Colombo
+                  IEEE Student Branch · Curtin Colombo
+                </p>
+              </motion.div>
+            </nav>
+</motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+
+      {/* Mobile menu — outside <header> so backdrop-blur on the header
+          doesn't become a containing block that breaks the fixed overlay */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-menu"
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 top-16 z-40 overflow-y-auto bg-background lg:hidden"
+          >
+            <nav
+              aria-label="Mobile"
+              className="flex min-h-full flex-col justify-between px-5 pb-10 pt-6 sm:px-8"
+            >
+              <ul className="flex flex-col">
+                {navItems.map((item, i) => (
+                  <motion.li
+                    key={item.href}
+                    initial={reduce ? false : { opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: 0.05 + i * 0.05 }}
+                    className="border-b border-line-soft"
+                  >
+                    <Link
+                      href={item.href}
+                      className="group flex items-baseline justify-between py-5"
+                      aria-current={
+                        isActive(pathname, item.href) ? "page" : undefined
+                      }
+                    >
+                      <span className="flex items-baseline gap-4">
+                        <span className="font-mono text-xs text-ink-faint">
+                          0{i + 1}
+                        </span>
+                        <span
+                          className={cn(
+                            "font-display text-3xl font-medium tracking-tight transition-colors",
+                            isActive(pathname, item.href)
+                              ? "text-blue"
+                              : "text-ink-strong",
+                          )}
+                        >
+                          {item.label}
+                        </span>
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-ink-faint transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue" />
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+
+              <motion.div
+                initial={reduce ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.35, delay: 0.4 }}
+                className="flex flex-col gap-4 pt-8"
+              >
+                <Link
+                  href="/membership"
+                  className="inline-flex h-12 items-center justify-center gap-2 bg-blue px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-blue-deep"
+                >
+                  Join IEEE — Become a member
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+                <p className="font-mono text-[0.6875rem] uppercase tracking-widest2 text-ink-faint">
+                  IEEE Student Branch · Curtin Colombo
                 </p>
               </motion.div>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

@@ -18,34 +18,41 @@ import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { CopyToClipboardWrapper } from "@/components/CopyToClipboardWrapper";
+import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
-const socialLinks = [
-  { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all", label: "LinkedIn" },
-  { icon: Facebook, href: "https://www.facebook.com/share/18JZ8M3B7p/", label: "Facebook" },
-  { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "YouTube" },
-  { icon: MessageCircle, href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ", label: "WhatsApp" },
-];
+const socialLinks = site.social.map((link) => ({
+  icon:
+    link.label === "Instagram"
+      ? Instagram
+      : link.label === "LinkedIn"
+        ? Linkedin
+        : link.label === "Facebook"
+          ? Facebook
+          : link.label === "YouTube"
+            ? Youtube
+            : MessageCircle,
+  ...link,
+}));
 
 const contactRows = [
   {
     icon: Mail,
-    copy: "curtincolombo.ieee@gmail.com",
+    copy: site.org.email,
     label: "Email",
     detail: "For general enquiries",
   },
   {
     icon: MapPin,
-    copy: "No. 80 Nawam Mawatha, Colombo 02, Sri Lanka",
+    copy: site.org.location,
     label: "Location",
-    detail: "Curtin University Colombo Campus",
+    detail: site.org.campus,
   },
   {
     icon: Phone,
-    copy: "+94 72 792 2261",
+    copy: site.org.phone,
     label: "Phone",
-    detail: "Secretary of the branch",
+    detail: site.org.phoneNote,
   },
 ];
 
@@ -132,6 +139,7 @@ export default function ContactContent() {
             <span>English · Sinhala · Tamil</span>
           </>
         }
+        media={site.pageHero.contact}
       />
 
       <section className="border-b border-line-soft bg-surface-deep">

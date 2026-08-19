@@ -87,7 +87,7 @@ export default {
         lift: "0 12px 40px -12px hsl(224 60% 3% / 0.7)",
       },
       letterSpacing: {
-        widest2: "0.24em",
+        widest2: "0.18em",
       },
     },
   },

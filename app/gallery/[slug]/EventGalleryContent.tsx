@@ -49,7 +49,7 @@ export default function EventGalleryContent({ event }: { event: GalleryEvent }) 
     <>
       {/* Header */}
       <section className="border-b border-line-soft bg-surface-deep">
-        <Container className="pb-12 pt-28 sm:pt-36">
+        <Container className="pb-12 pt-20 sm:pt-24">
           <Reveal>
             <Link
               href="/gallery"
@@ -62,7 +62,7 @@ export default function EventGalleryContent({ event }: { event: GalleryEvent }) 
               {event.title}
             </h1>
             <p className="mt-4 font-mono text-[0.75rem] uppercase tracking-wider text-ink-faint">
-              {images.length} photographs · IEEE Curtin University Colombo
+              {images.length} photographs · IEEE Student Branch of Curtin Colombo
             </p>
           </Reveal>
         </Container>

@@ -7,6 +7,7 @@ import { ArrowLink } from "@/components/ArrowLink";
 import { Stat } from "@/components/Stat";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
+import { site } from "@/data/site";
 import Link from "next/link";
 import { pastEvents } from "@/data/events";
 import { ArrowUpRight } from "lucide-react";
@@ -67,7 +68,7 @@ export default function AboutContent() {
             <span className="font-serif italic text-blue">built in Colombo.</span>
           </>
         }
-        lede="The IEEE Student Branch of Curtin University Colombo is a student-led engineering community that runs workshops, industry visits, webinars, and national competitions — grounded in Sri Lanka and connected to the world."
+        lede="The IEEE Student Branch of Curtin Colombo is a student-led engineering community that runs workshops, industry visits, webinars, and national competitions — grounded in Sri Lanka and connected to the world."
         meta={
           <>
             <span>Founded 2025</span>
@@ -75,13 +76,14 @@ export default function AboutContent() {
             <span>Curtin University Colombo</span>
           </>
         }
+        media={site.pageHero.about}
       />
 
       {/* Story */}
       <section className="border-b border-line-soft bg-background">
         <Container className="grid gap-14 py-20 sm:py-28 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <Reveal>
+            <Reveal immediate>
               <div className="mb-5 flex items-center gap-3">
                 <span className="font-mono text-[0.6875rem] text-blue">01</span>
                 <span className="eyebrow">Origins</span>
@@ -92,7 +94,7 @@ export default function AboutContent() {
             </Reveal>
           </div>
           <div className="lg:col-span-8 lg:pl-10">
-            <Reveal delay={0.1}>
+            <Reveal immediate delay={0.1}>
               <p className="max-w-[58ch] text-lg leading-relaxed text-ink-strong sm:text-xl">
                 We are the IEEE student branch at Curtin University Colombo.
                 We formed in 2025 with a simple conviction: engineering students
@@ -100,7 +102,7 @@ export default function AboutContent() {
                 and real projects — with real engineers in the room.
               </p>
             </Reveal>
-            <Reveal delay={0.18}>
+            <Reveal immediate delay={0.18}>
               <div className="mt-6 grid max-w-[58ch] gap-6">
                 <p className="text-base leading-relaxed text-ink-muted">
                   Since then, members have programmed Siemens PLCs in a workshop
@@ -120,7 +122,7 @@ export default function AboutContent() {
                 </p>
               </div>
             </Reveal>
-            <Reveal delay={0.26}>
+            <Reveal immediate delay={0.26}>
               <blockquote className="mt-9 border-l-2 border-blue pl-6">
                 <p className="font-display text-xl font-medium leading-snug text-ink-strong sm:text-2xl">
                   &ldquo;A serious student technology organization doesn&rsquo;t
@@ -233,7 +235,7 @@ export default function AboutContent() {
             <div className="relative overflow-hidden border border-line bg-surface">
               <img
                 src="/Aboutus/Excom.jpg"
-                alt="The executive committee of IEEE Curtin University Colombo together"
+                alt="The executive committee of IEEE Student Branch of Curtin Colombo together"
                 className="img-duotone aspect-[16/9] w-full object-cover sm:aspect-[4/3]"
                 loading="lazy"
               />

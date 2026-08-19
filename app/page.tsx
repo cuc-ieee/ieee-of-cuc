@@ -7,7 +7,7 @@ import { GalleryPreview } from "./components/sections/GalleryPreview";
 import { MembershipSection } from "./components/sections/MembershipSection";
 
 export const metadata: Metadata = {
-  title: "IEEE Curtin University Colombo Student Branch",
+  title: "IEEE Student Branch of Curtin Colombo",
   description:
     "A student-led engineering community in Colombo — running workshops, industry visits, webinars, and national competitions under IEEE.",
   keywords: [

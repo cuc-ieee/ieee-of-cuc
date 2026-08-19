@@ -4,7 +4,7 @@ import ContactContent from "./ContactContent";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with IEEE Curtin University Colombo Student Branch. Send us a message or find our contact information.",
+    "Get in touch with IEEE Student Branch of Curtin Colombo. Send us a message or find our contact information.",
 };
 
 // This page is statically generated at build time (SSG)

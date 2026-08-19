@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { upcomingEvents, pastEvents } from "@/data/events";
+import { site } from "@/data/site";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -37,27 +38,16 @@ const sortEvents = <T extends { title: string; date: string }>(
   return sorted.sort((a, b) => b.title.localeCompare(a.title));
 };
 
-const allCategories = Array.from(
-  new Set(
-    [...upcomingEvents, ...pastEvents].flatMap((e) => e.category ?? []),
-  ),
-).sort();
-
 export default function EventsContent() {
   const [tab, setTab] = useState<Tab>(
     upcomingEvents.length > 0 ? "upcoming" : "past",
   );
   const [sortBy, setSortBy] = useState<SortOption>("newest");
-  const [category, setCategory] = useState<string>("all");
 
-  const visibleEvents = useMemo(() => {
-    const pool = tab === "upcoming" ? upcomingEvents : pastEvents;
-    const filtered =
-      category === "all"
-        ? pool
-        : pool.filter((e) => (e.category ?? []).includes(category));
-    return sortEvents(filtered, sortBy);
-  }, [tab, sortBy, category]);
+  const visibleEvents = useMemo(
+    () => sortEvents(tab === "upcoming" ? upcomingEvents : pastEvents, sortBy),
+    [tab, sortBy],
+  );
 
   const featured = visibleEvents.find((e) => e.featured) ?? visibleEvents[0];
   const rest = visibleEvents.filter((e) => e !== featured);
@@ -79,6 +69,7 @@ export default function EventsContent() {
             <span>Upcoming · Past</span>
           </>
         }
+        media={site.pageHero.events}
       />
 
       {/* Controls */}
@@ -110,48 +101,17 @@ export default function EventsContent() {
             </div>
 
             {/* Sort */}
-            <div className="flex flex-wrap items-center gap-3">
-              <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
-                <SelectTrigger className="h-10 w-full border-line bg-surface text-ink-strong sm:w-[190px]">
-                  <SelectValue placeholder="Sort events" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="newest">Newest first</SelectItem>
-                  <SelectItem value="oldest">Oldest first</SelectItem>
-                  <SelectItem value="az">A — Z</SelectItem>
-                  <SelectItem value="za">Z — A</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Category chips */}
-          <div className="mt-6 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
-            <button
-              onClick={() => setCategory("all")}
-              className={cn(
-                "border px-3 py-1.5 font-mono text-[0.6875rem] uppercase tracking-wider transition-colors duration-300",
-                category === "all"
-                  ? "border-blue bg-blue/10 text-blue"
-                  : "border-line bg-surface text-ink-muted hover:border-line-strong hover:text-ink-strong",
-              )}
-            >
-              All
-            </button>
-            {allCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setCategory(cat)}
-                className={cn(
-                  "border px-3 py-1.5 font-mono text-[0.6875rem] uppercase tracking-wider transition-colors duration-300",
-                  category === cat
-                    ? "border-blue bg-blue/10 text-blue"
-                    : "border-line bg-surface text-ink-muted hover:border-line-strong hover:text-ink-strong",
-                )}
-              >
-                {cat}
-              </button>
-            ))}
+            <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+              <SelectTrigger className="h-10 w-full border-line bg-surface text-ink-strong sm:w-[190px]">
+                <SelectValue placeholder="Sort events" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="newest">Newest first</SelectItem>
+                <SelectItem value="oldest">Oldest first</SelectItem>
+                <SelectItem value="az">A — Z</SelectItem>
+                <SelectItem value="za">Z — A</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </Container>
       </section>
@@ -166,22 +126,14 @@ export default function EventsContent() {
               </p>
               <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-ink-strong">
                 {tab === "upcoming"
-                  ? "Nothing scheduled in this category yet."
+                  ? "Nothing scheduled yet."
                   : "No past events here yet."}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-ink-muted">
                 {tab === "upcoming"
                   ? "When the next workshop, competition, or industry visit is confirmed, it will appear here. Check the branch's social channels for announcements."
-                  : "Events in this category will be archived here once they conclude."}
+                  : "Events will be archived here once they conclude."}
               </p>
-              {category !== "all" && (
-                <button
-                  onClick={() => setCategory("all")}
-                  className="mt-8 border border-line-strong px-5 py-2.5 text-sm text-ink-strong transition-colors hover:border-blue hover:text-blue"
-                >
-                  Clear category filter
-                </button>
-              )}
             </div>
           ) : tab === "upcoming" && featured ? (
             <>

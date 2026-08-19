@@ -2,14 +2,21 @@ import { Instagram, Linkedin, Facebook, Youtube, MessageCircle, ArrowUpRight } f
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "./Container";
+import { site } from "@/data/site";
 
-const socialLinks = [
-  { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/ieee-student-branch-of-cuc/posts/?feedView=all", label: "LinkedIn" },
-  { icon: Facebook, href: "https://www.facebook.com/share/18JZ8M3B7p/", label: "Facebook" },
-  { icon: Youtube, href: "https://www.youtube.com/@IEEECUC", label: "YouTube" },
-  { icon: MessageCircle, href: "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ", label: "WhatsApp" },
-];
+const socialLinks = site.social.map((link) => ({
+  icon:
+    link.label === "Instagram"
+      ? Instagram
+      : link.label === "LinkedIn"
+        ? Linkedin
+        : link.label === "Facebook"
+          ? Facebook
+          : link.label === "YouTube"
+            ? Youtube
+            : MessageCircle,
+  ...link,
+}));
 
 const columns = [
   {
@@ -40,7 +47,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:gap-10">
           {/* Identity */}
           <div>
-            <Link href="/" className="inline-block" aria-label="IEEE Curtin University Colombo">
+            <Link href="/" className="inline-block" aria-label="IEEE Student Branch of Curtin Colombo">
               <Image
                 src="/logo/logo.png"
                 alt=""
@@ -50,7 +57,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="mt-5 max-w-[34ch] text-sm leading-relaxed text-ink-muted">
-              The IEEE Student Branch of Curtin University Colombo — a student-led
+              The IEEE Student Branch of Curtin Colombo — a student-led
               engineering community working across Sri Lanka.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
@@ -107,18 +114,18 @@ export function SiteFooter() {
             <ul className="space-y-4 text-sm text-ink-muted">
               <li>
                 <a
-                  href="mailto:curtincolombo.ieee@gmail.com"
+                  href={`mailto:${site.org.email}`}
                   className="link-line hover:text-ink-strong"
                 >
-                  curtincolombo.ieee@gmail.com
+                  {site.org.email}
                 </a>
               </li>
               <li>
                 IEEE Student Branch
                 <br />
-                Curtin University Colombo
+                {site.org.campus}
                 <br />
-                No. 80 Nawam Mawatha, Colombo 02, Sri Lanka
+                {site.org.location}
               </li>
             </ul>
             <Link
@@ -133,7 +140,7 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[0.6875rem] uppercase tracking-widest text-ink-faint">
-            © {new Date().getFullYear()} IEEE Student Branch of Curtin University Colombo
+            © {new Date().getFullYear()} IEEE Student Branch of Curtin Colombo
           </p>
           <p className="font-mono text-[0.6875rem] uppercase tracking-widest text-ink-faint">
             Advancing technology for humanity

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/Container";
 import { ArrowLink } from "@/components/ArrowLink";
+import { site } from "@/data/site";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -26,8 +27,8 @@ export function HeroSection() {
       <div className="vignette pointer-events-none absolute inset-0" aria-hidden />
       <div className="pointer-events-none absolute right-[-10%] top-[-20%] h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(closest-side,hsl(var(--blue-bright)/0.08),transparent)]" aria-hidden />
 
-      <Container className="relative flex min-h-svh flex-col justify-end pb-0 pt-28 lg:pt-32">
-        <div className="grid flex-1 items-center gap-12 pb-14 lg:grid-cols-12 lg:gap-10 lg:pb-16">
+      <Container className="relative pt-20 sm:pt-24 lg:pt-28">
+        <div className="grid items-center gap-12 pb-16 lg:grid-cols-12 lg:gap-10">
           {/* Left — masthead */}
           <div className="lg:col-span-7">
             <motion.div
@@ -38,11 +39,11 @@ export function HeroSection() {
             >
               <span>IEEE Student Branch</span>
               <span className="h-1 w-1 rounded-full bg-blue" aria-hidden />
-              <span>Curtin University Colombo</span>
+              <span>Curtin Colombo</span>
               <span className="hidden sm:inline">6.9186° N · 79.8494° E</span>
             </motion.div>
 
-            <h1 className="font-display leading-[0.95] tracking-tight text-ink-strong">
+            <h1 className="font-display leading-[1.02] tracking-tight text-ink-strong">
               <motion.span
                 initial={reduce ? false : { opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -55,9 +56,9 @@ export function HeroSection() {
                 initial={reduce ? false : { opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.18, ease: easeOut }}
-                className="mt-2 block text-[clamp(2rem,6vw,3.9rem)] font-medium"
+                className="mt-1 block text-[clamp(2rem,6vw,3.9rem)] font-medium"
               >
-                Curtin University
+                Student Branch
               </motion.span>
               <motion.span
                 initial={reduce ? false : { opacity: 0, y: 28 }}
@@ -65,7 +66,7 @@ export function HeroSection() {
                 transition={{ duration: 0.7, delay: 0.28, ease: easeOut }}
                 className="mt-1 block text-[clamp(2rem,6vw,3.9rem)] font-medium"
               >
-                <span className="font-serif italic text-blue">Colombo</span> — Student Branch
+                of Curtin <span className="font-serif italic text-blue">Colombo</span>
               </motion.span>
             </h1>
 
@@ -104,8 +105,8 @@ export function HeroSection() {
               <div className="relative aspect-[4/5] overflow-hidden bg-surface">
                 {/* Primary image */}
                 <img
-                  src="/events/3mrc/hero.jpg"
-                  alt="Students presenting at the 3 Minute Research Challenge hosted by IEEE Curtin University Colombo"
+                  src={site.home.hero.primary.src}
+                  alt={site.home.hero.primary.alt}
                   className="img-duotone absolute inset-0 h-full w-full object-cover"
                   loading="eager"
                 />
@@ -115,8 +116,8 @@ export function HeroSection() {
               {/* Offset secondary image */}
               <div className="absolute -bottom-8 -left-4 w-2/5 overflow-hidden border border-line bg-surface shadow-lift sm:-left-8">
                 <img
-                  src="/Events/plcfi/hero.jpg"
-                  alt="Hands-on PLC industrial automation workshop at Curtin University Colombo"
+                  src={site.home.hero.secondary.src}
+                  alt={site.home.hero.secondary.alt}
                   className="img-duotone aspect-[4/3] w-full object-cover"
                   loading="lazy"
                 />
@@ -125,7 +126,7 @@ export function HeroSection() {
               {/* Caption */}
               <div className="absolute bottom-4 right-4 border border-line/80 bg-background/80 px-3 py-2 backdrop-blur-sm">
                 <p className="font-mono text-[0.625rem] uppercase tracking-widest2 text-ink-muted">
-                  3MRC · Jan 2026
+                  {site.home.hero.caption}
                 </p>
               </div>
             </div>

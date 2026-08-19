@@ -52,11 +52,11 @@ export const metadata: Metadata = {
     apple: [{ url: "/logo/logo-mobile.png", type: "image/png" }],
   },
   title: {
-    default: "IEEE Curtin University Colombo Student Branch",
-    template: "%s | IEEE Curtin University Colombo",
+    default: "IEEE Student Branch of Curtin Colombo",
+    template: "%s | IEEE Student Branch of Curtin Colombo",
   },
   description:
-    "The IEEE Student Branch of Curtin University Colombo — a student-led engineering community in Sri Lanka running workshops, industry visits, webinars, and national competitions.",
+    "The IEEE Student Branch of Curtin Colombo — a student-led engineering community in Sri Lanka running workshops, industry visits, webinars, and national competitions.",
   keywords: [
     "IEEE",
     "Curtin University Colombo",
@@ -67,14 +67,14 @@ export const metadata: Metadata = {
     "Innovation",
     "IEEE Sri Lanka Section",
   ],
-  authors: [{ name: "IEEE Curtin University Colombo Student Branch" }],
-  creator: "IEEE Curtin University Colombo Student Branch",
+  authors: [{ name: "IEEE Student Branch of Curtin Colombo" }],
+  creator: "IEEE Student Branch of Curtin Colombo",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://ieeeofcuc.com",
-    siteName: "IEEE Curtin University Colombo Student Branch",
-    title: "IEEE Curtin University Colombo Student Branch",
+    siteName: "IEEE Student Branch of Curtin Colombo",
+    title: "IEEE Student Branch of Curtin Colombo",
     description:
       "A student-led engineering community in Colombo running workshops, industry visits, webinars, and national competitions.",
     images: [
@@ -82,13 +82,13 @@ export const metadata: Metadata = {
         url: "/logo/logo.png",
         width: 1200,
         height: 630,
-        alt: "IEEE Curtin University Colombo Student Branch",
+        alt: "IEEE Student Branch of Curtin Colombo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IEEE Curtin University Colombo Student Branch",
+    title: "IEEE Student Branch of Curtin Colombo",
     description:
       "A student-led engineering community in Colombo running workshops, industry visits, webinars, and national competitions.",
     images: ["/logo/logo.png"],

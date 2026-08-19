@@ -2,31 +2,16 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ArrowLink } from "@/components/ArrowLink";
 import { Reveal } from "@/components/Reveal";
-import { getCloudinaryUrl } from "@/lib/cloudinary";
+import { site } from "@/data/site";
 import { galleryEvents } from "@/data/gallery";
 
-const tiles = [
-  {
-    src: getCloudinaryUrl("IMG_5468_ugcalo", { width: 900 }),
-    label: "DetectX — AI & Computer Vision",
-    meta: "Workshop · 2026",
-    className: "col-span-2 row-span-2",
-  },
-  {
-    src: getCloudinaryUrl("1_wawox1", { width: 900 }),
-    label: "3 Minute Research Challenge",
-    meta: "Inter-university",
-    className: "aspect-[4/3]",
-  },
-  {
-    src: getCloudinaryUrl("1_z9ktxf", { width: 900 }),
-    label: "PLCFI — Industrial Automation",
-    meta: "With SLIR",
-    className: "aspect-[4/3]",
-  },
-];
-
 export function GalleryPreview() {
+  const tiles = site.home.gallery.tiles.map((tile) => ({
+    src: tile.src,
+    label: tile.label,
+    meta: tile.meta,
+    className: tile.tall ? "col-span-2 row-span-2" : "aspect-[4/3]",
+  }));
   return (
     <section className="border-t border-line-soft bg-background">
       <Container className="py-20 sm:py-28 lg:py-32">
@@ -51,7 +36,7 @@ export function GalleryPreview() {
               <a href="/gallery" className="block h-full" aria-label={`Open gallery — ${tile.label}`}>
                 <img
                   src={tile.src}
-                  alt={`${tile.label} — photograph from IEEE Curtin University Colombo`}
+                  alt={`${tile.label} — photograph from IEEE Student Branch of Curtin Colombo`}
                   className="img-duotone h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   loading="lazy"
                 />

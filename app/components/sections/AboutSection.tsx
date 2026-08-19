@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { Stat } from "@/components/Stat";
 
 const stats = [
-  { value: "2025", label: "Branch established at Curtin University Colombo" },
+  { value: "2025", label: "Branch established at Curtin Colombo" },
   { value: "50+", label: "Active student members" },
   { value: "15+", label: "Events organised in the first year" },
   { value: "3", label: "Programme series — TechXChange, Gear Up, Challenge Sphere" },
@@ -36,7 +36,7 @@ export function AboutSection() {
           <div className="lg:col-span-8 lg:pl-10">
             <Reveal delay={0.1}>
               <p className="max-w-[58ch] text-lg leading-relaxed text-ink-strong sm:text-xl">
-                We are the student branch of IEEE at Curtin University Colombo —
+                We are the IEEE Student Branch of Curtin Colombo —
                 a group of engineering students who believe the best way to learn
                 technology is to build it, break it, and share it.
               </p>

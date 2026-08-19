@@ -4,6 +4,7 @@ import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/Reveal";
 import { galleryEvents } from "@/data/gallery";
+import { site } from "@/data/site";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,7 +20,7 @@ export default function GalleryContent() {
             The gallery, <span className="font-serif italic text-blue">on record.</span>
           </>
         }
-        lede="Photographs from the branch's events — competitions, workshops, and gatherings. Every image is from a real IEEE Curtin University Colombo event."
+        lede="Photographs from the branch's events — competitions, workshops, and gatherings. Every image is from a real IEEE Student Branch of Curtin Colombo event."
         meta={
           <>
             <span>{galleryEvents.length} event archives</span>
@@ -28,6 +29,7 @@ export default function GalleryContent() {
             </span>
           </>
         }
+        media={site.pageHero.gallery}
       />
 
       <section className="border-t border-line-soft bg-surface-deep">

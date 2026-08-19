@@ -11,14 +11,31 @@ export function Reveal({
   delay = 0,
   y = 24,
   once = true,
+  immediate = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   y?: number;
   once?: boolean;
+  immediate?: boolean;
 }) {
   const reduce = useReducedMotion();
+
+  const transition = { duration: 0.7, delay, ease: easeOut };
+
+  if (immediate && !reduce) {
+    return (
+      <motion.div
+        className={className}
+        initial={{ opacity: 0, y }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={transition}
+      >
+        {children}
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -26,7 +43,7 @@ export function Reveal({
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={reduce ? {} : { opacity: 1, y: 0 }}
       viewport={{ once, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: easeOut }}
+      transition={transition}
     >
       {children}
     </motion.div>

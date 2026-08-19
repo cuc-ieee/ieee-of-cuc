@@ -8,6 +8,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 const benefits = [
@@ -85,6 +86,7 @@ export default function MembershipContent() {
             <span>Curtin University Colombo</span>
           </>
         }
+        media={site.pageHero.membership}
       />
 
       {/* Benefits */}

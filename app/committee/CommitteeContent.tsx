@@ -4,6 +4,7 @@ import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { committeeMembers } from "@/data/committee";
+import { site } from "@/data/site";
 import { Linkedin, Mail } from "lucide-react";
 
 const leads = committeeMembers.filter((m) =>
@@ -31,6 +32,7 @@ export default function CommitteeContent() {
             <span>Mechatronics · Electrical & Electronic Engineering</span>
           </>
         }
+        media={site.pageHero.committee}
       />
 
       {/* Leadership */}
@@ -48,7 +50,7 @@ export default function CommitteeContent() {
                   <div className="relative overflow-hidden">
                     <img
                       src={member.image}
-                      alt={`Portrait of ${member.name}, ${member.role} of IEEE Curtin University Colombo`}
+                      alt={`Portrait of ${member.name}, ${member.role} of IEEE Student Branch of Curtin Colombo`}
                       className="img-duotone aspect-[4/5] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                       loading="lazy"
                     />

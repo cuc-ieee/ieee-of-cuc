@@ -124,7 +124,7 @@ export const pastEvents: Event[] = [
     description:
       "A high-level technical workshop by IEEE Curtin Colombo and SLIR that provided hands-on training in Siemens S7-200 PLCs, Ladder Logic programming, and core industrial automation practice.",
     fullDescription:
-      "PLCFI was a high-level technical workshop organised by the IEEE Student Branch of Curtin University, Colombo, in collaboration with the Sri Lanka Institute of Robotics (SLIR). The event provided intensive hands-on training on Siemens S7-200 PLC hardware, with a focus on Ladder Logic programming and industrial automation. With over 80 participants, the workshop equipped students with practical day-one automation skills while offering recognised professional certification, helping bridge the gap between academic learning and real-world industry practice.",
+      "PLCFI was a high-level technical workshop organised by the IEEE Student Branch of Curtin Colombo, in collaboration with the Sri Lanka Institute of Robotics (SLIR). The event provided intensive hands-on training on Siemens S7-200 PLC hardware, with a focus on Ladder Logic programming and industrial automation. With over 80 participants, the workshop equipped students with practical day-one automation skills while offering recognised professional certification, helping bridge the gap between academic learning and real-world industry practice.",
     date: "27 Feb 2026",
     time: "1:30 PM onwards",
     participation: "Curtin University Colombo students",
@@ -141,7 +141,7 @@ export const pastEvents: Event[] = [
     description:
       "A TechXChange session exploring embodied intelligence, soft robotics, and how controllable stiffness enables robots to adapt, sense, and interact with dynamic real-world environments.",
     fullDescription: [
-      "TechXChange is an educational initiative by the IEEE Student Branch of Curtin University Colombo, designed to bridge the gap between academia and industry by connecting students with leading experts in emerging technologies.",
+      "TechXChange is an educational initiative by the IEEE Student Branch of Curtin Colombo, designed to bridge the gap between academia and industry by connecting students with leading experts in emerging technologies.",
       "In this session, we were honoured to host Professor Thrishantha Nanayakkara, Director of the Morph Lab and Professor of Robotics at Imperial College London. He shared his insights on embodied intelligence in robotics, exploring how controllable stiffness and physical mechanisms enable robots to perceive, adapt, and interact with dynamic environments.",
       "Participants were introduced to modern approaches in bio-inspired robotics, soft robotics, and adaptive mechanisms, showing how these concepts are shaping the next generation of intelligent robotic systems. The discussion also covered real-world applications and current research directions in robotics, providing students with insights into how mechanical design, sensing, and AI can work together to build more capable and responsive robotic platforms.",
       "Professor Nanayakkara's talk highlighted the importance of mechanical intelligence in creating robots that can operate naturally and effectively in complex, real-world settings.",
@@ -166,7 +166,7 @@ export const pastEvents: Event[] = [
       "The event commenced with an introductory session on IEEE, delivered by Dr. Thilina Thanthriwatta, Committee Member - Membership Development of the IEEE Sri Lanka Section. His session provided attendees with a comprehensive overview of IEEE, its global impact, and the opportunities available for students and young professionals.",
       "The technical sessions featured Ashen Fernando and Dr. Anwar F.A. Dafa-Alla, whose presentations combined industry and academic perspectives on simulation engineering, embedded systems, and secure digital transformation.",
       "Conducted on 8 April 2026, the webinar attracted a diverse audience of undergraduate students and young professionals and concluded with a panel discussion and Q&A session.",
-      "This event was jointly organized by the IEEE Student Branch of Curtin University Colombo and the IEEE Student Branch of Curtin University Dubai, with support from the IEEE Sri Lanka Section, IEEE UAE Section, and the IEEE Sri Lanka Section Student Activities Committee.",
+      "This event was jointly organized by the IEEE Student Branch of Curtin Colombo and the IEEE Student Branch of Curtin University Dubai, with support from the IEEE Sri Lanka Section, IEEE UAE Section, and the IEEE Sri Lanka Section Student Activities Committee.",
     ],
     date: "8 Apr 2026",
     time: "2:30 PM - 4:30 PM (IST)",
@@ -184,7 +184,7 @@ export const pastEvents: Event[] = [
     description:
       "An industry visit that gave students a first-hand look at innovation, product development, and the day-to-day operations of a modern technology hub.",
     fullDescription: [
-      "The first episode of the Gear Up Series kicked off with an exciting industry visit to Atlas Labs, organized by the IEEE Student Branch of Curtin University Colombo. This visit gave students a valuable opportunity to explore a real-world innovation environment, interact with industry professionals, and gain insights into emerging technologies, product development, and workplace practices within the tech industry.",
+      "The first episode of the Gear Up Series kicked off with an exciting industry visit to Atlas Labs, organized by the IEEE Student Branch of Curtin Colombo. This visit gave students a valuable opportunity to explore a real-world innovation environment, interact with industry professionals, and gain insights into emerging technologies, product development, and workplace practices within the tech industry.",
       "Participants were able to experience the day-to-day operations of a fast-paced innovation hub while learning about current industry trends, engineering workflows, and the importance of collaboration and creativity in modern technological solutions. The session also encouraged students to bridge the gap between academic learning and practical industry applications.",
       "Gear Up Episode 01 marked the beginning of a series focused on empowering students through industry exposure, networking opportunities, and professional development experiences.",
     ],
@@ -306,7 +306,7 @@ export const pastEvents: Event[] = [
     fullDescription: [
       "The IEEE Challenge Sphere - Chips Challenge Final Examination served as the national selection examination to identify Sri Lanka's representative for the International Microelectronics Olympiad in Armenia. Organized under the IEEE Challenge Sphere initiative, the examination assessed participants' knowledge and problem-solving skills in microelectronics and electronic design automation through a rigorous closed-book assessment.",
       "The national winner earned the opportunity to represent Sri Lanka on the global stage, competing against top young engineers from around the world.",
-      "The event was hosted by the IEEE Student Branch of Curtin University Colombo in collaboration with the IEEE Circuits and Systems Society and the IEEE CEDA Sri Lanka Joint Chapter, providing a professional examination environment for undergraduate participants.",
+      "The event was hosted by the IEEE Student Branch of Curtin Colombo in collaboration with the IEEE Circuits and Systems Society and the IEEE CEDA Sri Lanka Joint Chapter, providing a professional examination environment for undergraduate participants.",
     ],
     date: "24 Jul 2026",
     time: "9:00 AM - 10:00 AM (IST)",

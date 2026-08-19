@@ -4,7 +4,7 @@ import MembershipContent from "./MembershipContent";
 export const metadata: Metadata = {
   title: "Membership",
   description:
-    "Join IEEE Curtin University Colombo Student Branch and unlock exclusive benefits including IEEE Xplore access, networking, and career resources.",
+    "Join IEEE Student Branch of Curtin Colombo and unlock exclusive benefits including IEEE Xplore access, networking, and career resources.",
 };
 
 // This page is statically generated at build time (SSG)
