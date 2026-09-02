@@ -16,40 +16,38 @@ export interface Event {
   speakers?: { name: string; role: string; avatar?: string }[];
   registrationLink?: string;
   registrationClosingDate?: string;
+  agendaLink?: string;
+  guidelinesLink?: string;
   outcomes?: string[];
   gallery?: string[];
   participation?: string;
 }
 
 export const upcomingEvents: Event[] = [
-  // {
-  //   id: "U1",
-  //   title: "DetectX - AI and computer vision workshop (Phase 2)",
-  //   slug: "detectx-ai-computer-vision-workshop-2",
-  //   description: "Step into the future of intelligent systems. DetectX Phase 2 takes you beyond theory — tackling a real-world business problem using AI, Computer Vision, and the YOLO model, in an agentic, industry-backed hands-on workshop.",
-  //   fullDescription: [
-  //     "DetectX Phase 2 is an intensive, industry-collaborative workshop where participants move from concept to code — solving a client-oriented business problem using cutting-edge Computer Vision and AI-native engineering practices.",
-  //     "The session kicks off with an introductory pitch on AI Native Engineering and its intersection with Computer Vision, followed by a focused conceptual session covering core AI and CV principles, and a deep dive into the YOLO (You Only Look Once) object detection model — one of the most widely used real-time CV architectures in production systems today.",
-  //     "Participants will then be grouped into clusters of 10, working collaboratively through a structured development phase guided by 4-5 resource persons from Virtusa, a global leader in digital engineering. The development phase features two evaluation checkpoints to track progress and push problem-solving further.",
-  //     "The technical environment is hybrid — VS Code with Agentic mode takes centre stage, with Google Colab available as a cloud fallback to handle the hardware demands of running YOLO models. Expect a session built around real workflows, not toy examples.",
-  //     "As a highlight, DetectX Phase 2 features a special IoT demo integrating Computer Vision with a Dobot robotic arm — a live showcase of how agentic programming bridges the digital and physical world.",
-  //     "Prior to the main event, all registered participants will have access to an online briefing session held 2-3 days before the workshop. This session will walk you through an introduction to AI and Computer Vision, cover all the prerequisites and setup requirements, and ensure you're fully prepared and ready to hit the ground running on the day of the workshop. The session will also be recorded and shared with all participants, so if you miss it, you won't be left behind. No one comes in cold.",
-  //     "Whether you're strengthening your CV foundations or stepping into agentic AI development for the first time, this workshop is built to challenge you, connect you with industry professionals, and give you a taste of what AI engineering looks like in the real world.",
-  //     "Prerequisites: Python and VS Code must be configured on your laptop prior to the session.",
-  //   ],
-  //   date: "16 May 2026",
-  //   time: "10:00 AM onwards",
-  //   participation: "Open to all university students",
-  //   location: "Curtin University Colombo Campus, Room LT201",
-  //   image: "/Events/DetectX/Phase2/hero.jpg",
-  //   featured: false,
-  //   category: ["Workshop", "AI", "Computer Vision"],
-  //   capacity: 100,
-  //   status: "upcoming",
-  //   isPast: false,
-  //   registrationLink: "https://forms.gle/xF7xcCcPd95v5gw59",
-  //   registrationClosingDate: "12 May 2026 at 11:59 PM",
-  // },
+  {
+    id: "U1",
+    title: "CV Boost - Career Fair and CV Clinic",
+    slug: "cv-boost-career-fair-and-cv-clinic",
+    description:
+      "CVBoost 2026 is a three-phase Recruitment Readiness Pipeline that takes Engineering and Computing undergraduates from CV diagnosis through field-specific coaching to direct, on-campus recruiter access — connecting them with industry partners for interviews, feedback, and post-event hiring opportunities",
+    fullDescription: [
+      "CVBoost 2026 is a three-phase Recruitment Readiness Pipeline for Engineering and Computing undergraduates, organized by the IEEE Student Branch of Curtin University Colombo. It moves students from CV diagnosis through field-specific coaching to direct recruiter access — combining a technical CV masterclass, an ATS/interview prep session, and an on-campus Career Fair & CV Clinic with industry partners. The program closes with a post-event CV Partner pipeline that sends curated, pre-screened candidates directly to partner companies and tracks outcomes like shortlists and placements.",
+    ],
+    date: "4th September 2026",
+    time: "9:00 AM onwards",
+    participation: "Open to all university students",
+    location: "Curtin University Colombo Campus, Room LT201",
+    image: "/Events/CVBoost/hero.png",
+    featured: false,
+    category: ["Career Fair", "CV Clinic"],
+    capacity: 100,
+    status: "upcoming",
+    isPast: false,
+    registrationLink: "https://forms.gle/xF7xcCcPd95v5gw59",
+    registrationClosingDate: "12 May 2026 at 11:59 PM",
+    agendaLink: "/temp/cvboost-agenda.html",
+    guidelinesLink: "/temp/cvboost-guidelines.html",
+  },
   // {
   //   id: "2",
   //   title: "IoT Hackathon 2026",
@@ -238,7 +236,8 @@ export const pastEvents: Event[] = [
   },
   {
     id: "P9",
-    title: "IEEE Challenge Sphere: Chips Challenge 2026 Workshop 2: An Introduction to Digital Electronics & C++",
+    title:
+      "IEEE Challenge Sphere: Chips Challenge 2026 Workshop 2: An Introduction to Digital Electronics & C++",
     slug: "ieee-challenge-sphere-chips-challenge-2026-workshop-2",
     description:
       "A technical workshop introducing participants to digital electronics fundamentals, C++, and semiconductor concepts with insights from industry professionals.",
@@ -259,7 +258,8 @@ export const pastEvents: Event[] = [
   },
   {
     id: "P10",
-    title: "IEEE Challenge Sphere: Chips Challenge 2026 Workshop Series 3, The Story of the Silicon Chip",
+    title:
+      "IEEE Challenge Sphere: Chips Challenge 2026 Workshop Series 3, The Story of the Silicon Chip",
     slug: "ieee-challenge-sphere-chips-challenge-2026-workshop-series-3",
     description:
       "A technical session exploring the evolution of silicon chip technology, transistor scaling, materials, and the future of semiconductor innovation.",
@@ -279,7 +279,8 @@ export const pastEvents: Event[] = [
   },
   {
     id: "P11",
-    title: "IEEE Challenge Sphere: Chips Challenge 2026 Workshop 4, Final Practice Session",
+    title:
+      "IEEE Challenge Sphere: Chips Challenge 2026 Workshop 4, Final Practice Session",
     slug: "ieee-challenge-sphere-chips-challenge-2026-workshop-4",
     description:
       "A final practice session focused on solving example questions directly related to the IEEE Chips Challenge and helping participants prepare for the competition.",
@@ -362,7 +363,8 @@ export const pastEvents: Event[] = [
   },
   {
     id: "P15",
-    title: "IEEE Curtin ASPIRE 26 Workshop 1: Finding the Right Problem; User Empathy and Challenge Definition",
+    title:
+      "IEEE Curtin ASPIRE 26 Workshop 1: Finding the Right Problem; User Empathy and Challenge Definition",
     slug: "ieee-curtin-aspire-26-workshop-1-finding-the-right-problem-user-empathy-and-challenge-definition",
     description:
       "A pre-recorded workshop introducing user empathy and challenge definition as the foundations for meaningful innovation and problem-driven solution design.",
@@ -383,7 +385,8 @@ export const pastEvents: Event[] = [
   },
   {
     id: "P16",
-    title: "IEEE Curtin ASPIRE 26 Workshop 2: From Idea to Business Model and Beyond",
+    title:
+      "IEEE Curtin ASPIRE 26 Workshop 2: From Idea to Business Model and Beyond",
     slug: "ieee-curtin-aspire-26-workshop-2-from-idea-to-business-model-and-beyond",
     description:
       "A virtual workshop on transforming innovative ideas into sustainable business models through value creation, customer validation, and Lean Canvas thinking.",

@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CVBoost 2026 — Career Fair & CV Clinic</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap");
+
+      :root {
+        --blue: #0867d8;
+        --blue2: #0754b7;
+        --yellow: #ffd21c;
+        --paper: #f4f0e5;
+        --ink: #07172b;
+        --white: #fffdf6;
+        --purple: #8f55ff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--blue);
+        color: var(--ink);
+        font-family: Inter, Arial, sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      body:before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 10;
+        opacity: 0.12;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+        background-size: 18px 18px;
+      }
+      .page {
+        max-width: 1180px;
+        margin: auto;
+        padding: 28px 28px 70px;
+        position: relative;
+      }
+      .grid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.18;
+        background-image:
+          linear-gradient(90deg, #fff 1px, transparent 1px),
+          linear-gradient(#fff 1px, transparent 1px);
+        background-size: 80px 80px;
+      }
+      nav {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 38px;
+        color: white;
+      }
+      .logo {
+        font-weight: 900;
+        font-size: 22px;
+        letter-spacing: -1px;
+      }
+      .logo span {
+        color: var(--yellow);
+      }
+      .live {
+        font: 700 11px "Space Mono";
+        border: 2px solid white;
+        border-radius: 20px;
+        padding: 9px 13px;
+      }
+      .live i {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: var(--yellow);
+        border-radius: 50%;
+        margin-right: 7px;
+      }
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 35px;
+        align-items: end;
+      }
+      .kicker {
+        display: inline-block;
+        background: var(--yellow);
+        padding: 8px 16px;
+        border-radius: 8px;
+        font: 700 13px "Space Mono";
+        margin-bottom: 14px;
+        transform: rotate(-1deg);
+      }
+      h1 {
+        font:
+          900 clamp(55px, 8.2vw, 108px)/0.82 "Archivo Black",
+          Impact,
+          sans-serif;
+        letter-spacing: -4px;
+        text-transform: uppercase;
+        color: white;
+      }
+      h1 em {
+        color: var(--yellow);
+        font-style: normal;
+      }
+      .sub {
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        max-width: 490px;
+        margin-top: 22px;
+        line-height: 1.45;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 25px;
+      }
+      .meta span {
+        background: white;
+        color: var(--ink);
+        border-radius: 7px;
+        padding: 9px 12px;
+        font: 700 11px "Space Mono";
+      }
+      .ticket {
+        position: absolute;
+        right: 3%;
+        bottom: 20px;
+        width: 220px;
+        background: var(--yellow);
+        padding: 18px 20px;
+        transform: rotate(5deg);
+        box-shadow: 8px 9px 0 rgba(0, 0, 0, 0.12);
+      }
+      .ticket:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+        border-right: 2px dashed var(--ink);
+      }
+      .ticket strong {
+        display: block;
+        font: 900 28px "Archivo Black";
+        margin-left: 10px;
+      }
+      .ticket small {
+        font: 700 10px "Space Mono";
+        margin-left: 10px;
+      }
+      .ticket .barcode {
+        height: 30px;
+        margin: 13px 10px 0;
+        background: repeating-linear-gradient(
+          90deg,
+          #07172b 0 2px,
+          transparent 2px 5px
+        );
+      }
+      .ticket .tear {
+        position: absolute;
+        right: -9px;
+        top: 0;
+        bottom: 0;
+        width: 18px;
+        background: var(--blue);
+        clip-path: polygon(
+          0 0,
+          100% 6%,
+          0 12%,
+          100% 18%,
+          0 24%,
+          100% 30%,
+          0 36%,
+          100% 42%,
+          0 48%,
+          100% 54%,
+          0 60%,
+          100% 66%,
+          0 72%,
+          100% 78%,
+          0 84%,
+          100% 90%,
+          0 96%,
+          100% 100%,
+          0 100%
+        );
+      }
+
+      .countdown {
+        background: var(--paper);
+        border: 4px solid var(--ink);
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 9px 9px 0 var(--ink);
+        position: relative;
+      }
+      .count-label {
+        font: 700 11px "Space Mono";
+        letter-spacing: 0.08em;
+        margin-bottom: 15px;
+      }
+      .clock {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .unit {
+        background: var(--ink);
+        color: var(--yellow);
+        border-radius: 9px;
+        padding: 13px 7px;
+        text-align: center;
+      }
+      .unit b {
+        display: block;
+        font: 900 clamp(30px, 4vw, 50px) "Archivo Black";
+      }
+      .unit span {
+        font: 700 9px "Space Mono";
+        color: white;
+      }
+      .next {
+        margin-top: 15px;
+        padding-top: 14px;
+        border-top: 2px solid rgba(7, 23, 43, 0.15);
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .next strong {
+        color: var(--blue);
+      }
+
+      .section {
+        position: relative;
+        z-index: 1;
+        margin-top: 58px;
+      }
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        margin-bottom: 17px;
+        color: white;
+      }
+      .section-head h2 {
+        font: 900 43px/0.9 "Archivo Black";
+        text-transform: uppercase;
+        letter-spacing: -1.5px;
+      }
+      .section-head p {
+        font: 700 11px "Space Mono";
+        text-transform: uppercase;
+      }
+
+      .filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+      }
+      .filter {
+        border: 2px solid white;
+        background: transparent;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 7px;
+        font: 700 10px "Space Mono";
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .filter.active,
+      .filter:hover {
+        background: var(--yellow);
+        color: var(--ink);
+        border-color: var(--yellow);
+      }
+
+      .agenda {
+        background: var(--paper);
+        border: 4px solid var(--ink);
+        border-radius: 18px;
+        padding: 12px;
+        box-shadow: 9px 9px 0 var(--ink);
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 145px 1fr 48px;
+        gap: 16px;
+        align-items: stretch;
+        padding: 12px;
+        border-bottom: 2px solid rgba(7, 23, 43, 0.12);
+        cursor: pointer;
+        transition: 0.22s;
+        position: relative;
+      }
+      .row:last-child {
+        border-bottom: 0;
+      }
+      .row:hover {
+        background: #fffdf6;
+        transform: translateX(3px);
+      }
+      .time {
+        font: 700 12px "Space Mono";
+        padding-top: 15px;
+      }
+      .time b {
+        display: block;
+        font-size: 17px;
+        margin-bottom: 4px;
+      }
+      .card {
+        border: 2px solid var(--ink);
+        border-radius: 13px;
+        background: white;
+        padding: 15px 17px;
+        min-height: 72px;
+        position: relative;
+        overflow: hidden;
+      }
+      .card:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 7px;
+        background: var(--blue);
+      }
+      .row.session .card:before {
+        background: var(--purple);
+      }
+      .row.break .card {
+        background: var(--yellow);
+      }
+      .row.break .card:before {
+        background: var(--ink);
+      }
+      .card h3 {
+        font: 900 21px/1 "Archivo Black";
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+      }
+      .card p {
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 7px;
+        max-width: 680px;
+      }
+      .arrow {
+        width: 42px;
+        height: 42px;
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+        align-self: center;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        transition: 0.25s;
+      }
+      .row.open .arrow {
+        background: var(--ink);
+        color: white;
+        transform: rotate(45deg);
+      }
+      .detail {
+        grid-column: 2/3;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: 0.35s;
+      }
+      .detail > div {
+        overflow: hidden;
+      }
+      .row.open .detail {
+        grid-template-rows: 1fr;
+      }
+      .detail p {
+        font-size: 12px;
+        line-height: 1.5;
+        padding: 0 5px 10px 17px;
+        font-weight: 600;
+      }
+
+      .bottom {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .info {
+        background: var(--yellow);
+        border: 4px solid var(--ink);
+        border-radius: 17px;
+        padding: 23px;
+        box-shadow: 7px 7px 0 var(--ink);
+      }
+      .info.dark {
+        background: var(--ink);
+        color: white;
+      }
+      .info h3 {
+        font: 900 30px/0.95 "Archivo Black";
+        text-transform: uppercase;
+      }
+      .info p {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.5;
+        margin-top: 12px;
+      }
+      .btn {
+        display: inline-block;
+        margin-top: 16px;
+        background: var(--ink);
+        color: white;
+        border: 0;
+        padding: 12px 16px;
+        border-radius: 7px;
+        font: 900 11px "Space Mono";
+        cursor: pointer;
+      }
+      .dark .btn {
+        background: var(--yellow);
+        color: var(--ink);
+      }
+
+      footer {
+        color: white;
+        text-align: center;
+        margin-top: 50px;
+        font: 700 10px "Space Mono";
+        letter-spacing: 0.08em;
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        pointer-events: none;
+        background: var(--ink);
+        color: white;
+        padding: 13px 17px;
+        border-radius: 8px;
+        font: 700 11px "Space Mono";
+        transition: 0.3s;
+        z-index: 20;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      @media (max-width: 800px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .ticket {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          margin: 20px auto 0;
+          transform: rotate(3deg);
+        }
+        .countdown {
+          margin-top: 15px;
+        }
+      }
+      @media (max-width: 600px) {
+        .page {
+          padding: 20px 15px 55px;
+        }
+        h1 {
+          letter-spacing: -2px;
+        }
+        .section-head {
+          display: block;
+        }
+        .section-head p {
+          margin-top: 10px;
+        }
+        .row {
+          grid-template-columns: 1fr 40px;
+          gap: 8px;
+        }
+        .time {
+          grid-column: 1/-1;
+          padding-top: 4px;
+        }
+        .time b {
+          display: inline;
+          margin-right: 8px;
+        }
+        .card {
+          grid-column: 1/2;
+        }
+        .arrow {
+          grid-column: 2;
+          grid-row: 2;
+        }
+        .detail {
+          grid-column: 1/-1;
+        }
+        .bottom {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="grid"></div>
+
+      <nav>
+        <div class="logo">CV<span>BOOST</span> 2026</div>
+        <div class="live"><i></i> LIVE AGENDA</div>
+      </nav>
+
+      <section class="hero">
+        <div>
+          <div class="kicker">YOUR CAREER STARTS HERE →</div>
+          <h1>CAREER FAIR<br />&amp; CV <em>CLINIC</em></h1>
+          <p class="sub">
+            One day. Real recruiters. Better CVs. More connections. Here’s
+            exactly what your day at CVBoost looks like.
+          </p>
+          <div class="meta">
+            <span>FRI 04 SEP 2026</span>
+            <span>9:00 AM – 3:00 PM</span>
+            <span>HALL LT201 · CURTIN COLOMBO</span>
+          </div>
+          <div class="ticket">
+            <strong>BOARDING<br />PASS</strong>
+            <small>CVBOOST 2026 · LT201</small>
+            <div class="barcode"></div>
+            <div class="tear"></div>
+          </div>
+        </div>
+
+        <div class="countdown">
+          <div class="count-label">// EVENT DEPARTURE COUNTDOWN</div>
+          <div class="clock">
+            <div class="unit"><b id="days">--</b><span>DAYS</span></div>
+            <div class="unit"><b id="hours">--</b><span>HOURS</span></div>
+            <div class="unit"><b id="mins">--</b><span>MINS</span></div>
+          </div>
+          <div class="next">
+            <span>NEXT UP</span><strong id="nextEvent">Loading…</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Agenda</h2>
+          <p>// TAP A SESSION TO OPEN DETAILS</p>
+        </div>
+
+        <div class="filters">
+          <button class="filter active" data-filter="all">ALL</button>
+          <button class="filter" data-filter="session">SESSIONS</button>
+          <button class="filter" data-filter="break">BREAKS</button>
+          <button class="filter" data-filter="prep">OPEN / CLOSE</button>
+        </div>
+
+        <div class="agenda" id="agenda">
+          <div class="row prep" data-type="prep">
+            <div class="time"><b>8:30 – 9:00</b>AM</div>
+            <div class="card">
+              <h3>Partner Stall Setup &amp; Check-In</h3>
+              <p>Get the room, stalls and AV ready before doors open.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div>
+                <p>
+                  Partners set up stalls, banners and AV assets ahead of doors
+                  opening.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row prep" data-type="prep">
+            <div class="time"><b>9:00 – 9:10</b>AM</div>
+            <div class="card">
+              <h3>Opening Remarks</h3>
+              <p>Kick off the day and find out what to expect.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div>
+                <p>
+                  Welcome students and partners, followed by a quick overview of
+                  the day.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row session" data-type="session">
+            <div class="time"><b>9:10 – 10:30</b>AM</div>
+            <div class="card">
+              <h3>Session I — First Contact</h3>
+              <p>Open networking + live CV reviews at partner stalls.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div>
+                <p>
+                  Make your first connections, meet recruiters and get practical
+                  feedback on your CV.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row break" data-type="break">
+            <div class="time"><b>10:30 – 10:45</b>AM</div>
+            <div class="card">
+              <h3>Refreshment Break</h3>
+              <p>Short reset. Stalls remain open for informal networking.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div>
+                <p>Grab a refreshment and keep the conversation going.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row session" data-type="session">
+            <div class="time"><b>10:45 – 12:30</b>PM</div>
+            <div class="card">
+              <h3>Session II — Interview Ready</h3>
+              <p>Recruitment, networking + structured mock interviews.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div>
+                <p>
+                  Continue networking and recruitment while structured mock
+                  interviews begin.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row break" data-type="break">
+            <div class="time"><b>12:30 – 1:00</b>PM</div>
+            <div class="card">
+              <h3>Lunch Break</h3>
+              <p>Take a proper breather before the final rounds.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div><p>Midday break.</p></div>
+            </div>
+          </div>
+
+          <div class="row session" data-type="session">
+            <div class="time"><b>1:00 – 2:45</b>PM</div>
+            <div class="card">
+              <h3>Session III — Final Rounds</h3>
+              <p>Final networking + mock interview rounds.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div>
+                <p>
+                  Use the final session to make your strongest connections and
+                  complete your mock interview rounds.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row prep" data-type="prep">
+            <div class="time"><b>2:45 – 3:00</b>PM</div>
+            <div class="card">
+              <h3>Closing Remarks &amp; Partner Acknowledgement</h3>
+              <p>Close the day and celebrate the people who made it happen.</p>
+            </div>
+            <div class="arrow">+</div>
+            <div class="detail">
+              <div>
+                <p>
+                  Closing remarks, official partner acknowledgement and
+                  appreciation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom">
+          <div class="info">
+            <h3>Come<br />Prepared.</h3>
+            <p>
+              Bring printed copies of your CV, dress ready to meet employers,
+              and come with questions.
+            </p>
+            <button
+              class="btn"
+              onclick="showToast('CV CHECK: READY FOR TAKEOFF ✓')"
+            >
+              I'M READY →
+            </button>
+          </div>
+          <div class="info dark">
+            <h3>Don't Just<br />Attend.</h3>
+            <p>
+              Use every session. Talk to someone new. Ask for feedback. Leave
+              with a stronger CV and stronger connections.
+            </p>
+            <button
+              class="btn"
+              onclick="
+                showToast('TIP: ARRIVE EARLY + MAKE YOUR FIRST CONNECTION')
+              "
+            >
+              SHOW ME THE TIP →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        CVBOOST 2026 · YOUR FUTURE. YOUR DEPARTURE. · CURTIN UNIVERSITY COLOMBO
+      </footer>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const eventDate = new Date("2026-09-04T09:00:00");
+      const events = [
+        ["Partner Stall Setup & Check-In", "2026-09-04T08:30:00"],
+        ["Opening Remarks", "2026-09-04T09:00:00"],
+        ["Session I — First Contact", "2026-09-04T09:10:00"],
+        ["Refreshment Break", "2026-09-04T10:30:00"],
+        ["Session II — Interview Ready", "2026-09-04T10:45:00"],
+        ["Lunch Break", "2026-09-04T12:30:00"],
+        ["Session III — Final Rounds", "2026-09-04T13:00:00"],
+        ["Closing Remarks & Partner Acknowledgement", "2026-09-04T14:45:00"],
+      ];
+
+      function tick() {
+        const now = new Date();
+        let diff = Math.max(0, eventDate - now);
+        const days = Math.floor(diff / 86400000);
+        diff %= 86400000;
+        const hrs = Math.floor(diff / 3600000);
+        diff %= 3600000;
+        const mins = Math.floor(diff / 60000);
+        document.getElementById("days").textContent = String(days).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("hours").textContent = String(hrs).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("mins").textContent = String(mins).padStart(
+          2,
+          "0",
+        );
+
+        let upcoming = events.find((e) => new Date(e[1]) > now);
+        document.getElementById("nextEvent").textContent = upcoming
+          ? upcoming[0]
+          : "EVENT COMPLETE";
+      }
+      tick();
+      setInterval(tick, 1000);
+
+      document.querySelectorAll(".row").forEach((row) => {
+        row.addEventListener("click", () => row.classList.toggle("open"));
+      });
+
+      document.querySelectorAll(".filter").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const filter = btn.dataset.filter;
+          document.querySelectorAll(".row").forEach((row) => {
+            row.style.display =
+              filter === "all" || row.dataset.type === filter ? "grid" : "none";
+          });
+        });
+      });
+
+      function showToast(text) {
+        const t = document.getElementById("toast");
+        t.textContent = text;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 2600);
+      }
+    </script>
+  </body>
+</html>

@@ -202,32 +202,66 @@ export default function EventDetailContent({ event }: Props) {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="rounded-2xl bg-card border border-border/50 p-6"
                 >
-                  <h3 className="font-display text-xl font-semibold mb-4">
-                    Register Now
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-6">
-                    Secure your spot for this exciting event. Limited seats
-                    available!
-                  </p>
-                  {event.registrationLink ? (
-                    <Button asChild variant="glow" className="w-full">
-                      <Link
-                        href={event.registrationLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Register for Event
-                      </Link>
-                    </Button>
+                  {event.agendaLink || event.guidelinesLink ? (
+                    <>
+                      <h3 className="font-display text-xl font-semibold mb-4">
+                        Event Resources
+                      </h3>
+                      <div className="space-y-3">
+                        {event.agendaLink && (
+                          <Button asChild variant="glow" className="w-full">
+                            <Link
+                              href={event.agendaLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View Agenda
+                            </Link>
+                          </Button>
+                        )}
+                        {event.guidelinesLink && (
+                          <Button asChild variant="outline" className="w-full">
+                            <Link
+                              href={event.guidelinesLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View Guidelines
+                            </Link>
+                          </Button>
+                        )}
+                      </div>
+                    </>
                   ) : (
-                    <Button variant="glow" className="w-full" disabled>
-                      Registration Opens Soon
-                    </Button>
-                  )}
-                  {event.registrationClosingDate && (
-                    <p className="text-red-500 text-sm mt-4 text-center font-semibold">
-                      Closes: {event.registrationClosingDate}
-                    </p>
+                    <>
+                      <h3 className="font-display text-xl font-semibold mb-4">
+                        Register Now
+                      </h3>
+                      <p className="text-muted-foreground text-sm mb-6">
+                        Secure your spot for this exciting event. Limited
+                        seats available!
+                      </p>
+                      {event.registrationLink ? (
+                        <Button asChild variant="glow" className="w-full">
+                          <Link
+                            href={event.registrationLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Register for Event
+                          </Link>
+                        </Button>
+                      ) : (
+                        <Button variant="glow" className="w-full" disabled>
+                          Registration Opens Soon
+                        </Button>
+                      )}
+                      {event.registrationClosingDate && (
+                        <p className="text-red-500 text-sm mt-4 text-center font-semibold">
+                          Closes: {event.registrationClosingDate}
+                        </p>
+                      )}
+                    </>
                   )}
                 </motion.div>
               )}

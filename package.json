@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next-sitemap --config next-sitemap.config.cjs",
-    "start": "next start",
+    "dev": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next dev",
+    "build": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next build && next-sitemap --config next-sitemap.config.cjs",
+    "start": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next start",
     "lint": "next lint",
     "fetch-gallery": "node scripts/fetch-cloudinary-images.js",
     "deploy": "npm run build && firebase deploy --only hosting"
