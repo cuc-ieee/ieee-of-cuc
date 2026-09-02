@@ -76,9 +76,9 @@ export function HeroSection() {
           className="grid grid-cols-3 gap-4 md:gap-8 max-w-xl mx-auto"
         >
           {[
-            { icon: Users, value: "50+", label: "Members" },
-            { icon: Calendar, value: "5+", label: "Events" },
-            { icon: Lightbulb, value: "3+", label: "Workshops" },
+            { icon: Users, value: "100+", label: "Members" },
+            { icon: Calendar, value: "10+", label: "Events" },
+            { icon: Lightbulb, value: "5+", label: "Workshops" },
           ].map((stat) => (
             <div
               key={stat.label}

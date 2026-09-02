@@ -220,16 +220,16 @@
       }
       .rail-item {
         display: grid;
-        grid-template-columns: 92px minmax(0, 1fr);
+        grid-template-columns: 100px minmax(0, 1fr);
         gap: 22px;
-        padding: 12px 0 12px 22px;
+        padding: 12px 0;
         position: relative;
         align-items: start;
       }
       .rail-item:not(:last-child):after {
         content: "";
         position: absolute;
-        left: 80px;
+        left: 100px;
         top: 30px;
         bottom: -12px;
         width: 2px;
@@ -248,7 +248,7 @@
       }
       .rail-dot {
         position: absolute;
-        left: 72px;
+        left: 92px;
         top: 16px;
         width: 16px;
         height: 16px;
@@ -377,6 +377,8 @@
         padding: 9px 8px;
         text-align: center;
         transition: 0.25s;
+        position: relative;
+        overflow: hidden;
       }
       .slot .co {
         font: 800 12px Inter;
@@ -387,30 +389,32 @@
         margin-top: 3px;
         color: var(--blue);
       }
-      .slot.blacked {
-        background: var(--ink);
+      .slot.unassigned {
+        background: #d5d8dc;
+        border-color: #8b929b;
       }
-      .slot.blacked .co {
-        color: var(--ink);
+      .slot.unassigned .co,
+      .slot.unassigned .tm {
+        color: #626a73;
       }
-      .slot.blacked .tm {
-        color: var(--ink);
+      .slot .seal {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%) rotate(-12deg) scale(2);
+        border: 2px solid #d62828;
+        border-radius: 50%;
+        padding: 4px 6px;
+        color: #d62828;
+        font: 900 9px "Space Mono";
+        opacity: 0;
+        transition:
+          opacity 0.15s,
+          transform 0.15s;
+        pointer-events: none;
       }
-      .mockcard.flipped .slot:nth-child(3) {
-        background: var(--ink);
-      }
-      .mockcard.flipped .slot:nth-child(3) .co,
-      .mockcard.flipped .slot:nth-child(3) .tm {
-        color: var(--ink);
-      }
-      .mockcard.flipped .slot:nth-child(5) {
-        background: white;
-      }
-      .mockcard.flipped .slot:nth-child(5) .co {
-        color: var(--ink);
-      }
-      .mockcard.flipped .slot:nth-child(5) .tm {
-        color: var(--blue);
+      .slot.completed .seal {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) rotate(-12deg) scale(1);
       }
       .taplabel {
         text-align: center;
@@ -691,19 +695,19 @@
         <div class="route-explain">
           <div class="route-copy">
             <p>
-              Every delegate gets a personal Route Card. A visible company logo
-              means you have a confirmed slot — the time written underneath is
-              when you visit them.
+              Every delegate gets a personal Route Card. A visible logo means
+              you have a confirmed slot — the time written underneath is when
+              you visit them.
             </p>
             <p>
-              A blackened logo means no confirmed slot with that company.
+              A greyed out logo means no confirmed slot with that company.
               Waitlisted requests aren't shown separately and don't count as
               confirmed.
             </p>
             <span class="hint">TAP THE CARD →</span>
           </div>
           <div class="mockcard" id="mockcard">
-            <div class="top"><b>ROUTE CARD</b><span>DELEGATE #0142</span></div>
+            <div class="top"><b>ROUTE CARD</b></div>
             <div class="slotgrid">
               <div class="slot">
                 <div class="co">WSO2</div>
@@ -712,8 +716,9 @@
               <div class="slot">
                 <div class="co">Virtusa</div>
                 <div class="tm">10:05 AM</div>
+                <div class="seal">COMPLETE</div>
               </div>
-              <div class="slot">
+              <div class="slot unassigned">
                 <div class="co">Nagarro</div>
                 <div class="tm">—</div>
               </div>
@@ -721,13 +726,17 @@
                 <div class="co">Idea8</div>
                 <div class="tm">11:40 AM</div>
               </div>
-              <div class="slot">
+              <div class="slot unassigned">
                 <div class="co">GRI</div>
                 <div class="tm">—</div>
               </div>
               <div class="slot">
                 <div class="co">Zone24x7</div>
                 <div class="tm">1:15 PM</div>
+              </div>
+              <div class="slot unassigned">
+                <div class="co">Syno Lanka</div>
+                <div class="tm">—</div>
               </div>
             </div>
             <div class="taplabel">TAP TO TOGGLE A SLOT ↻</div>
@@ -771,6 +780,9 @@
         .getElementById("mockcard")
         .addEventListener("click", function () {
           this.classList.toggle("flipped");
+          this.querySelector(".slot:nth-child(2)").classList.toggle(
+            "completed",
+          );
         });
 
       // Split-flap board
@@ -781,6 +793,7 @@
         "NAGARRO",
         "VIRTUSA",
         "GRI",
+        "SYNO LANKA",
       ];
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       const grid = document.getElementById("flapGrid");
