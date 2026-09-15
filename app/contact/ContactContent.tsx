@@ -111,10 +111,7 @@ export default function ContactContent() {
       <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden grid-pattern">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        </div>
+      <section className="relative pt-32 pb-20">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -122,9 +119,6 @@ export default function ContactContent() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-              Contact
-            </span>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Get in <span className="gradient-text">Touch</span>
             </h1>
@@ -326,13 +320,12 @@ export default function ContactContent() {
       </section>
 
       {/* Map Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="rounded-2xl overflow-hidden border border-border/50 h-80 bg-card">
+      <section className="py-12 pb-24">
+        <div className="container mx-auto px-4 flex flex-col items-center">
+          <div className="w-full max-w-xl aspect-square rounded-3xl overflow-hidden border border-border/50 bg-card shadow-2xl relative">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.305911878678!2d79.849452074861!3d6.91863369308097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2598e4891314b%3A0xc54d930bba52fae8!2sCurtin%20University%20Colombo!5e1!3m2!1sen!2slk!4v1769868205900!5m2!1sen!2slk"
-              width="100%"
-              height="100%"
+              className="w-full h-full"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"

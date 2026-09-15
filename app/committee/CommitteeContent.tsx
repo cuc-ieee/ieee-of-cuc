@@ -13,10 +13,7 @@ export default function CommitteeContent() {
       <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden grid-pattern">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        </div>
+      <section className="relative pt-32 pb-20">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -24,9 +21,6 @@ export default function CommitteeContent() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-              Leadership
-            </span>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Our <span className="gradient-text">Executive Committee</span>
             </h1>

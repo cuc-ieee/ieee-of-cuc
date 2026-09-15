@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { FloatingBubbles } from "./components/FloatingBubbles";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ieeeofcuc.com"),
@@ -64,7 +65,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-background antialiased">
+      <body className="min-h-screen bg-background antialiased relative">
+        <FloatingBubbles />
         <Providers>{children}</Providers>
       </body>
     </html>

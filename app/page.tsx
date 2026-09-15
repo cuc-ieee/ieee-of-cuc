@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DesktopNav, MobileNav } from "./components/Navigation";
 import { HeroSection } from "./components/sections/HeroSection";
+import { DomainMarquee } from "./components/DomainMarquee";
+import { SectionSeparator } from "./components/SectionSeparator";
 import { AboutSection } from "./components/sections/AboutSection";
 import { EventsSection } from "./components/sections/EventsSection";
 import { MembershipSection } from "./components/sections/MembershipSection";
@@ -31,9 +33,14 @@ export default function HomePage() {
 
       <main>
         <HeroSection />
+        <DomainMarquee />
+        <SectionSeparator />
         <AboutSection />
+        <SectionSeparator />
         <EventsSection />
+        <SectionSeparator />
         <MembershipSection />
+        <SectionSeparator />
         <ContactSection />
         <Footer />
       </main>

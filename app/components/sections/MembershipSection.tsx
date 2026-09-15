@@ -6,6 +6,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { Check, Sparkles, BookOpen, Network, Award, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 const benefits = [
   { icon: BookOpen, text: "Access to IEEE Xplore digital library" },
@@ -24,14 +25,8 @@ export function MembershipSection() {
     <section
       id="membership"
       ref={ref}
-      className="relative flex items-center py-20 overflow-hidden"
+      className="relative flex items-center py-20"
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -40,11 +35,8 @@ export function MembershipSection() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-              Join Us
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Become an <span className="gradient-text">IEEE Member</span>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text">
+              Become an IEEE Member
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               Unlock exclusive benefits and join a global community of over
@@ -65,12 +57,16 @@ export function MembershipSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                className="flex items-center gap-3 p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-colors"
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <benefit.icon className="w-5 h-5 text-primary" />
-                </div>
-                <span className="text-sm">{benefit.text}</span>
+                <SpotlightCard
+                  className="flex items-center gap-3 p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/40 transition-colors h-full"
+                  spotlightColor="rgba(56, 189, 248, 0.18)"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <benefit.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="text-sm font-medium text-foreground/90">{benefit.text}</span>
+                </SpotlightCard>
               </motion.div>
             ))}
           </motion.div>

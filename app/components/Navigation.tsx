@@ -36,33 +36,31 @@ export function DesktopNav() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-5 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-5 transition-all duration-500 ${scrolled
           ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
           : "bg-transparent"
-      }`}
+        }`}
     >
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="flex items-center gap-3"
+      <Link
+        href="/"
+        className="flex items-center gap-3 cursor-pointer group"
       >
         <img
           src="/logo/logo.png"
           alt="IEEE Curtin University Colombo"
-          className="w-auto h-10 rounded-lg"
+          className="w-auto h-10 rounded-lg group-hover:opacity-90 transition-opacity"
         />
-      </button>
+      </Link>
 
       <div className="flex items-center gap-8">
         {navItems.map((item) => (
           <Link
             key={item.label}
             href={item.href}
-            className={`text-sm font-medium tracking-wide relative group transition-colors duration-300 ${
-              isNavItemActive(pathname, item.href)
+            className={`text-sm font-medium tracking-wide relative group transition-colors duration-300 ${isNavItemActive(pathname, item.href)
                 ? "text-primary"
                 : "text-muted-foreground hover:text-primary"
-            }`}
+              }`}
           >
             {item.label}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
@@ -107,11 +105,10 @@ export function MobileNav() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-4 transition-all duration-500 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-4 transition-all duration-500 ${scrolled
             ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
             : "bg-transparent"
-        }`}
+          }`}
       >
         <Link href="/" className="flex items-center gap-2">
           <img
