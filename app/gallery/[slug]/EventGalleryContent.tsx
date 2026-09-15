@@ -72,7 +72,7 @@ export default function EventGalleryContent({
             filter: "blur(7px)",
           }}
         />
-        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

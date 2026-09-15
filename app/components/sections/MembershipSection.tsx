@@ -35,8 +35,8 @@ export function MembershipSection() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-              Become an IEEE Member
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Become an <span className="gradient-text">IEEE Member</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               Unlock exclusive benefits and join a global community of over

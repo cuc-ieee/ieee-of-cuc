@@ -90,9 +90,9 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-5 leading-tight gradient-text"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-5 leading-tight"
           >
-            Shaping the Future of Technology
+            Shaping the <span className="gradient-text">Future of Technology</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

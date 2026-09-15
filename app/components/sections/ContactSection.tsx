@@ -90,8 +90,8 @@ export function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text">
-              Get in Touch
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+              Get in <span className="gradient-text">Touch</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-8">
               Have questions? Want to collaborate? We'd love to hear from you.

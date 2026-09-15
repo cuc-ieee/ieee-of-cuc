@@ -61,8 +61,8 @@ export function EventsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-            Upcoming Events
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            Upcoming <span className="gradient-text">Events</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Join our workshops, competitions, and networking sessions to enhance
