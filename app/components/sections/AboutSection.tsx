@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 export function AboutSection() {
   const ref = useRef(null);
@@ -30,7 +31,7 @@ export function AboutSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
+            transition={transitionNormal(0)}
             className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-5 leading-tight"
           >
             Shaping the <span className="gradient-text">Future of Technology</span>
@@ -38,7 +39,7 @@ export function AboutSection() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal)}
             className="text-muted-foreground text-lg leading-relaxed"
           >
             IEEE Curtin University Colombo Student Branch bridges the gap between
@@ -53,7 +54,7 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
             className="md:col-span-7"
           >
             <SpotlightCard
@@ -111,7 +112,7 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
             className="md:col-span-5"
           >
             <SpotlightCard
@@ -168,7 +169,7 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
             className="md:col-span-6"
           >
             <SpotlightCard
@@ -226,7 +227,7 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 4)}
             className="md:col-span-6"
           >
             <SpotlightCard

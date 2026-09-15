@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../../components/Navigation";
 import { Footer } from "../../components/Footer";
 import type { Event } from "@/data/events";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 interface Props {
   event: Event;
@@ -44,7 +45,7 @@ export default function EventDetailContent({ event }: Props) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={transitionNormal(0)}
           >
             <Link
               href="/events"
@@ -111,7 +112,7 @@ export default function EventDetailContent({ event }: Props) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
                 className="rounded-2xl overflow-hidden"
               >
                 <img
@@ -125,7 +126,7 @@ export default function EventDetailContent({ event }: Props) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
                 className="prose prose-invert max-w-none"
               >
                 <h2 className="font-display text-2xl font-semibold mb-4">
@@ -148,7 +149,7 @@ export default function EventDetailContent({ event }: Props) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2.5)}
                 >
                   <h2 className="font-display text-2xl font-semibold mb-6">
                     Event Outcomes
@@ -169,7 +170,7 @@ export default function EventDetailContent({ event }: Props) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
                 >
                   <h2 className="font-display text-2xl font-semibold mb-6">
                     Event Gallery
@@ -199,7 +200,7 @@ export default function EventDetailContent({ event }: Props) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
                   className="rounded-2xl bg-card border border-border/50 p-6"
                 >
                   {event.agendaLink || event.guidelinesLink ? (
@@ -271,7 +272,7 @@ export default function EventDetailContent({ event }: Props) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2.5)}
                   className="rounded-2xl bg-card border border-border/50 p-6"
                 >
                   <div className="flex items-center gap-2 mb-4">
@@ -306,7 +307,7 @@ export default function EventDetailContent({ event }: Props) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
                 className="rounded-2xl bg-card border border-border/50 p-6"
               >
                 <h3 className="font-display text-xl font-semibold mb-4">

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { TechGlobe } from "@/components/TechGlobe";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 export function HeroSection() {
   return (
@@ -18,15 +19,17 @@ export function HeroSection() {
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column */}
-          <div className="lg:col-span-7 text-left">
+          <div className="lg:col-span-7 xl:col-span-8 text-left">
             <motion.h1
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.12] text-left"
+              transition={transitionNormal(0)}
+              className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[2.65rem] xl:text-5xl font-bold mb-6 leading-[1.15] text-left tracking-tight"
             >
-              <span className="text-foreground">IEEE</span>{" "}
-              <span className="gradient-text">Curtin University Colombo</span>
+              <span className="whitespace-nowrap">
+                <span className="text-foreground">IEEE</span>{" "}
+                <span className="diamond-shine-text">Curtin University Colombo</span>
+              </span>
               <br />
               <span className="text-foreground">Student Branch</span>
             </motion.h1>
@@ -34,7 +37,7 @@ export function HeroSection() {
             <motion.p
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
               className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 text-left leading-relaxed"
             >
               Empowering the next generation of engineers and innovators through
@@ -44,7 +47,7 @@ export function HeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
               className="flex flex-col sm:flex-row gap-4 justify-start mb-12"
             >
               <Button variant="hero" size="xl" asChild>
@@ -59,7 +62,7 @@ export function HeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
               className="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg"
             >
               {[
@@ -88,8 +91,12 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="lg:col-span-5 flex items-center justify-center relative mt-6 lg:mt-0"
+            transition={{
+              duration: ANIMATION_CONFIG.duration.globe,
+              delay: ANIMATION_CONFIG.stagger.normal,
+              ease: ANIMATION_CONFIG.ease.out,
+            }}
+            className="lg:col-span-5 xl:col-span-4 flex items-center justify-center relative mt-6 lg:mt-0"
           >
             <TechGlobe />
           </motion.div>

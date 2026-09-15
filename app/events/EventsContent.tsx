@@ -15,6 +15,7 @@ import {
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { upcomingEvents, pastEvents } from "@/data/events";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 type SortOption = "newest" | "oldest" | "az" | "za";
 
@@ -71,7 +72,7 @@ export default function EventsContent() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -144,7 +145,7 @@ export default function EventsContent() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
                     className={`rounded-2xl overflow-hidden border card-hover ${
                       event.featured
                         ? "bg-gradient-to-br from-primary/10 to-card border-primary/30"
@@ -235,7 +236,7 @@ export default function EventsContent() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
                   className="rounded-2xl bg-card border border-border/50 overflow-hidden card-hover"
                 >
                   <Link href={`/events/${event.slug}`}>

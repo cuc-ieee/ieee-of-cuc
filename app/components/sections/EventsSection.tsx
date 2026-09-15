@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { upcomingEvents } from "@/data/events";
 
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 function getEventStatus(dateStr: string, statusOverride?: "upcoming" | "past" | "ongoing"): {
   label: string;
@@ -58,7 +59,7 @@ export function EventsSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={transitionNormal(0)}
           className="text-center mb-12"
         >
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
@@ -79,7 +80,7 @@ export function EventsSection() {
                 key={event.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
+                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * (index + 1))}
                 className="w-full sm:w-[380px] md:w-[410px] flex-shrink-0"
               >
                 <SpotlightCard
@@ -157,7 +158,7 @@ export function EventsSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 4)}
           className="text-center"
         >
           <Link href="/events">

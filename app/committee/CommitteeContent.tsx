@@ -5,6 +5,7 @@ import { Linkedin, Mail } from "lucide-react";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { committeeMembers } from "@/data/committee";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 export default function CommitteeContent() {
   return (
@@ -18,7 +19,7 @@ export default function CommitteeContent() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -42,7 +43,7 @@ export default function CommitteeContent() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={transitionNormal(index * ANIMATION_CONFIG.stagger.fast)}
                 className="group rounded-2xl bg-card border border-border/50 overflow-hidden card-hover"
               >
                 <div className="aspect-square overflow-hidden">

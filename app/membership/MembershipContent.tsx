@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 const membershipBenefits = [
   {
@@ -92,7 +93,7 @@ export default function MembershipContent() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -123,7 +124,7 @@ export default function MembershipContent() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center mb-12"
           >
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
@@ -141,7 +142,7 @@ export default function MembershipContent() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
                 className="p-6 rounded-2xl bg-card border border-border/50 card-hover"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
@@ -166,7 +167,7 @@ export default function MembershipContent() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center mb-12"
           >
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
@@ -184,7 +185,7 @@ export default function MembershipContent() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
+                transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
                 className="relative"
               >
                 <div className="p-6 rounded-2xl bg-card border border-border/50">
@@ -208,7 +209,7 @@ export default function MembershipContent() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
             className="text-center mt-12"
           >
             <p className="text-muted-foreground max-w-xl mx-auto mb-6">
@@ -235,7 +236,7 @@ export default function MembershipContent() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="max-w-3xl mx-auto text-center rounded-2xl p-8 md:p-12 bg-gradient-to-br from-primary/20 to-card border border-primary/30"
           >
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">

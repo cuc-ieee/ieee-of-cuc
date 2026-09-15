@@ -7,6 +7,7 @@ import { Mail, MapPin, Phone, Send, Instagram, Linkedin, Facebook, Youtube, Mess
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { CopyToClipboardWrapper } from "@/components/CopyToClipboardWrapper";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/ieee.cuc", label: "Instagram" },
@@ -88,7 +89,7 @@ export function ContactSection() {
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
               Get in <span className="gradient-text">Touch</span>
@@ -161,7 +162,7 @@ export function ContactSection() {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1.5)}
             className="rounded-2xl p-6 md:p-8 bg-card border border-border/50"
           >
             <form className="space-y-5" onSubmit={handleSubmit}>

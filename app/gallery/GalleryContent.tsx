@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer";
 import { galleryEvents } from "../data/gallery";
 import { Button } from "@/components/ui/button";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
+import { ANIMATION_CONFIG, transitionNormal, transitionFast } from "@/lib/animations";
 
 export default function GalleryContent() {
   return (
@@ -21,7 +22,7 @@ export default function GalleryContent() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -45,7 +46,7 @@ export default function GalleryContent() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: eventIndex * 0.2 }}
+                transition={transitionNormal(eventIndex * ANIMATION_CONFIG.stagger.normal)}
               >
                 <h2 className="font-display text-3xl font-bold mb-8 text-center">
                   {event.title} 
@@ -57,7 +58,7 @@ export default function GalleryContent() {
                       initial={{ opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true, amount: 0.5 }}
-                      transition={{ duration: 0.4, delay: imgIndex * 0.1 }}
+                      transition={transitionFast(imgIndex * ANIMATION_CONFIG.stagger.fast)}
                       className="group aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer relative"
                     >
                       <img

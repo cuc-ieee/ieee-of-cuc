@@ -18,6 +18,7 @@ import {
 import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { Button } from "@/components/ui/button";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 const values = [
   {
@@ -88,7 +89,7 @@ export default function AboutContent() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -110,7 +111,7 @@ export default function AboutContent() {
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8 }}
+              transition={transitionNormal(0)}
             >
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
                 Our <span className="gradient-text">Story</span>
@@ -137,7 +138,7 @@ export default function AboutContent() {
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1.5)}
               className="grid grid-cols-2 gap-4"
             >
               {[
@@ -175,7 +176,7 @@ export default function AboutContent() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={transitionNormal(0)}
             >
               <img
                 src="/Aboutus/Excom.jpg"
@@ -187,7 +188,7 @@ export default function AboutContent() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1.5)}
             >
               <h2 className="hidden lg:block font-display text-3xl md:text-4xl font-bold mb-6">
                 Meet the <span className="gradient-text">Committee</span>
@@ -220,7 +221,7 @@ export default function AboutContent() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center mb-12"
           >
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
@@ -238,7 +239,7 @@ export default function AboutContent() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
                 className="p-6 rounded-2xl bg-card border border-border/50 card-hover"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
@@ -263,7 +264,7 @@ export default function AboutContent() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center mb-12"
           >
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
@@ -281,7 +282,7 @@ export default function AboutContent() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
                 className="text-center p-6"
               >
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mx-auto mb-4">

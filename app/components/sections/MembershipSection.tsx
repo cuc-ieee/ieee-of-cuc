@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Check, Sparkles, BookOpen, Network, Award, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 const benefits = [
   { icon: BookOpen, text: "Access to IEEE Xplore digital library" },
@@ -32,7 +33,7 @@ export function MembershipSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center mb-12"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
@@ -48,7 +49,7 @@ export function MembershipSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12"
           >
             {benefits.map((benefit, index) => (
@@ -56,7 +57,9 @@ export function MembershipSection() {
                 key={benefit.text}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                transition={transitionNormal(
+                  ANIMATION_CONFIG.stagger.normal * 1.5 + index * ANIMATION_CONFIG.stagger.fast
+                )}
               >
                 <SpotlightCard
                   className="flex items-center gap-3 p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/40 transition-colors h-full"
@@ -75,7 +78,7 @@ export function MembershipSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
             className="relative rounded-2xl p-8 md:p-12 bg-gradient-to-br from-card to-secondary/50 border border-border/50 overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />

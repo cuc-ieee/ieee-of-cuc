@@ -18,6 +18,7 @@ import { Footer } from "../components/Footer";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { CopyToClipboardWrapper } from "@/components/CopyToClipboardWrapper";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 const socialLinks = [
   {
@@ -116,7 +117,7 @@ export default function ContactContent() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -138,7 +139,7 @@ export default function ContactContent() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={transitionNormal(0)}
             >
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-8">
                 Contact <span className="gradient-text">Information</span>
@@ -219,7 +220,7 @@ export default function ContactContent() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1.5)}
               className="rounded-2xl p-6 md:p-8 bg-card border border-border/50"
             >
               <h2 className="font-display text-2xl font-bold mb-6">
