@@ -7,6 +7,7 @@ import Link from "next/link";
 import { TechGlobe } from "@/components/TechGlobe";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { DiamondShineText } from "@/components/ui/DiamondShineText";
 import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 export function HeroSection() {
@@ -28,7 +29,7 @@ export function HeroSection() {
             >
               <span className="whitespace-nowrap">
                 <span className="text-foreground">IEEE</span>{" "}
-                <span className="diamond-shine-text">Curtin University Colombo</span>
+                <DiamondShineText>Curtin University Colombo</DiamondShineText>
               </span>
               <br />
               <span className="text-foreground">Student Branch</span>
