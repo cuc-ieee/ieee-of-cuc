@@ -252,12 +252,9 @@
     vertical-align: baseline;
   }
 
-  /* 1. Base clean text: crisp, rich IEEE cyan-blue gradient */
+  /* 1. Base clean text: exact Curtin cyan-blue #32baf6 with crisp native subpixel rendering */
   .diamond-shine-base {
-    background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #32baf6;
     display: inline;
     position: relative;
     z-index: 1;
@@ -270,22 +267,22 @@
     z-index: 2;
     pointer-events: none;
     user-select: none;
+    opacity: 0;
 
     background-image:
       linear-gradient(
         115deg,
         transparent 0%,
         transparent 38%,
-        rgba(255, 255, 255, 1) 48%,
-        rgba(186, 230, 253, 0.95) 52%,
+        rgba(255, 255, 255, 0.95) 48%,
+        rgba(186, 230, 253, 0.9) 52%,
         transparent 62%,
         transparent 100%
       ),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cdefs%3E%3Cfilter id='b' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeGaussianBlur stdDeviation='0.8'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='6,0 12,6 6,12 0,6' fill='%2338bdf8' filter='url(%23b)' opacity='0.85'/%3E%3Cpolygon points='6,1.5 10.5,6 6,10.5 1.5,6' fill='%23ffffff' opacity='0.95'/%3E%3C/svg%3E"),
-      linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
-    background-size: 260% 100%, 12px 12px, 100% 100%;
-    background-repeat: no-repeat, repeat, no-repeat;
-    background-blend-mode: screen, overlay, normal;
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cdefs%3E%3Cfilter id='b' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeGaussianBlur stdDeviation='0.8'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='6,0 12,6 6,12 0,6' fill='%2332baf6' filter='url(%23b)' opacity='0.85'/%3E%3Cpolygon points='6,1.5 10.5,6 6,10.5 1.5,6' fill='%23ffffff' opacity='0.95'/%3E%3C/svg%3E");
+    background-size: 260% 100%, 12px 12px;
+    background-repeat: no-repeat, repeat;
+    background-blend-mode: screen, overlay;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -318,12 +315,26 @@
 
   @keyframes diamondFilterSweep {
     0% {
-      background-position: -220% 0, 0 0, 0 0;
+      opacity: 0;
+      background-position: -220% 0, 0 0;
       -webkit-mask-position: -220% 0;
       mask-position: -220% 0;
     }
-    48%, 100% {
-      background-position: 220% 0, 0 0, 0 0;
+    3% {
+      opacity: 1;
+    }
+    42% {
+      opacity: 1;
+    }
+    46% {
+      opacity: 0;
+      background-position: 220% 0, 0 0;
+      -webkit-mask-position: 220% 0;
+      mask-position: 220% 0;
+    }
+    47%, 100% {
+      opacity: 0;
+      background-position: 220% 0, 0 0;
       -webkit-mask-position: 220% 0;
       mask-position: 220% 0;
     }

@@ -1,13 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Calendar, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { TechGlobe } from "@/components/TechGlobe";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { DiamondShineText } from "@/components/ui/DiamondShineText";
+import { MemberFacepile } from "@/components/ui/MemberFacepile";
 import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 export function HeroSection() {
@@ -49,7 +47,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
-              className="flex flex-col sm:flex-row gap-4 justify-start mb-12"
+              className="flex flex-col sm:flex-row gap-4 justify-start mb-8"
             >
               <Button variant="hero" size="xl" asChild>
                 <Link href="/membership">Become a Member</Link>
@@ -59,32 +57,13 @@ export function HeroSection() {
               </Button>
             </motion.div>
 
-            {/* Stats with Animated Counters and Spotlight */}
+            {/* Member Facepile Social Proof */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
-              className="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg"
             >
-              {[
-                { icon: Users, value: 100, suffix: "+", label: "Members" },
-                { icon: Calendar, value: 10, suffix: "+", label: "Events" },
-                { icon: Lightbulb, value: 5, suffix: "+", label: "Workshops" },
-              ].map((stat) => (
-                <SpotlightCard
-                  key={stat.label}
-                  className="p-3.5 sm:p-4 rounded-xl border border-border/50 bg-card/50"
-                  spotlightColor="rgba(56, 189, 248, 0.2)"
-                >
-                  <stat.icon className="w-5 h-5 text-primary mb-2" />
-                  <div className="font-display text-2xl md:text-3xl font-bold text-foreground">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <span className="text-muted-foreground text-xs sm:text-sm">
-                    {stat.label}
-                  </span>
-                </SpotlightCard>
-              ))}
+              <MemberFacepile />
             </motion.div>
           </div>
 
