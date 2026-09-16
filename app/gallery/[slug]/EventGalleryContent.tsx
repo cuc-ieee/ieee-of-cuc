@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { DesktopNav, MobileNav } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
@@ -49,8 +48,6 @@ export default function EventGalleryContent({
 
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">

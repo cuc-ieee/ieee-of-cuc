@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { DesktopNav, MobileNav } from "./components/Navigation";
 import { HeroSection } from "./components/sections/HeroSection";
 import { DomainMarquee } from "./components/DomainMarquee";
 import { SectionSeparator } from "./components/SectionSeparator";
@@ -30,8 +29,6 @@ export default function HomePage() {
   return (
     <div className="min-h-screen w-full bg-background overflow-x-hidden relative">
       <DotGridBackground />
-      <DesktopNav />
-      <MobileNav />
 
       <main>
         <HeroSection />

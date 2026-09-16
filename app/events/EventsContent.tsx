@@ -12,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { upcomingEvents, pastEvents } from "@/data/events";
 import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
@@ -63,8 +62,6 @@ export default function EventsContent() {
 
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-12 md:pb-20">

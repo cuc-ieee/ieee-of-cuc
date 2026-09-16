@@ -11,7 +11,6 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DesktopNav, MobileNav } from "../../components/Navigation";
 import { Footer } from "../../components/Footer";
 import type { Event } from "@/data/events";
 import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
@@ -27,8 +26,6 @@ export default function EventDetailContent({ event }: Props) {
 
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
       <section className="relative pt-24 md:pb-12 overflow-hidden">

@@ -58,6 +58,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { DesktopNav, MobileNav } from "./components/Navigation";
+
 export default function RootLayout({
   children,
 }: {
@@ -67,6 +69,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-background antialiased relative">
         <FloatingBubbles />
+        <DesktopNav />
+        <MobileNav />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { galleryEvents } from "../data/gallery";
 import { Button } from "@/components/ui/button";
@@ -13,8 +12,6 @@ import { ANIMATION_CONFIG, transitionNormal, transitionFast } from "@/lib/animat
 export default function GalleryContent() {
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20">
