@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
+import { Chakra_Petch, Outfit } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { FloatingBubbles } from "./components/FloatingBubbles";
+
+const chakraPetch = Chakra_Petch({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-chakra-petch",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ieeeofcuc.com"),
@@ -66,8 +81,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-background antialiased relative">
+    <html
+      lang="en"
+      className={`${chakraPetch.variable} ${outfit.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-screen bg-background antialiased relative font-sans">
         <FloatingBubbles />
         <DesktopNav />
         <MobileNav />

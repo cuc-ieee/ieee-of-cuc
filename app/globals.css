@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -64,8 +64,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Outfit', sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-outfit), 'Outfit', sans-serif;
   }
 
   h1,
@@ -73,8 +73,9 @@
   h3,
   h4,
   h5,
-  h6 {
-    font-family: 'Outfit', sans-serif;
+  h6,
+  .font-display {
+    font-family: var(--font-chakra-petch), 'Chakra Petch', sans-serif !important;
   }
 
   button,
