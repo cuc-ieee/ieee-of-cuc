@@ -5,10 +5,10 @@ import Link from "next/link";
 import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import { ArrowRight, Images } from "lucide-react";
 import { Footer } from "../components/Footer";
+import { Typewriter } from "../components/Tech";
 import { galleryEvents } from "../data/gallery";
 import { Button } from "@/components/ui/button";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
-import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 export default function GalleryContent() {
   return (
@@ -18,24 +18,16 @@ export default function GalleryContent() {
           HERO SECTION
           ================================================================= */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
-        {/* Subtle ambient glow */}
-        <div
-          aria-hidden="true"
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-primary/10 rounded-full blur-[110px] pointer-events-none -z-10"
-        />
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            
+          <div className="max-w-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground mb-4">
+              <span className="text-primary">■</span> Gallery — Event albums
+            </p>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              <span className="relative inline-block">
-                <SpearBurstEmblem />
-                <span className="relative z-10">Photo</span>
-              </span>{" "}
-              <span className="text-primary">Gallery</span>
+              <Typewriter parts={[{ t: "Photo " }, { t: "Gallery", accent: true }]} speed={45} />
             </h1>
 
-            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mb-10">
               Relive the memorable milestones, technical hackathons, conferences, and student celebrations of the IEEE Curtin University Colombo Student Branch.
             </p>
 
@@ -56,7 +48,7 @@ export default function GalleryContent() {
               return (
                 <div
                   key={event.id}
-                  className="rounded-3xl border border-border/50 bg-card/30 backdrop-blur-sm p-6 sm:p-8 hover:border-primary/30 transition-all duration-300 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+                  className="rounded-none border border-border/50 bg-card/30 backdrop-blur-sm p-6 sm:p-8 hover:border-primary/30 transition-all duration-300 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
                 >
                   {/* Event Album Title Bar */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-border/40">
@@ -70,7 +62,7 @@ export default function GalleryContent() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-secondary/60 text-muted-foreground border border-border/50">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none text-xs font-semibold bg-secondary/60 text-muted-foreground border border-border/50">
                         <Images className="w-3.5 h-3.5 text-primary" />
                         <span>{totalCount} Photos</span>
                       </div>
@@ -94,7 +86,7 @@ export default function GalleryContent() {
                         <Link
                           key={image}
                           href={`/gallery/${event.slug}`}
-                          className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-secondary/30 border border-border/40 shadow-sm block"
+                          className="group relative aspect-[4/3] rounded-none overflow-hidden bg-secondary/30 border border-border/40 shadow-sm block"
                         >
                           <SkeletonImage
                             src={imgUrl}

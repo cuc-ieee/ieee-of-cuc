@@ -26,7 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Footer } from "../components/Footer";
 import { useToast } from "@/hooks/use-toast";
-import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
+import { Typewriter } from "../components/Tech";
 
 const CONTACT_EMAIL = "curtincolombo.ieee@gmail.com";
 const WHATSAPP_URL = "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ";
@@ -231,31 +231,24 @@ export default function ContactContent() {
           1. HERO SECTION
           ================================================================= */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
-        {/* Ambient Glow */}
-        <div
-          aria-hidden="true"
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-primary/10 rounded-full blur-[110px] pointer-events-none -z-10"
-        />
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="max-w-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground mb-4">
+              <span className="text-primary">■</span> Contact — Dispatch & inbox
+            </p>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              <span className="relative inline-block">
-                <SpearBurstEmblem />
-                <span className="relative z-10">Contact</span>
-              </span>{" "}
-              <span className="text-primary">Us</span>
+              <Typewriter parts={[{ t: "Contact " }, { t: "Us", accent: true }]} speed={45} />
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-8">
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mb-8">
               Have questions, technical ideas, or looking to partner? Route your inquiry directly to
               our leadership team or visit our Colombo campus innovation hub.
             </p>
 
             {/* Live Operational Status Ribbon */}
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-primary/25 bg-card/60 backdrop-blur-md shadow-sm">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-none border border-primary/25 bg-card/60 backdrop-blur-md shadow-sm">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full bg-emerald-600 opacity-75" />
+                <span className="relative inline-flex rounded-none h-2.5 w-2.5 bg-emerald-500" />
               </span>
               <span className="text-xs sm:text-sm font-medium text-foreground">
                 Inquiries Open
@@ -277,18 +270,18 @@ export default function ContactContent() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Bento Card 1: Direct Email Hub (Spans 2 on large screens) */}
-            <div className="lg:col-span-2 rounded-3xl border border-primary/30 bg-gradient-to-br from-card/80 to-secondary/30 backdrop-blur-xl p-6 sm:p-8 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex flex-col justify-between group">
+            <div className="lg:col-span-2 rounded-none border border-primary/30 bg-gradient-to-br from-card/80 to-secondary/30 backdrop-blur-xl p-6 sm:p-8 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex flex-col justify-between group">
               <div
                 aria-hidden="true"
-                className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2"
+                className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2"
               />
 
               <div>
                 <div className="flex items-center justify-between gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary shadow-sm">
+                  <div className="w-12 h-12 rounded-none bg-primary/15 border border-primary/30 flex items-center justify-center text-primary shadow-sm">
                     <Mail className="w-6 h-6" />
                   </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
+                  <span className="px-3 py-1 rounded-none text-xs font-semibold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
                     Primary Dispatch
                   </span>
                 </div>
@@ -303,7 +296,7 @@ export default function ContactContent() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4 border-t border-border/40">
-                <div className="flex-1 px-4 py-2.5 rounded-xl bg-background/80 border border-border/60 text-sm font-mono text-foreground flex items-center justify-between">
+                <div className="flex-1 px-4 py-2.5 rounded-none bg-background/80 border border-border/60 text-sm font-mono text-foreground flex items-center justify-between">
                   <span className="truncate">{CONTACT_EMAIL}</span>
                   <button
                     type="button"
@@ -312,7 +305,7 @@ export default function ContactContent() {
                     aria-label="Copy Email"
                   >
                     {copiedKey === "email" ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
+                      <Check className="w-4 h-4 text-emerald-700" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
@@ -329,10 +322,10 @@ export default function ContactContent() {
             </div>
 
             {/* Bento Card 2: Executive Hotline */}
-            <div className="rounded-3xl border border-border/50 bg-card/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between hover:border-primary/40 transition-all duration-300 shadow-lg group">
+            <div className="rounded-none border border-border/50 bg-card/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between hover:border-primary/40 transition-all duration-300 shadow-lg group">
               <div>
                 <div className="flex items-center justify-between gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-secondary/70 border border-border/60 flex items-center justify-center text-primary shadow-sm group-hover:border-primary/40 transition-colors">
+                  <div className="w-12 h-12 rounded-none bg-secondary/70 border border-border/60 flex items-center justify-center text-primary shadow-sm group-hover:border-primary/40 transition-colors">
                     <Phone className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-mono text-muted-foreground">Direct Line</span>
@@ -347,7 +340,7 @@ export default function ContactContent() {
               </div>
 
               <div className="space-y-2 pt-4 border-t border-border/30">
-                <div className="px-3.5 py-2 rounded-xl bg-secondary/50 border border-border/40 text-sm font-mono text-foreground flex items-center justify-between">
+                <div className="px-3.5 py-2 rounded-none bg-secondary/50 border border-border/40 text-sm font-mono text-foreground flex items-center justify-between">
                   <span>+94 72 792 2261</span>
                   <button
                     type="button"
@@ -356,7 +349,7 @@ export default function ContactContent() {
                     aria-label="Copy Phone Number"
                   >
                     {copiedKey === "phone" ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
+                      <Check className="w-4 h-4 text-emerald-700" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
@@ -372,10 +365,10 @@ export default function ContactContent() {
             </div>
 
             {/* Bento Card 3: Campus Coordinates */}
-            <div className="rounded-3xl border border-border/50 bg-card/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between hover:border-primary/40 transition-all duration-300 shadow-lg group">
+            <div className="rounded-none border border-border/50 bg-card/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between hover:border-primary/40 transition-all duration-300 shadow-lg group">
               <div>
                 <div className="flex items-center justify-between gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-secondary/70 border border-border/60 flex items-center justify-center text-primary shadow-sm group-hover:border-primary/40 transition-colors">
+                  <div className="w-12 h-12 rounded-none bg-secondary/70 border border-border/60 flex items-center justify-center text-primary shadow-sm group-hover:border-primary/40 transition-colors">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-mono text-muted-foreground">GPS: 6.9186, 79.8495</span>
@@ -399,7 +392,7 @@ export default function ContactContent() {
                   className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 transition-colors"
                 >
                   {copiedKey === "addr" ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <Check className="w-3.5 h-3.5 text-emerald-700" />
                   ) : (
                     <Copy className="w-3.5 h-3.5" />
                   )}
@@ -419,11 +412,11 @@ export default function ContactContent() {
             </div>
 
             {/* Bento Card 4: Community Channels (Spans 2 on lg) */}
-            <div className="lg:col-span-2 rounded-3xl border border-border/50 bg-card/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between shadow-lg">
+            <div className="lg:col-span-2 rounded-none border border-border/50 bg-card/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between shadow-lg">
               <div>
                 <div className="flex items-center justify-between gap-4 mb-4">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
+                    <div className="w-3 h-3 rounded-none bg-emerald-500 animate-pulse" />
                     <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                       Social & Community Streams
                     </span>
@@ -442,7 +435,7 @@ export default function ContactContent() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-2xl border border-border/40 bg-secondary/30 hover:bg-secondary/70 hover:border-primary/40 transition-all flex flex-col items-center text-center group"
+                    className="p-3 rounded-none border border-border/40 bg-secondary/30 hover:bg-secondary/70 hover:border-primary/40 transition-all flex flex-col items-center text-center group"
                   >
                     <social.icon className={`w-5 h-5 text-muted-foreground ${social.color} transition-colors mb-2`} />
                     <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">
@@ -478,7 +471,7 @@ export default function ContactContent() {
 
           <div className="grid lg:grid-cols-12 gap-8 max-w-6xl mx-auto items-start">
             {/* Form Column (7 Cols) */}
-            <div className="lg:col-span-7 rounded-3xl border border-border/60 bg-card/50 backdrop-blur-xl p-6 sm:p-10 shadow-2xl">
+            <div className="lg:col-span-7 rounded-none border border-border/60 bg-card/50 backdrop-blur-xl p-6 sm:p-10 shadow-2xl">
               {/* Topic Selectors */}
               <div className="mb-8">
                 <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
@@ -492,7 +485,7 @@ export default function ContactContent() {
                         key={t.id}
                         type="button"
                         onClick={() => setSelectedTopic(t)}
-                        className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
+                        className={`px-3.5 py-2 rounded-none text-xs sm:text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
                           isSelected
                             ? "bg-primary text-primary-foreground shadow-[0_0_16px_hsl(210_100%_50%/0.35)]"
                             : "bg-secondary/40 text-muted-foreground hover:text-foreground hover:bg-secondary/80 border border-border/40"
@@ -518,7 +511,7 @@ export default function ContactContent() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Jane Doe"
-                      className="w-full px-4 py-3 rounded-xl bg-secondary/40 border border-border/60 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm transition-all"
+                      className="w-full px-4 py-3 rounded-none bg-secondary/40 border border-border/60 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm transition-all"
                       required
                     />
                   </div>
@@ -531,7 +524,7 @@ export default function ContactContent() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="jane@university.edu"
-                      className="w-full px-4 py-3 rounded-xl bg-secondary/40 border border-border/60 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm transition-all"
+                      className="w-full px-4 py-3 rounded-none bg-secondary/40 border border-border/60 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm transition-all"
                       required
                     />
                   </div>
@@ -548,7 +541,7 @@ export default function ContactContent() {
                     type="text"
                     value={formData.customSubject || selectedTopic.defaultSubject}
                     onChange={(e) => setFormData({ ...formData, customSubject: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-secondary/40 border border-border/60 text-foreground text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium"
+                    className="w-full px-4 py-3 rounded-none bg-secondary/40 border border-border/60 text-foreground text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium"
                   />
                 </div>
 
@@ -561,7 +554,7 @@ export default function ContactContent() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder={selectedTopic.placeholder}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl bg-secondary/40 border border-border/60 text-foreground placeholder:text-muted-foreground/60 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none leading-relaxed"
+                    className="w-full px-4 py-3 rounded-none bg-secondary/40 border border-border/60 text-foreground placeholder:text-muted-foreground/60 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none leading-relaxed"
                     required
                   />
                 </div>
@@ -583,7 +576,7 @@ export default function ContactContent() {
             </div>
 
             {/* Real-Time Payload / Dispatch Ticket Preview (5 Cols) */}
-            <div className="lg:col-span-5 rounded-3xl border border-border/60 bg-gradient-to-b from-card/90 to-card/50 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative">
+            <div className="lg:col-span-5 rounded-none border border-border/60 bg-gradient-to-b from-card/90 to-card/50 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative">
               <div className="flex items-center justify-between pb-4 mb-5 border-b border-border/40">
                 <div className="flex items-center gap-2">
                   <Terminal className="w-4 h-4 text-primary" />
@@ -591,7 +584,7 @@ export default function ContactContent() {
                     Dispatch Inspector
                   </span>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-primary/10 text-primary border border-primary/20">
+                <span className="px-2.5 py-0.5 rounded-none text-[10px] font-mono bg-primary/10 text-primary border border-primary/20">
                   Ready
                 </span>
               </div>
@@ -628,9 +621,9 @@ export default function ContactContent() {
               </div>
 
               {/* Direct WhatsApp Box */}
-              <div className="mt-8 p-4 rounded-2xl border border-emerald-500/25 bg-emerald-500/5">
+              <div className="mt-8 p-4 rounded-none border border-emerald-500/25 bg-emerald-500/5">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                  <div className="w-8 h-8 rounded-none bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-700 flex-shrink-0">
                     <MessageCircle className="w-4 h-4" />
                   </div>
                   <div>
@@ -644,7 +637,7 @@ export default function ContactContent() {
                       href={WHATSAPP_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300"
+                      className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
                     >
                       <span>Join WhatsApp Community</span>
                       <ExternalLink className="w-3 h-3" />
@@ -662,7 +655,7 @@ export default function ContactContent() {
           ================================================================= */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto rounded-3xl border border-border/60 bg-card/40 backdrop-blur-xl p-6 sm:p-10 shadow-2xl overflow-hidden">
+          <div className="max-w-6xl mx-auto rounded-none border border-border/60 bg-card/40 backdrop-blur-xl p-6 sm:p-10 shadow-2xl overflow-hidden">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 pb-6 border-b border-border/40">
               <div>
                 <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-1 block">
@@ -692,7 +685,7 @@ export default function ContactContent() {
             </div>
 
             {/* Radar Map Frame */}
-            <div className="w-full h-[360px] sm:h-[440px] rounded-2xl overflow-hidden border border-border/60 shadow-inner relative">
+            <div className="w-full h-[360px] sm:h-[440px] rounded-none overflow-hidden border border-border/60 shadow-inner relative">
               <iframe
                 src={CAMPUS_MAP_URL}
                 title="Curtin University Colombo Campus Map"
@@ -731,7 +724,7 @@ export default function ContactContent() {
               return (
                 <div
                   key={faq.q}
-                  className="rounded-2xl border border-border/50 bg-card/40 overflow-hidden transition-colors"
+                  className="rounded-none border border-border/50 bg-card/40 overflow-hidden transition-colors"
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : index)}

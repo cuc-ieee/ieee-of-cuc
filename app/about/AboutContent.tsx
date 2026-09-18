@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { Button } from "@/components/ui/button";
-import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
+import { Typewriter } from "../components/Tech";
 
 const pillars = [
   {
@@ -74,45 +74,31 @@ export default function AboutContent() {
           1. HERO SECTION
           ================================================================= */}
       <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-        {/* Subtle background ambient glow */}
-        <div
-          aria-hidden="true"
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[360px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
-        />
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            
-            {/* Headline with Rotating Porcupine Spear Emblem Behind First Word */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]"
-            >
-              <span className="relative inline-block">
-                <SpearBurstEmblem />
-                <span className="relative z-10">About</span>
-              </span>{" "}
-              <span className="text-primary">Us</span>
-            </motion.h1>
+          <div className="max-w-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground mb-4">
+              <span className="text-primary">■</span> About — Branch profile
+            </p>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
+              <Typewriter parts={[{ t: "About " }, { t: "Us", accent: true }]} speed={45} />
+            </h1>
 
             {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -32 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10"
+              className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mb-10"
             >
               Engineering curiosity and empowering future leaders. We are a community of passionate student engineers, researchers, and innovators affiliated with the IEEE Sri Lanka Section, advancing technology for humanity.
             </motion.p>
 
             {/* Action Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -32 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center justify-center gap-4"
+              className="flex flex-wrap items-center gap-4"
             >
               <Button variant="hero" size="xl" asChild>
                 <Link href="/committee">Meet Our Committee</Link>
@@ -147,7 +133,7 @@ export default function AboutContent() {
           <div className="grid lg:grid-cols-12 gap-6 max-w-6xl mx-auto">
             
             {/* Bento 1: Primary Narrative (8 cols) */}
-            <div className="lg:col-span-8 rounded-2xl border border-border/60 bg-card/40 backdrop-blur-md p-8 sm:p-10 flex flex-col justify-between">
+            <div className="lg:col-span-8 rounded-none border border-border/60 bg-card/40 backdrop-blur-md p-8 sm:p-10 flex flex-col justify-between">
               <div>
                 <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-3 inline-block">
                   Affiliation & Heritage
@@ -180,7 +166,7 @@ export default function AboutContent() {
             </div>
 
             {/* Bento 2: Distinctives & Focus (4 cols) */}
-            <div className="lg:col-span-4 rounded-2xl border border-border/60 bg-card/40 backdrop-blur-md p-8 flex flex-col justify-between">
+            <div className="lg:col-span-4 rounded-none border border-border/60 bg-card/40 backdrop-blur-md p-8 flex flex-col justify-between">
               <div>
                 <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-3 inline-block">
                   Core Highlights
@@ -192,7 +178,7 @@ export default function AboutContent() {
                 <div className="space-y-6">
                   {highlights.map((h) => (
                     <div key={h.title} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
+                      <div className="w-8 h-8 rounded-none bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
                         <h.icon className="w-4 h-4" />
                       </div>
                       <div>
@@ -207,7 +193,7 @@ export default function AboutContent() {
               <div className="mt-8 pt-6 border-t border-border/40">
                 <Link
                   href="/membership"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-sky-300 transition-colors group"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-[#1A4FCC] transition-colors group"
                 >
                   <span>Join as an IEEE Member</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -241,7 +227,7 @@ export default function AboutContent() {
             {pillars.map((pillar) => (
               <div
                 key={pillar.title}
-                className="group relative rounded-2xl border border-border/50 bg-card/40 hover:bg-card/70 hover:border-primary/40 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between"
+                className="group relative rounded-none border border-border/50 bg-card/40 hover:bg-card/70 hover:border-primary/40 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between"
               >
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-5 group-hover:scale-110 transition-transform">
@@ -269,11 +255,11 @@ export default function AboutContent() {
           ================================================================= */}
       <section className="py-20 border-t border-border/40 bg-card/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto rounded-3xl border border-border/60 bg-card/60 backdrop-blur-xl overflow-hidden p-8 sm:p-12">
+          <div className="max-w-5xl mx-auto rounded-none border border-border/60 bg-card/60 backdrop-blur-xl overflow-hidden p-8 sm:p-12">
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
               {/* Image with glass frame */}
-              <div className="lg:col-span-6 relative rounded-2xl overflow-hidden border border-border/60 shadow-xl group">
+              <div className="lg:col-span-6 relative rounded-none overflow-hidden border border-border/60 shadow-xl group">
                 <SkeletonImage
                   src="/Aboutus/Excom.jpg"
                   alt="IEEE Curtin University Colombo Executive Committee"

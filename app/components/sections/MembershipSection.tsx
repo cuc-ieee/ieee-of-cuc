@@ -1,210 +1,122 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, BookOpen, Network, Award, Rocket, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight, BookOpen, Network, Award, Rocket, Check } from "lucide-react";
+import { Typewriter, SlideIn, PixelIn, CHAMFER } from "../Tech";
 
-const corePerks = [
-  {
-    icon: BookOpen,
-    title: "IEEE Xplore Access",
-    desc: "Over 5M top-tier research papers, standards, and technical articles.",
-  },
-  {
-    icon: Network,
-    title: "Global Student Network",
-    desc: "Connect across 160 countries and attend regional conferences.",
-  },
-  {
-    icon: Rocket,
-    title: "Hands-on Workshops & Competitions",
-    desc: "Exclusive access to hackathons, robotics challenges, and lab sessions.",
-  },
-  {
-    icon: Award,
-    title: "Career & Certifications",
-    desc: "Industry-recognized credentials, mentorship, and leadership roles.",
-  },
+const ACCENT = "#2667FF";
+const INK = "#111214";
+
+const perks = [
+  { icon: BookOpen, title: "IEEE Xplore Access", desc: "5M+ research papers, standards, and technical articles." },
+  { icon: Network, title: "Global Student Network", desc: "Connect across 160 countries and regional conferences." },
+  { icon: Rocket, title: "Workshops & Competitions", desc: "Hackathons, robotics challenges, and lab sessions." },
+  { icon: Award, title: "Career & Certifications", desc: "Credentials, mentorship, and leadership roles." },
+];
+
+const checklist = [
+  "Discounted student rates available",
+  "Immediate access to branch activities",
+  "Eligibility for committee leadership roles",
 ];
 
 export function MembershipSection() {
   return (
-    <section id="membership" className="relative py-24 md:py-32 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-          
-          {/* =================================================================
-              LEFT COLUMN: Left-Aligned Content with Animated Morphing Oval 1
-              ================================================================= */}
-          <div className="lg:col-span-7 relative">
-            {/* Animated Oval 1 (Wide horizontal ellipse) */}
-            <motion.div
-              animate={{
-                scale: [1, 1.08, 0.96, 1],
-                rotate: [0, 8, -6, 0],
-                borderRadius: [
-                  "60% 40% 50% 50% / 50% 60% 40% 50%",
-                  "50% 50% 60% 40% / 60% 40% 50% 50%",
-                  "40% 60% 40% 60% / 50% 50% 60% 40%",
-                  "60% 40% 50% 50% / 50% 60% 40% 50%",
-                ],
-              }}
-              transition={{
-                duration: 18,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute -top-16 -left-16 w-[480px] sm:w-[560px] h-[340px] pointer-events-none -z-10 blur-3xl opacity-25"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 40% 50%, rgba(56, 189, 248, 0.45) 0%, rgba(14, 116, 144, 0.25) 50%, transparent 80%)",
-              }}
-              aria-hidden="true"
-            />
+    <section id="membership" className="relative border-b-2 border-[#111214] bg-[#E4E4E0] text-[#111214] scroll-mt-[84px]">
+      <div className="grid md:grid-cols-12 border-b border-black/20">
+        <div className="px-4 md:px-8 py-3 font-mono text-[10px] uppercase tracking-[0.28em] text-black/70 md:col-span-3 border-b md:border-b-0 md:border-r border-black/20">
+          <span style={{ color: ACCENT }}>■</span> 03 / Membership
+        </div>
+        <h2 className="px-4 md:px-8 py-8 md:py-12 font-display text-3xl md:text-5xl font-bold leading-[1.05] tracking-tight md:col-span-9">
+          <Typewriter parts={[{ t: "Become an " }, { t: "IEEE Member", accent: true }]} speed={26} />
+        </h2>
+      </div>
 
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold tracking-wider uppercase mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Global Community & Student Branch
-            </div>
-
-            {/* Title */}
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-5 text-left leading-[1.18]">
-              Become an <span className="text-primary">IEEE Member</span>
-            </h2>
-
-            {/* Concise description */}
-            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl mb-8 text-left">
-              Unlock the resources of the world&apos;s largest technical professional organization.
-              Gain peer mentorship, access premier research databases, and accelerate your engineering career at Curtin Colombo.
-            </p>
-
-            {/* 4 Core Perks Grid */}
-            <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-8">
-              {corePerks.map((perk) => (
-                <div
-                  key={perk.title}
-                  className="flex items-start gap-3.5 p-3.5 rounded-xl border border-border/40 bg-card/25 backdrop-blur-sm hover:border-primary/40 hover:bg-card/40 transition-all duration-200"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
-                    <perk.icon className="w-4 h-4" />
-                  </div>
+      <div className="grid md:grid-cols-12 items-start">
+        {/* left — perks ledger */}
+        <SlideIn
+          from="left"
+          className="md:col-span-7 px-4 md:px-8 py-10 md:py-14 border-b md:border-b-0 md:border-r border-black/20"
+        >
+          <p className="max-w-xl text-base md:text-lg leading-relaxed text-black/70 mb-8">
+            Unlock the resources of the world&apos;s largest technical professional
+            organization — peer mentorship, premier research databases, and a faster
+            engineering career at Curtin Colombo.
+          </p>
+          <div className="border-t border-black/20">
+            {perks.map((perk, i) => (
+              <div key={perk.title} className="grid grid-cols-[auto_1fr] gap-4 py-5 border-b border-black/20">
+                <span className="font-mono text-[11px] text-black/40 pt-1">P.0{i + 1}</span>
+                <div className="flex items-start gap-3.5">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center border border-black/40" style={{ color: ACCENT }}>
+                    <perk.icon className="h-5 w-5" />
+                  </span>
                   <div>
-                    <h3 className="font-semibold text-sm text-foreground mb-0.5">
-                      {perk.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {perk.desc}
-                    </p>
+                    <h3 className="font-bold text-[15px]">{perk.title}</h3>
+                    <p className="text-sm text-black/75 leading-relaxed">{perk.desc}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+          <Link
+            href="/membership"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-bold hover:underline underline-offset-4"
+            style={{ color: ACCENT }}
+          >
+            Read detailed student membership benefits
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </SlideIn>
 
-            {/* Link to full membership page */}
-            <div className="text-left">
+        {/* right — blue action panel */}
+        <PixelIn
+          delay={0.1}
+          tone={ACCENT}
+          className="md:col-span-5 p-4 md:p-8 md:mt-14"
+        >
+          <div
+            className="text-white p-6 md:p-8 h-full flex flex-col"
+            style={{ background: ACCENT, clipPath: CHAMFER, filter: `drop-shadow(8px 8px 0 ${INK})` }}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/70">
+              Student Chapter
+            </p>
+            <h3 className="font-display text-2xl md:text-3xl font-bold mt-1 mb-6">
+              Start Your Membership
+            </h3>
+            <ul className="space-y-3 mb-8 text-sm">
+              {checklist.map((c) => (
+                <li key={c} className="flex items-center gap-2.5 border-b border-white/25 pb-3">
+                  <Check className="h-4 w-4 shrink-0" />
+                  <span>{c}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-auto space-y-3">
+              <Link
+                href="https://www.ieee.org/membership/join/index.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-white px-6 py-4 font-display text-sm font-bold uppercase tracking-wider transition-transform hover:-translate-y-0.5"
+                style={{ color: INK }}
+              >
+                Register on IEEE.org
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
               <Link
                 href="/membership"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-sky-300 transition-colors group"
+                className="flex items-center justify-center border-2 border-white px-6 py-3.5 font-display text-sm font-bold uppercase tracking-wider text-white hover:bg-white/10 transition-colors"
               >
-                <span>Read detailed student membership benefits</span>
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                How to Register — Step by Step
               </Link>
             </div>
-          </div>
-
-          {/* =================================================================
-              RIGHT COLUMN: CTA Action Card with Animated Morphing Oval 2
-              ================================================================= */}
-          <div className="lg:col-span-5 relative">
-            {/* Animated Oval 2 (Taller, distinct size and timing) */}
-            <motion.div
-              animate={{
-                scale: [1, 1.12, 0.92, 1],
-                rotate: [0, -12, 10, 0],
-                borderRadius: [
-                  "40% 60% 60% 40% / 60% 30% 70% 40%",
-                  "55% 45% 40% 60% / 40% 60% 40% 60%",
-                  "35% 65% 55% 45% / 50% 40% 60% 50%",
-                  "40% 60% 60% 40% / 60% 30% 70% 40%",
-                ],
-              }}
-              transition={{
-                duration: 22,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute -top-10 -right-10 w-[380px] sm:w-[440px] h-[480px] pointer-events-none -z-10 blur-3xl opacity-30"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 60% 45%, rgba(14, 165, 233, 0.5) 0%, rgba(30, 58, 138, 0.3) 55%, transparent 80%)",
-              }}
-              aria-hidden="true"
-            />
-
-            {/* High-Impact Glass Action Card */}
-            <div className="relative rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.35)]">
-              <div className="flex items-center justify-between mb-6 pb-5 border-b border-border/40">
-                <div>
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                    Student Chapter
-                  </span>
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mt-0.5">
-                    Start Your Membership
-                  </h3>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center text-primary font-bold text-lg font-display">
-                  IEEE
-                </div>
-              </div>
-
-              {/* Quick checklist */}
-              <ul className="space-y-3 mb-8 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>Discounted student rates available</span>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>Immediate access to Curtin Colombo branch activities</span>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>Eligibility for IEEE committee leadership roles</span>
-                </li>
-              </ul>
-
-              {/* Action Buttons */}
-              <div className="space-y-3">
-                <Button variant="hero" size="xl" className="w-full" asChild>
-                  <Link
-                    href="https://www.ieee.org/membership/join/index.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span>Register on IEEE.org</span>
-                    <ArrowUpRight className="w-4 h-4 ml-1.5" />
-                  </Link>
-                </Button>
-
-                <Button variant="outline_glow" size="lg" className="w-full" asChild>
-                  <Link href="/membership">
-                    <span>How to Register (Step-by-Step)</span>
-                  </Link>
-                </Button>
-              </div>
-
-              {/* Micro proof counter */}
-              <div className="mt-6 pt-5 border-t border-border/30 flex items-center justify-between text-xs text-muted-foreground">
-                <span>Curtin University Colombo</span>
-                <span className="text-foreground/80 font-medium">IEEE Region 10</span>
-              </div>
+            <div className="mt-6 pt-4 border-t border-white/25 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-white/75">
+              <span>Curtin Colombo</span>
+              <span>IEEE Region 10</span>
             </div>
-
           </div>
-
-        </div>
+        </PixelIn>
       </div>
     </section>
   );

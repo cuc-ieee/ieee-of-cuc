@@ -14,9 +14,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Footer } from "../components/Footer";
+import { Typewriter } from "../components/Tech";
 import { upcomingEvents, pastEvents } from "@/data/events";
 import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
-import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 type SortOption = "newest" | "oldest" | "az" | "za";
 
@@ -83,31 +83,19 @@ export default function EventsContent() {
 
       {/* Hero Section */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
-        {/* Subtle ambient glow */}
-        <div
-          aria-hidden="true"
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-primary/10 rounded-full blur-[110px] pointer-events-none -z-10"
-        />
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={transitionNormal(0)}
-            className="text-center max-w-3xl mx-auto"
-          >
+          <div className="max-w-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground mb-4">
+              <span className="text-primary">■</span> Events — Workshops & meetups
+            </p>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              <span className="relative inline-block">
-                <SpearBurstEmblem />
-                <span className="relative z-10">Our</span>
-              </span>{" "}
-              <span className="text-primary">Events</span>
+              <Typewriter parts={[{ t: "Our " }, { t: "Events", accent: true }]} speed={45} />
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mb-10">
               Join our workshops, competitions, and networking sessions to
               enhance your skills and connect with fellow innovators.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -118,7 +106,7 @@ export default function EventsContent() {
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => setActiveTab("upcoming")}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                className={`px-6 py-3 rounded-none font-medium transition-all ${
                   activeTab === "upcoming"
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary/50 text-muted-foreground hover:text-foreground"
@@ -128,7 +116,7 @@ export default function EventsContent() {
               </button>
               <button
                 onClick={() => setActiveTab("past")}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                className={`px-6 py-3 rounded-none font-medium transition-all ${
                   activeTab === "past"
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary/50 text-muted-foreground hover:text-foreground"
@@ -143,10 +131,10 @@ export default function EventsContent() {
                 value={sortBy}
                 onValueChange={(value) => setSortBy(value as SortOption)}
               >
-                <SelectTrigger className="h-12 rounded-xl border border-border/60 bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary/20 focus:ring-offset-2">
+                <SelectTrigger className="h-12 rounded-none border border-border/60 bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary/20 focus:ring-offset-2">
                   <SelectValue placeholder="Sort events" />
                 </SelectTrigger>
-                <SelectContent className="rounded-xl border border-border bg-popover shadow-lg">
+                <SelectContent className="rounded-none border border-border bg-popover shadow-lg">
                   <SelectItem value="newest">Newest to oldest</SelectItem>
                   <SelectItem value="oldest">Oldest to newest</SelectItem>
                   <SelectItem value="az">A to Z</SelectItem>
@@ -172,7 +160,7 @@ export default function EventsContent() {
                       transition: { type: "spring", stiffness: 400, damping: 25 },
                     }}
                     whileTap={{ scale: 0.99 }}
-                    className={`group rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-[0_16px_36px_-10px_hsl(210_100%_50%/0.25)] hover:border-primary/50 ${
+                    className={`group rounded-none overflow-hidden border transition-all duration-300 hover:shadow-[0_16px_36px_-10px_hsl(210_100%_50%/0.25)] hover:border-primary/50 ${
                       event.featured
                         ? "bg-gradient-to-br from-primary/10 to-card border-primary/30"
                         : "bg-card border-border/50"
@@ -189,7 +177,7 @@ export default function EventsContent() {
                       </div>
                       <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
                         {event.featured && (
-                          <span className="inline-block w-fit px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-semibold tracking-wider uppercase mb-3">
+                          <span className="inline-block w-fit px-3 py-1 rounded-none bg-primary/20 text-primary text-xs font-semibold tracking-wider uppercase mb-3">
                             Featured Event
                           </span>
                         )}
@@ -197,7 +185,7 @@ export default function EventsContent() {
                           {event.category?.map((cat, idx) => (
                             <span
                               key={idx}
-                              className="inline-block px-3 py-1 rounded-full bg-secondary text-xs font-medium"
+                              className="inline-block px-3 py-1 rounded-none bg-secondary text-xs font-medium"
                             >
                               {cat}
                             </span>
@@ -265,7 +253,7 @@ export default function EventsContent() {
                     transition: { type: "spring", stiffness: 400, damping: 25 },
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="group rounded-2xl bg-card/60 border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-[0_12px_32px_-8px_hsl(210_100%_50%/0.28)] transition-all duration-300"
+                  className="group rounded-none bg-card/60 border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-[0_12px_32px_-8px_hsl(210_100%_50%/0.28)] transition-all duration-300"
                 >
                   <Link href={`/events/${event.slug}`}>
                     <div className="aspect-video overflow-hidden relative">
@@ -281,7 +269,7 @@ export default function EventsContent() {
                         {event.category?.map((cat, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-1 rounded-full bg-secondary text-xs font-medium"
+                            className="px-3 py-1 rounded-none bg-secondary text-xs font-medium"
                           >
                             {cat}
                           </span>

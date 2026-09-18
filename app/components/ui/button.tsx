@@ -10,21 +10,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_hsl(210_100%_50%/0.4)]",
+          "bg-primary text-primary-foreground hover:bg-primary/85 hover:shadow-[4px_4px_0_hsl(222_8%_7%)]",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-border bg-transparent hover:bg-secondary hover:text-secondary-foreground",
+          "border border-foreground/30 bg-transparent hover:bg-foreground/5 hover:text-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/70",
         ghost: "hover:bg-secondary hover:text-secondary-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        glow: "bg-primary text-primary-foreground hover:shadow-[0_0_30px_hsl(210_100%_50%/0.5)] hover:scale-105",
-        hero: "bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold tracking-wide hover:shadow-[0_0_40px_hsl(210_100%_50%/0.6)] hover:scale-105",
+        glow: "bg-primary text-primary-foreground hover:shadow-[0_0_28px_hsl(222_100%_57%/0.55)] hover:-translate-y-0.5",
+        hero: "bg-primary text-primary-foreground font-semibold tracking-wide shadow-[4px_4px_0_hsl(222_8%_7%)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_hsl(222_8%_7%)]",
         outline_glow:
-          "border-2 border-primary bg-transparent text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_hsl(210_100%_50%/0.3)]",
+          "border-2 border-foreground bg-transparent text-foreground hover:border-primary hover:text-primary hover:bg-primary/5",
         glass:
-          "bg-secondary/50 backdrop-blur-sm text-foreground border border-border/50 hover:bg-secondary/70 hover:border-primary/50",
+          "bg-card/70 backdrop-blur-sm text-foreground border border-foreground/20 hover:bg-card hover:border-primary/60",
       },
       size: {
         default: "h-10 px-4 py-2",

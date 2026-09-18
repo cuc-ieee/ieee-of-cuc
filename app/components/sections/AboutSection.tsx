@@ -1,281 +1,189 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { Typewriter, SlideIn } from "../Tech";
 import {
   Target,
+  Award,
   Lightbulb,
   Globe,
-  Award,
-  ArrowRight,
-  CheckCircle2,
+  ArrowUpRight,
+  Check,
   Cpu,
   Bot,
   Cloud,
   Layers,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
-import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
+
+const ACCENT = "#2667FF";
+
+const cells = [
+  {
+    no: "A",
+    icon: Target,
+    tag: "Core Mission",
+    title: "Empowering Next-Gen Engineers",
+    desc: "To foster technological innovation and excellence for the benefit of humanity, while creating hands-on opportunities and leadership roles for Curtin students.",
+    points: [
+      "Student-led research and practical technical projects",
+      "Direct alignment with IEEE Sri Lanka Section",
+      "Open platform for all engineering disciplines",
+    ],
+  },
+  {
+    no: "B",
+    icon: Award,
+    tag: "Excellence",
+    title: "100+ Active Student Engineers",
+    desc: "Bridging campus knowledge with industry standards through recruiter networking, leadership pathways, and technical verification.",
+    points: ["Industry Exposure — 100% focused", "Executive Pathways — active committee"],
+  },
+];
+
+const domains = [
+  { icon: Bot, label: "Robotics & AI" },
+  { icon: Cpu, label: "IoT & Hardware" },
+  { icon: Cloud, label: "Cloud & Dev" },
+  { icon: Layers, label: "Code Clinics" },
+];
 
 export function AboutSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="about" ref={ref} className="relative flex items-center py-24">
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Heading */}
-        <div className="max-w-3xl mb-14 text-left">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={transitionNormal(0)}
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-5 leading-tight"
-          >
-            Shaping the <span className="gradient-text">Future of Technology</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal)}
-            className="text-muted-foreground text-lg leading-relaxed"
-          >
-            IEEE Curtin University Colombo Student Branch bridges the gap between
-            academic concepts and real-world technology through collaborative builds,
-            industry networks, and global initiatives.
-          </motion.p>
+    <section id="about" className="relative border-b-2 border-[#111214] bg-[#E4E4E0] text-[#111214] scroll-mt-[84px]">
+      {/* section header */}
+      <div className="grid md:grid-cols-12 border-b border-black/20">
+        <div className="px-4 md:px-8 py-3 font-mono text-[10px] uppercase tracking-[0.28em] text-black/70 md:col-span-3 border-b md:border-b-0 md:border-r border-black/20">
+          <span style={{ color: ACCENT }}>■</span> 01 / Who we are
         </div>
+        <h2 className="px-4 md:px-8 py-8 md:py-12 font-display text-3xl md:text-5xl font-bold leading-[1.05] tracking-tight md:col-span-9">
+          <Typewriter parts={[{ t: "Shaping the " }, { t: "Future of Technology", accent: true }]} speed={26} />
+        </h2>
+      </div>
 
-        {/* Modern Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Bento Card 1: Our Mission & Leadership (7 Cols) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
-            className="md:col-span-7"
+      <p className="px-4 md:px-8 py-8 max-w-3xl text-base md:text-lg leading-relaxed text-black/75 border-b border-black/20">
+        IEEE Curtin University Colombo Student Branch bridges the gap between academic
+        concepts and real-world technology through collaborative builds, industry
+        networks, and global initiatives.
+      </p>
+
+      {/* spec cells */}
+      <div className="grid md:grid-cols-12 gap-px bg-black/20 border-b border-black/20">
+        {cells.map((cell, ci) => (
+          <SlideIn
+            key={cell.no}
+            from={ci === 0 ? "left" : "right"}
+            delay={ci * 0.08}
+            className={`bg-[#E4E4E0] p-6 md:p-12 ${ci === 0 ? "md:col-span-7" : "md:col-span-5"}`}
           >
-            <SpotlightCard
-              className="p-8 sm:p-10 rounded-3xl border-border/50 bg-card/60 h-full flex flex-col justify-between"
-              spotlightColor="rgba(56, 189, 248, 0.22)"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                    <Target className="w-6 h-6" />
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-                    Core Mission
-                  </span>
-                </div>
+            <div className="flex items-center justify-between mb-6">
+              <span className="grid h-11 w-11 place-items-center border border-black/40" style={{ color: ACCENT }}>
+                <cell.icon className="h-5 w-5" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] border border-black/40 px-3 py-1.5">
+                {cell.no} — {cell.tag}
+              </span>
+            </div>
+            <h3 className="font-display text-2xl md:text-[1.7rem] font-bold leading-tight mb-3">
+              {cell.title}
+            </h3>
+            <p className="text-sm md:text-[15px] leading-relaxed text-black/75 mb-6">{cell.desc}</p>
+            <ul className="border-t border-black/20">
+              {cell.points.map((p) => (
+                <li key={p} className="flex items-start gap-2.5 py-2.5 border-b border-black/20 text-sm">
+                  <Check className="h-4 w-4 mt-0.5 shrink-0" style={{ color: ACCENT }} />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </SlideIn>
+        ))}
 
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-3">
-                  Empowering Next-Gen Engineers
-                </h3>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">
-                  To foster technological innovation and excellence for the benefit
-                  of humanity, while creating impactful hands-on opportunities,
-                  leadership roles, and technical growth for Curtin students.
-                </p>
+        {/* cell C — innovation hub */}
+        <SlideIn
+          from="left"
+          delay={0.1}
+          className="bg-[#E4E4E0] p-6 md:p-12 md:col-span-5"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <span className="grid h-11 w-11 place-items-center border border-black/40" style={{ color: ACCENT }}>
+              <Lightbulb className="h-5 w-5" />
+            </span>
+            <span className="font-display text-xl font-bold" style={{ color: ACCENT }}>
+              15+ Workshops
+            </span>
+          </div>
+          <h3 className="font-display text-2xl md:text-[1.7rem] font-bold leading-tight mb-2">
+            Innovation Hub
+          </h3>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] mb-4" style={{ color: ACCENT }}>
+            Idea to prototype pipeline
+          </p>
+          <p className="text-sm md:text-[15px] leading-relaxed text-black/75 mb-6">
+            A launchpad where students explore cutting-edge fields through collaborative
+            sprints, build nights, and national hackathons.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {domains.map((d) => (
+              <span key={d.label} className="inline-flex items-center gap-1.5 border border-black/40 bg-black/[0.03] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider">
+                <d.icon className="h-3.5 w-3.5" style={{ color: ACCENT }} />
+                {d.label}
+              </span>
+            ))}
+          </div>
+        </SlideIn>
 
-                <div className="space-y-3 mb-8">
-                  {[
-                    "Student-led research and practical technical projects",
-                    "Direct alignment with IEEE Sri Lanka Section",
-                    "Open and inclusive platform for all engineering disciplines",
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-3 text-sm text-foreground/90">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
+        {/* cell D — global network */}
+        <SlideIn
+          from="right"
+          delay={0.16}
+          className="bg-[#E4E4E0] p-6 md:p-12 md:col-span-7"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <span className="grid h-11 w-11 place-items-center border border-black/40" style={{ color: ACCENT }}>
+              <Globe className="h-5 w-5" />
+            </span>
+            <span className="font-display text-xl font-bold" style={{ color: ACCENT }}>
+              400K+ Global
+            </span>
+          </div>
+          <h3 className="font-display text-2xl md:text-[1.7rem] font-bold leading-tight mb-2">
+            Global Network
+          </h3>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] mb-4" style={{ color: ACCENT }}>
+            IEEE Region 10 — Asia-Pacific
+          </p>
+          <p className="text-sm md:text-[15px] leading-relaxed text-black/75 mb-6">
+            Direct integration into the world&apos;s largest technical professional community —
+            international exposure, cross-border hackathons, IEEE Xplore support.
+          </p>
+          <div className="grid grid-cols-2 gap-px bg-black/25 border border-black/20">
+            {[
+              ["IEEE Xplore", "Digital Library"],
+              ["Region 10", "APAC Integration"],
+            ].map(([t, s]) => (
+              <div key={t} className="bg-[#E4E4E0] p-3">
+                <p className="text-xs font-bold">{t}</p>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-black/70">{s}</p>
               </div>
+            ))}
+          </div>
+        </SlideIn>
+      </div>
 
-              <div className="pt-6 border-t border-border/40 flex items-center justify-between">
-                <Link href="/about">
-                  <Button variant="outline_glow" size="default" className="group">
-                    Discover More About Us
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <span className="text-xs text-muted-foreground font-medium hidden sm:inline-block">
-                  Curtin University Colombo • Region 10
-                </span>
-              </div>
-            </SpotlightCard>
-          </motion.div>
-
-          {/* Bento Card 2: Active Engineers & Career Readiness (5 Cols) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
-            className="md:col-span-5"
+      <div className="px-4 md:px-8 pb-12">
+        <div className="relative z-10 -mt-7 inline-block">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 bg-[#111214] text-white px-6 py-3.5 font-display text-sm font-bold uppercase tracking-wider transition-all hover:translate-x-[2px] hover:translate-y-[2px]"
+            style={{ boxShadow: `4px 4px 0 ${ACCENT}` }}
           >
-            <SpotlightCard
-              className="p-8 sm:p-10 rounded-3xl border-border/50 bg-card/60 h-full flex flex-col justify-between"
-              spotlightColor="rgba(56, 189, 248, 0.22)"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                    <Award className="w-6 h-6" />
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-secondary/80 text-foreground/90 border border-border/60">
-                    Excellence
-                  </span>
-                </div>
-
-                <div className="mb-4">
-                  <div className="font-display text-4xl sm:text-5xl font-bold gradient-text mb-1">
-                    100+
-                  </div>
-                  <div className="text-sm font-semibold text-foreground uppercase tracking-wide">
-                    Active Student Engineers
-                  </div>
-                </div>
-
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  Bridging campus knowledge with industry standards through
-                  recruiter networking, leadership pathways, and technical verification.
-                </p>
-
-                {/* Focus metrics */}
-                <div className="space-y-2.5">
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-secondary/40 border border-border/40 text-xs sm:text-sm">
-                    <span className="text-muted-foreground font-medium">Industry Exposure</span>
-                    <span className="font-bold text-foreground">100% Focused</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-secondary/40 border border-border/40 text-xs sm:text-sm">
-                    <span className="text-muted-foreground font-medium">Executive Pathways</span>
-                    <span className="font-bold text-foreground">Active Committee</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-border/40">
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span>Accredited IEEE Student Branch Chapter</span>
-                </div>
-              </div>
-            </SpotlightCard>
-          </motion.div>
-
-          {/* Bento Card 3: Innovation Hub & Prototype Pipeline (6 Cols) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
-            className="md:col-span-6"
-          >
-            <SpotlightCard
-              className="p-8 sm:p-10 rounded-3xl border-border/50 bg-card/60 h-full flex flex-col justify-between"
-              spotlightColor="rgba(56, 189, 248, 0.22)"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                    <Lightbulb className="w-6 h-6" />
-                  </div>
-                  <div className="font-display text-2xl font-bold gradient-text">
-                    15+ Workshops
-                  </div>
-                </div>
-
-                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
-                  Innovation Hub
-                </h3>
-                <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-4">
-                  Idea to Prototype Pipeline
-                </p>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  A dynamic launchpad where students explore cutting-edge fields
-                  through collaborative sprints, build nights, and national hackathons.
-                </p>
-
-                {/* Domain Badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {[
-                    { icon: Bot, label: "Robotics & AI" },
-                    { icon: Cpu, label: "IoT & Hardware" },
-                    { icon: Cloud, label: "Cloud & Dev" },
-                    { icon: Layers, label: "Code Clinics" },
-                  ].map((badge, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/50 border border-border/50 text-xs font-medium text-foreground/90"
-                    >
-                      <badge.icon className="w-3.5 h-3.5 text-primary" />
-                      <span>{badge.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-border/40 text-xs text-muted-foreground flex items-center justify-between">
-                <span>Hands-on Hardware Labs</span>
-                <span className="text-primary font-medium">Inter-University Builds &rarr;</span>
-              </div>
-            </SpotlightCard>
-          </motion.div>
-
-          {/* Bento Card 4: Global Network & IEEE Region 10 (6 Cols) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 4)}
-            className="md:col-span-6"
-          >
-            <SpotlightCard
-              className="p-8 sm:p-10 rounded-3xl border-border/50 bg-card/60 h-full flex flex-col justify-between"
-              spotlightColor="rgba(56, 189, 248, 0.22)"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                    <Globe className="w-6 h-6" />
-                  </div>
-                  <div className="font-display text-2xl font-bold gradient-text">
-                    400K+ Global
-                  </div>
-                </div>
-
-                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
-                  Global Network
-                </h3>
-                <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-4">
-                  Opening Doors across IEEE Region 10
-                </p>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  Direct integration into the world&apos;s largest technical professional
-                  community, giving students international exposure, cross-border
-                  hackathons, and IEEE Xplore publication support.
-                </p>
-
-                {/* Network Perks */}
-                <div className="grid grid-cols-2 gap-2.5 mb-4">
-                  <div className="p-3 rounded-xl bg-secondary/40 border border-border/40 text-xs">
-                    <div className="font-semibold text-foreground mb-0.5">IEEE Xplore</div>
-                    <div className="text-muted-foreground">Digital Library Access</div>
-                  </div>
-                  <div className="p-3 rounded-xl bg-secondary/40 border border-border/40 text-xs">
-                    <div className="font-semibold text-foreground mb-0.5">Region 10</div>
-                    <div className="text-muted-foreground">Asia-Pacific Integration</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-border/40 text-xs text-muted-foreground flex items-center justify-between">
-                <span>Cross-Branch Collaborations</span>
-                <span className="text-primary font-medium">Worldwide Recognition &rarr;</span>
-              </div>
-            </SpotlightCard>
-          </motion.div>
+            Discover More About Us
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
+        <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-black/70">
+          Curtin University Colombo • Region 10
+        </p>
       </div>
     </section>
   );

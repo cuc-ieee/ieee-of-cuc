@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Chakra_Petch, Outfit } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { FloatingBubbles } from "./components/FloatingBubbles";
 
 const chakraPetch = Chakra_Petch({
   subsets: ["latin"],
@@ -74,6 +73,7 @@ export const metadata: Metadata = {
 };
 
 import { DesktopNav, MobileNav } from "./components/Navigation";
+import { PageTransition } from "./components/PageTransition";
 
 export default function RootLayout({
   children,
@@ -99,10 +99,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background antialiased relative font-sans">
-        <FloatingBubbles />
         <DesktopNav />
         <MobileNav />
-        <Providers>{children}</Providers>
+        <PageTransition />
+        <div className="pt-[67px]">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );

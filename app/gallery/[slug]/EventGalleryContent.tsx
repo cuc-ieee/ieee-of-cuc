@@ -9,7 +9,7 @@ import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { ANIMATION_CONFIG, transitionNormal, transitionFast } from "@/lib/animations";
-import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
+import { Typewriter } from "../../components/Tech";
 
 export default function EventGalleryContent({
   event,
@@ -68,12 +68,10 @@ export default function EventGalleryContent({
         />
         <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={transitionNormal(0)}
-            className="text-center max-w-3xl mx-auto"
-          >
+          <div className="max-w-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground mb-4">
+              <span className="text-primary">■</span> Album — {event.images.length} photos
+            </p>
             <div className="mb-6">
               <Link
                 href="/gallery"
@@ -83,13 +81,9 @@ export default function EventGalleryContent({
               </Link>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              <span className="relative inline-block text-primary">
-                <SpearBurstEmblem />
-                <span className="relative z-10">{event.title}</span>
-              </span>{" "}
-              Gallery
+              <Typewriter parts={[{ t: `${event.title} ` }, { t: "Gallery", accent: true }]} speed={40} />
             </h1>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -105,7 +99,7 @@ export default function EventGalleryContent({
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.25, delay: Math.min(index * 0.02, 0.25) }}
                   onClick={() => setSelectedImage(image)}
-                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-square bg-secondary/30 relative border border-border/40"
+                  className="group rounded-none overflow-hidden cursor-pointer aspect-square bg-secondary/30 relative border border-border/40"
                 >
                   <SkeletonImage
                     src={getCloudinaryUrl(image, { width: 800 })}
@@ -135,7 +129,7 @@ export default function EventGalleryContent({
           >
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 w-12 h-12 rounded-lg bg-secondary/80 flex items-center justify-center text-foreground hover:text-primary transition-colors z-10"
+              className="absolute top-4 right-4 w-12 h-12 rounded-none bg-secondary/80 flex items-center justify-center text-foreground hover:text-primary transition-colors z-10"
               aria-label="Close"
             >
               <X className="w-6 h-6" />
@@ -145,7 +139,7 @@ export default function EventGalleryContent({
                 e.stopPropagation();
                 handlePrev();
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/80 flex items-center justify-center text-foreground hover:text-primary transition-colors"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-none bg-secondary/80 flex items-center justify-center text-foreground hover:text-primary transition-colors"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -155,7 +149,7 @@ export default function EventGalleryContent({
                 e.stopPropagation();
                 handleNext();
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/80 flex items-center justify-center text-foreground hover:text-primary transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-none bg-secondary/80 flex items-center justify-center text-foreground hover:text-primary transition-colors"
               aria-label="Next image"
             >
               <ChevronRight className="w-6 h-6" />
@@ -168,7 +162,7 @@ export default function EventGalleryContent({
               onClick={(e) => e.stopPropagation()}
               src={getCloudinaryUrl(selectedImage, { width: 2000 })}
               alt="Enlarged gallery view"
-              className="max-w-[90vw] max-h-[90vh] w-auto h-auto object-contain rounded-2xl"
+              className="max-w-[90vw] max-h-[90vh] w-auto h-auto object-contain rounded-none"
             />
           </motion.div>
         )}

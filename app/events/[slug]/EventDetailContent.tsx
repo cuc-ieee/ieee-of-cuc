@@ -59,18 +59,18 @@ export default function EventDetailContent({ event }: Props) {
               {event.category?.map((cat, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium"
+                  className="px-3 py-1 rounded-none bg-primary/20 text-primary text-sm font-medium"
                 >
                   {cat}
                 </span>
               ))}
               {event.featured && (
-                <span className="px-3 py-1 rounded-full bg-accent/20 text-accent text-sm font-medium">
+                <span className="px-3 py-1 bg-[#111214] text-white text-sm font-medium">
                   Featured Event
                 </span>
               )}
               {event.isPast && (
-                <span className="px-3 py-1 rounded-full bg-muted text-muted-foreground text-sm font-medium">
+                <span className="px-3 py-1 rounded-none bg-muted text-muted-foreground text-sm font-medium">
                   Past Event
                 </span>
               )}
@@ -113,7 +113,7 @@ export default function EventDetailContent({ event }: Props) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
-                className="rounded-2xl overflow-hidden relative aspect-video"
+                className="rounded-none overflow-hidden relative aspect-video"
               >
                 <SkeletonImage
                   src={event.image}
@@ -181,7 +181,7 @@ export default function EventDetailContent({ event }: Props) {
                     {event.gallery.map((img, index) => (
                       <div
                         key={index}
-                        className="rounded-xl overflow-hidden aspect-video relative"
+                        className="rounded-none overflow-hidden aspect-video relative"
                       >
                         <SkeletonImage
                           src={img}
@@ -204,7 +204,7 @@ export default function EventDetailContent({ event }: Props) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
-                  className="rounded-2xl bg-card border border-border/50 p-6"
+                  className="rounded-none bg-card border border-border/50 p-6"
                 >
                   <h3 className="font-display text-xl font-semibold mb-4">
                     Event Resources
@@ -243,7 +243,7 @@ export default function EventDetailContent({ event }: Props) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
-                    className="rounded-2xl bg-card border border-border/50 p-6"
+                    className="rounded-none bg-card border border-border/50 p-6"
                   >
                     <h3 className="font-display text-xl font-semibold mb-4">
                       Register Now
@@ -281,7 +281,7 @@ export default function EventDetailContent({ event }: Props) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2.5)}
-                  className="rounded-2xl bg-card border border-border/50 p-6"
+                  className="rounded-none bg-card border border-border/50 p-6"
                 >
                   <div className="flex items-center gap-2 mb-4">
                     <Users className="w-5 h-5 text-primary" />
@@ -292,7 +292,7 @@ export default function EventDetailContent({ event }: Props) {
                   <div className="space-y-4">
                     {event.speakers.map((speaker, index) => (
                       <div key={index} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-none bg-primary/20 flex items-center justify-center">
                           <span className="text-primary font-semibold">
                             {speaker.name.charAt(0)}
                           </span>
@@ -316,7 +316,7 @@ export default function EventDetailContent({ event }: Props) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
-                className="rounded-2xl bg-card border border-border/50 p-6"
+                className="rounded-none bg-card border border-border/50 p-6"
               >
                 <h3 className="font-display text-xl font-semibold mb-4">
                   Event Details

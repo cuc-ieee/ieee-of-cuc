@@ -1,181 +1,145 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
-import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar, MapPin, Clock, ArrowRight, ArrowUpRight } from "lucide-react";
 import { upcomingEvents } from "@/data/events";
+import { Typewriter, PixelIn } from "../Tech";
 
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
-import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
+const ACCENT = "#2667FF";
 
-function getEventStatus(dateStr: string, statusOverride?: "upcoming" | "past" | "ongoing"): {
-  label: string;
-  variant: "ongoing" | "upcoming" | "past";
-} {
-  if (statusOverride === "ongoing") {
-    return { label: "Live Now", variant: "ongoing" };
-  }
-  if (statusOverride === "past") {
-    return { label: "Past Event", variant: "past" };
-  }
-
+function getEventStatus(dateStr: string, statusOverride?: "upcoming" | "past" | "ongoing") {
+  if (statusOverride === "ongoing") return { label: "Live Now", live: true };
+  if (statusOverride === "past") return { label: "Past Event", live: false };
   const cleaned = dateStr.replace(/(\d+)(st|nd|rd|th)/i, "$1");
   const eventDate = new Date(cleaned);
-
-  if (isNaN(eventDate.getTime())) {
-    return { label: "Upcoming", variant: "upcoming" };
-  }
-
+  if (isNaN(eventDate.getTime())) return { label: "Upcoming", live: false };
   const now = new Date();
-  const isSameDay =
+  const sameDay =
     eventDate.getFullYear() === now.getFullYear() &&
     eventDate.getMonth() === now.getMonth() &&
     eventDate.getDate() === now.getDate();
-
-  if (isSameDay) {
-    return { label: "Live Now", variant: "ongoing" };
-  }
-
-  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const eventMidnight = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
-
-  if (eventMidnight < todayMidnight) {
-    return { label: "Past Event", variant: "past" };
-  }
-
-  return { label: "Upcoming", variant: "upcoming" };
+  if (sameDay) return { label: "Live Now", live: true };
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const evt = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
+  if (evt < today) return { label: "Past Event", live: false };
+  return { label: "Upcoming", live: false };
 }
 
 export function EventsSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const events = upcomingEvents.slice(0, 3);
 
   return (
-    <section id="events" ref={ref} className="relative flex items-center py-20">
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={transitionNormal(0)}
-          className="text-center mb-12"
-        >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Upcoming <span className="gradient-text">Events</span>
+    <section id="events" className="relative border-b-2 border-[#111214] bg-[#E4E4E0] text-[#111214] scroll-mt-[84px]">
+      <div className="grid md:grid-cols-12 border-b border-black/20">
+        <div className="px-4 md:px-8 py-3 font-mono text-[10px] uppercase tracking-[0.28em] text-black/70 md:col-span-3 border-b md:border-b-0 md:border-r border-black/20">
+          <span style={{ color: ACCENT }}>■</span> 02 / Events
+        </div>
+        <div className="px-4 md:px-8 py-8 md:py-12 md:col-span-9">
+          <h2 className="font-display text-3xl md:text-5xl font-bold leading-[1.05] tracking-tight">
+            <Typewriter parts={[{ t: "Upcoming " }, { t: "Events", accent: true }]} speed={30} />
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Join our workshops, competitions, and networking sessions to enhance
-            your skills and connect with fellow innovators.
+          <p className="mt-4 max-w-xl text-black/75 leading-relaxed">
+            Workshops, competitions, and networking sessions to sharpen skills and
+            meet fellow innovators.
           </p>
-        </motion.div>
+        </div>
+      </div>
 
-        <div className="flex flex-wrap justify-center gap-6 mb-10">
-          {upcomingEvents.length === 0 && (
-            <p className="text-muted-foreground text-center max-w-md">
-              No upcoming events at the moment — check back soon or explore
-              our past events.
-            </p>
-          )}
-          {upcomingEvents.slice(0, 3).map((event, index) => {
+      {events.length === 0 ? (
+        <p className="px-4 md:px-8 py-12 text-black/75">
+          No upcoming events at the moment — check back soon or explore past events.
+        </p>
+      ) : (
+        <div className="grid md:grid-cols-3 items-start gap-px bg-black/20 border-b border-black/20">
+          {events.map((event, i) => {
             const status = getEventStatus(event.date, event.status);
-
             return (
-              <motion.div
+              <PixelIn
                 key={event.title}
-                whileHover={{
-                  y: -6,
-                  transition: { type: "spring", stiffness: 400, damping: 25 },
-                }}
-                whileTap={{ scale: 0.99 }}
-                className="w-full sm:w-[380px] md:w-[410px] flex-shrink-0"
+                delay={i * 0.1}
+                className={`bg-[#E4E4E0] ${i === 1 ? "md:mt-10" : ""} ${i === 2 ? "md:mt-20" : ""}`}
               >
-                <SpotlightCard
-                  className={`group rounded-2xl overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-[0_16px_36px_-10px_hsl(210_100%_50%/0.25)] h-full flex flex-col justify-between ${
-                    event.featured
-                      ? "border-primary/40 bg-gradient-to-br from-primary/15 to-card"
-                      : "bg-card/70 border-border/50"
-                  }`}
-                  spotlightColor="rgba(56, 189, 248, 0.22)"
+                <article className="group flex flex-col">
+                {event.featured && <div className="h-1.5 w-full" style={{ background: ACCENT }} />}
+                <div className="flex items-center justify-between px-5 md:px-6 pt-5 font-mono text-[10px] uppercase tracking-[0.2em]">
+                  <span className="text-black/65">E.0{i + 1}</span>
+                  <span
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 border font-bold"
+                    style={
+                      status.live
+                        ? { color: "#047857", borderColor: "#047857", background: "rgba(4,120,87,0.08)" }
+                        : { color: ACCENT, borderColor: ACCENT, background: "rgba(38,103,255,0.07)" }
+                    }
+                  >
+                    {status.live && <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-600" />}
+                    {!status.live && <span className="h-1.5 w-1.5" style={{ background: ACCENT }} />}
+                    {status.label}
+                  </span>
+                </div>
+
+                <Link href={`/events/${event.slug}`} className="flex flex-1 flex-col px-5 md:px-6 py-5">
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {event.category?.map((cat) => (
+                      <span key={cat} className="font-mono text-[10px] uppercase tracking-wider border border-black/40 px-2 py-0.5 text-black/75">
+                        {cat}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="font-display text-xl md:text-2xl font-bold leading-tight mb-3 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4" style={{ textDecorationColor: ACCENT }}>
+                    {event.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-black/75 line-clamp-3 mb-5">
+                    {event.description}
+                  </p>
+                  <div className="mt-auto border-t border-black/20 font-mono text-[11px] uppercase tracking-wider">
+                    <div className="flex items-center gap-2.5 py-2 border-b border-black/20">
+                      <Calendar className="h-3.5 w-3.5 shrink-0" style={{ color: ACCENT }} />
+                      <span className="font-bold normal-case tracking-normal text-[13px]">{event.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2.5 py-2 border-b border-black/20 text-black/75">
+                      <Clock className="h-3.5 w-3.5 shrink-0" style={{ color: ACCENT }} />
+                      <span>{event.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2.5 py-2 text-black/75">
+                      <MapPin className="h-3.5 w-3.5 shrink-0" style={{ color: ACCENT }} />
+                      <span className="truncate">{event.location}</span>
+                    </div>
+                  </div>
+                </Link>
+
+                <Link
+                  href={`/events/${event.slug}`}
+                  className="flex items-center justify-between border-t border-black/20 px-5 md:px-6 py-3.5 font-display text-xs font-bold uppercase tracking-wider hover:text-white transition-colors"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = ACCENT;
+                    e.currentTarget.style.color = "#fff";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "inherit";
+                  }}
                 >
-                  <Link href={`/events/${event.slug}`} className="block p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      {/* Status and Category Row */}
-                      <div className="flex items-center justify-between gap-2 mb-4">
-                        <div className="flex flex-wrap items-center gap-2">
-                          {event.category?.map((cat, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-0.5 rounded-full bg-secondary/80 border border-border/40 text-xs font-medium text-foreground"
-                            >
-                              {cat}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Dynamic Status Badge */}
-                        {status.variant === "ongoing" && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                            {status.label}
-                          </span>
-                        )}
-                        {status.variant === "upcoming" && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-400 text-xs font-semibold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                            {status.label}
-                          </span>
-                        )}
-                        {status.variant === "past" && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full bg-muted/60 text-muted-foreground text-xs font-medium">
-                            {status.label}
-                          </span>
-                        )}
-                      </div>
-
-                      <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-primary transition-colors">
-                        {event.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-6 line-clamp-3 leading-relaxed">
-                        {event.description}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2.5 text-sm text-muted-foreground border-t border-border/40 pt-4 mt-auto">
-                      <div className="flex items-center gap-2.5">
-                        <Calendar className="w-4 h-4 text-primary shrink-0" />
-                        <span className="text-foreground/90 font-medium">{event.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2.5">
-                        <Clock className="w-4 h-4 text-primary shrink-0" />
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-2.5">
-                        <MapPin className="w-4 h-4 text-primary shrink-0" />
-                        <span className="truncate">{event.location}</span>
-                      </div>
-                    </div>
-                  </Link>
-                </SpotlightCard>
-              </motion.div>
+                  Open brief
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+                </article>
+              </PixelIn>
             );
           })}
         </div>
+      )}
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 4)}
-          className="text-center"
+      <div className="flex items-center justify-between px-4 md:px-8 py-8">
+        <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-black/70">
+          Full archive on the events index
+        </span>
+        <Link
+          href="/events"
+          className="inline-flex items-center gap-2 border-2 border-[#111214] px-6 py-3 font-display text-sm font-bold uppercase tracking-wider hover:bg-black/5 transition-colors"
         >
-          <Link href="/events">
-            <Button variant="outline_glow" size="lg" className="group">
-              View All Events
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
-        </motion.div>
+          View All Events
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </section>
   );
