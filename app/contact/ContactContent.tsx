@@ -13,7 +13,6 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -40,6 +39,14 @@ const socialLinks = [
   },
 ];
 
+const CONTACT_EMAIL = "curtincolombo.ieee@gmail.com";
+const WHATSAPP_URL = "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ";
+// Backend not deployed yet — keep submit logic below intact, but disable
+// direct POSTs until NEXT_PUBLIC_CONTACT_API_URL is configured.
+const CONTACT_FORM_ENABLED =
+  Boolean(process.env.NEXT_PUBLIC_CONTACT_API_URL) &&
+  !process.env.NEXT_PUBLIC_CONTACT_API_URL?.includes("YOUR_PROJECT_ID");
+
 export default function ContactContent() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -50,6 +57,12 @@ export default function ContactContent() {
   });
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    formData.subject || "IEEE CUC Inquiry"
+  )}&body=${encodeURIComponent(
+    `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\n\n${formData.message}`
+  )}`;
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -65,12 +78,14 @@ export default function ContactContent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!CONTACT_FORM_ENABLED) return;
     setLoading(true);
 
     try {
       // For static export, use an external endpoint (e.g., Firebase Cloud Function)
-      // Replace with your deployed function URL
-      const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL || "https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/contactForm";
+      // Preserved for when the backend is deployed. Set
+      // NEXT_PUBLIC_CONTACT_API_URL to re-enable.
+      const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL as string;
       const response = await fetch(contactEndpoint, {
         method: "POST",
         headers: {
@@ -108,23 +123,27 @@ export default function ContactContent() {
 
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20">
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div
+          aria-hidden="true"
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-primary/10 rounded-full blur-[110px] pointer-events-none -z-10"
+        />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Get in <span className="gradient-text">Touch</span>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
+              Contact <span className="text-primary">Us</span>
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
-              Have questions or want to collaborate? We'd love to hear from you.
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+              Have questions or want to collaborate? We&apos;d love to hear from you.
             </p>
           </motion.div>
         </div>
@@ -226,7 +245,36 @@ export default function ContactContent() {
               <h2 className="font-display text-2xl font-bold mb-6">
                 Send a <span className="gradient-text">Message</span>
               </h2>
+              {!CONTACT_FORM_ENABLED && (
+                <div className="mb-6 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-200/90">
+                  Online form is temporarily disabled while we set up our
+                  message backend. Please reach us directly — we reply
+                  within a few days.
+                  <div className="mt-3 flex flex-col sm:flex-row gap-2">
+                    <Button variant="hero" size="sm" asChild>
+                      <a href={mailtoHref}>
+                        <Mail className="w-4 h-4 mr-2" />
+                        Email {CONTACT_EMAIL}
+                      </a>
+                    </Button>
+                    <Button variant="outline_glow" size="sm" asChild>
+                      <a
+                        href={WHATSAPP_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        WhatsApp Community
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              )}
               <form className="space-y-5" onSubmit={handleSubmit}>
+                <fieldset
+                  disabled={!CONTACT_FORM_ENABLED || loading}
+                  className="space-y-5 disabled:opacity-60"
+                >
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-medium mb-2">
@@ -309,11 +357,16 @@ export default function ContactContent() {
                   variant="hero"
                   size="lg"
                   className="w-full group"
-                  disabled={loading}
+                  disabled={loading || !CONTACT_FORM_ENABLED}
                 >
-                  {loading ? "Sending..." : "Send Message"}
+                  {loading
+                    ? "Sending..."
+                    : CONTACT_FORM_ENABLED
+                      ? "Send Message"
+                      : "Form Disabled — Use Email Above"}
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
+                </fieldset>
               </form>
             </motion.div>
           </div>

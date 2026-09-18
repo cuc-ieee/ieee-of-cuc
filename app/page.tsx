@@ -5,7 +5,7 @@ import { SectionSeparator } from "./components/SectionSeparator";
 import { AboutSection } from "./components/sections/AboutSection";
 import { EventsSection } from "./components/sections/EventsSection";
 import { MembershipSection } from "./components/sections/MembershipSection";
-import { ContactSection } from "./components/sections/ContactSection";
+import { ConnectGatewaySection } from "./components/sections/ConnectGatewaySection";
 import { DotGridBackground } from "./components/DotGridBackground";
 import { Footer } from "./components/Footer";
 
@@ -40,7 +40,7 @@ export default function HomePage() {
         <SectionSeparator />
         <MembershipSection />
         <SectionSeparator />
-        <ContactSection />
+        <ConnectGatewaySection />
         <Footer />
       </main>
     </div>

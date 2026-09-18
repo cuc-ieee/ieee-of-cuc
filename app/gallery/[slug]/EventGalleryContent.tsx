@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
@@ -25,8 +26,10 @@ export default function EventGalleryContent({
       event.images[(currentIndex - 1 + event.images.length) % event.images.length];
 
     [nextImage, prevImage].forEach((img) => {
-      const preload = new Image();
-      preload.src = getCloudinaryUrl(img, { width: 1200 });
+      if (typeof window !== "undefined") {
+        const preload = new window.Image();
+        preload.src = getCloudinaryUrl(img, { width: 1200 });
+      }
     });
   }, [selectedImage, event.images]);
 
@@ -78,8 +81,8 @@ export default function EventGalleryContent({
                 &larr; Back to Gallery
               </Link>
             </div>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="gradient-text">{event.title}</span> Gallery
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
+              <span className="text-primary">{event.title}</span> Gallery
             </h1>
           </motion.div>
         </div>
@@ -93,15 +96,19 @@ export default function EventGalleryContent({
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={transitionFast(index * ANIMATION_CONFIG.stagger.fast)}
+                  transition={{ duration: 0.25, delay: Math.min(index * 0.02, 0.25) }}
                   onClick={() => setSelectedImage(image)}
-                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-square"
+                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-square bg-secondary/30 relative border border-border/40"
                 >
-                  <img
+                  <Image
                     src={getCloudinaryUrl(image, { width: 800 })}
                     alt={`${event.title} image ${index + 1}`}
+                    width={500}
+                    height={500}
+                    priority={index < 8}
+                    loading={index < 8 ? "eager" : "lazy"}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </motion.div>

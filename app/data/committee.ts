@@ -3,7 +3,7 @@ export interface CommitteeMember {
   role: string;
   department: string;
   image: string;
-  linkedin: string;
+  linkedin?: string;
   email: string;
 }
 
@@ -37,7 +37,7 @@ export const committeeMembers: CommitteeMember[] = [
     role: "Treasurer",
     department: "Electrical and Electronic Engineering",
     image: "/ExoCom/rashmitha.jpeg",
-    linkedin: "bugger doesn't have linkedin",
+    linkedin: "",
     email: "a.rashmitha.fernando123@gmail.com",
   },
   {

@@ -64,18 +64,24 @@ export default function EventsContent() {
     <div className="min-h-screen w-full bg-background">
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-12 md:pb-20">
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div
+          aria-hidden="true"
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-primary/10 rounded-full blur-[110px] pointer-events-none -z-10"
+        />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Our <span className="gradient-text">Events</span>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
+              Our <span className="text-primary">Events</span>
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
               Join our workshops, competitions, and networking sessions to
               enhance your skills and connect with fellow innovators.
             </p>
@@ -139,11 +145,12 @@ export default function EventsContent() {
                 {visibleEvents.map((event, index) => (
                   <motion.div
                     key={event.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
-                    className={`rounded-2xl overflow-hidden border card-hover ${
+                    whileHover={{
+                      y: -6,
+                      transition: { type: "spring", stiffness: 400, damping: 25 },
+                    }}
+                    whileTap={{ scale: 0.99 }}
+                    className={`group rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-[0_16px_36px_-10px_hsl(210_100%_50%/0.25)] hover:border-primary/50 ${
                       event.featured
                         ? "bg-gradient-to-br from-primary/10 to-card border-primary/30"
                         : "bg-card border-border/50"
@@ -154,7 +161,7 @@ export default function EventsContent() {
                         <img
                           src={event.image}
                           alt={event.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
                       <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
@@ -230,18 +237,19 @@ export default function EventsContent() {
               {visibleEvents.map((event, index) => (
                 <motion.div
                   key={event.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={transitionNormal(index * ANIMATION_CONFIG.stagger.normal)}
-                  className="rounded-2xl bg-card border border-border/50 overflow-hidden card-hover"
+                  whileHover={{
+                    y: -6,
+                    transition: { type: "spring", stiffness: 400, damping: 25 },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group rounded-2xl bg-card/60 border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-[0_12px_32px_-8px_hsl(210_100%_50%/0.28)] transition-all duration-300"
                 >
                   <Link href={`/events/${event.slug}`}>
                     <div className="aspect-video overflow-hidden">
                       <img
                         src={event.image}
                         alt={event.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                     <div className="p-6">

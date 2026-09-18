@@ -25,12 +25,26 @@ const initialFormState = {
   message: "",
 };
 
+const CONTACT_EMAIL = "curtincolombo.ieee@gmail.com";
+const WHATSAPP_URL = "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ";
+// Backend not deployed yet — keep submit logic intact, but disable direct
+// POSTs until NEXT_PUBLIC_CONTACT_API_URL is configured.
+const CONTACT_FORM_ENABLED =
+  Boolean(process.env.NEXT_PUBLIC_CONTACT_API_URL) &&
+  !process.env.NEXT_PUBLIC_CONTACT_API_URL?.includes("YOUR_PROJECT_ID");
+
 export function ContactSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    formData.subject || "IEEE CUC Inquiry"
+  )}&body=${encodeURIComponent(
+    `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\n\n${formData.message}`
+  )}`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -42,12 +56,13 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!CONTACT_FORM_ENABLED) return;
     setLoading(true);
 
     try {
       // For static export, use an external endpoint (e.g., Firebase Cloud Function)
-      // Replace with your deployed function URL
-      const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL || "https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/contactForm";
+      // Preserved for when the backend is deployed.
+      const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL as string;
       const response = await fetch(contactEndpoint, {
         method: "POST",
         headers: {
@@ -165,7 +180,35 @@ export function ContactSection() {
             transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1.5)}
             className="rounded-2xl p-6 md:p-8 bg-card border border-border/50"
           >
+            {!CONTACT_FORM_ENABLED && (
+              <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-200/90">
+                Online form is temporarily disabled. Please email us
+                directly — we reply within a few days.
+                <div className="mt-3 flex flex-col sm:flex-row gap-2">
+                  <Button variant="hero" size="sm" asChild>
+                    <a href={mailtoHref}>
+                      <Mail className="w-4 h-4 mr-2" />
+                      Email {CONTACT_EMAIL}
+                    </a>
+                  </Button>
+                  <Button variant="outline_glow" size="sm" asChild>
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      WhatsApp Community
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            )}
             <form className="space-y-5" onSubmit={handleSubmit}>
+              <fieldset
+                disabled={!CONTACT_FORM_ENABLED || loading}
+                className="space-y-5 disabled:opacity-60"
+              >
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium mb-2">
@@ -246,11 +289,16 @@ export function ContactSection() {
                 variant="hero"
                 size="lg"
                 className="w-full"
-                disabled={loading}
+                disabled={loading || !CONTACT_FORM_ENABLED}
               >
                 <Send className="w-4 h-4 mr-2" />
-                {loading ? "Sending..." : "Send Message"}
+                {loading
+                  ? "Sending..."
+                  : CONTACT_FORM_ENABLED
+                    ? "Send Message"
+                    : "Form Disabled — Use Email Above"}
               </Button>
+              </fieldset>
             </form>
           </motion.div>
         </div>

@@ -7,7 +7,7 @@
     "dev": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next dev",
     "build": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next build && next-sitemap --config next-sitemap.config.cjs",
     "start": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next start",
-    "lint": "next lint",
+    "lint": "eslint ./app --ext .ts,.tsx",
     "fetch-gallery": "node scripts/fetch-cloudinary-images.js",
     "deploy": "npm run build && firebase deploy --only hosting"
   },

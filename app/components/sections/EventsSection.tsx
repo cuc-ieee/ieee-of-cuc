@@ -72,19 +72,35 @@ export function EventsSection() {
         </motion.div>
 
         <div className="flex flex-wrap justify-center gap-6 mb-10">
+          {upcomingEvents.length === 0 && (
+            <p className="text-muted-foreground text-center max-w-md">
+              No upcoming events at the moment — check back soon or explore
+              our past events.
+            </p>
+          )}
           {upcomingEvents.slice(0, 3).map((event, index) => {
             const status = getEventStatus(event.date, event.status);
 
             return (
               <motion.div
                 key={event.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * (index + 1))}
+                initial={{ opacity: 0, y: 22, scale: 0.98 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                whileHover={{
+                  y: -6,
+                  transition: { type: "spring", stiffness: 400, damping: 25 },
+                }}
+                whileTap={{ scale: 0.99 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 320,
+                  damping: 26,
+                  delay: Math.min(index * 0.06, 0.2),
+                }}
                 className="w-full sm:w-[380px] md:w-[410px] flex-shrink-0"
               >
                 <SpotlightCard
-                  className={`group rounded-2xl overflow-hidden card-hover h-full flex flex-col justify-between ${
+                  className={`group rounded-2xl overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-[0_16px_36px_-10px_hsl(210_100%_50%/0.25)] h-full flex flex-col justify-between ${
                     event.featured
                       ? "border-primary/40 bg-gradient-to-br from-primary/15 to-card"
                       : "bg-card/70 border-border/50"

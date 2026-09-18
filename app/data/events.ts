@@ -24,30 +24,6 @@ export interface Event {
 }
 
 export const upcomingEvents: Event[] = [
-  {
-    id: "U1",
-    title: "CV Boost - Career Fair and CV Clinic",
-    slug: "cv-boost-career-fair-and-cv-clinic",
-    description:
-      "CVBoost 2026 is a three-phase Recruitment Readiness Pipeline that takes Engineering and Computing undergraduates from CV diagnosis through field-specific coaching to direct, on-campus recruiter access — connecting them with industry partners for interviews, feedback, and post-event hiring opportunities",
-    fullDescription: [
-      "CVBoost 2026 is a three-phase Recruitment Readiness Pipeline for Engineering and Computing undergraduates, organized by the IEEE Student Branch of Curtin University Colombo. It moves students from CV diagnosis through field-specific coaching to direct recruiter access — combining a technical CV masterclass, an ATS/interview prep session, and an on-campus Career Fair & CV Clinic with industry partners. The program closes with a post-event CV Partner pipeline that sends curated, pre-screened candidates directly to partner companies and tracks outcomes like shortlists and placements.",
-    ],
-    date: "4th September 2026",
-    time: "9:00 AM onwards",
-    participation: "Open to all university students",
-    location: "Curtin University Colombo Campus, Room LT201",
-    image: "/Events/CVBoost/hero.png",
-    featured: false,
-    category: ["Career Fair", "CV Clinic"],
-    capacity: 100,
-    status: "upcoming",
-    isPast: false,
-    registrationLink: "https://forms.gle/xF7xcCcPd95v5gw59",
-    registrationClosingDate: "12 May 2026 at 11:59 PM",
-    agendaLink: "/temp/cvboost-agenda.html",
-    guidelinesLink: "/temp/cvboost-guidelines.html",
-  },
   // {
   //   id: "2",
   //   title: "IoT Hackathon 2026",
@@ -82,6 +58,30 @@ export const upcomingEvents: Event[] = [
 
 export const pastEvents: Event[] = [
   {
+    id: "P0",
+    title: "CV Boost - Career Fair and CV Clinic",
+    slug: "cv-boost-career-fair-and-cv-clinic",
+    description:
+      "CVBoost 2026 is a three-phase Recruitment Readiness Pipeline that takes Engineering and Computing undergraduates from CV diagnosis through field-specific coaching to direct, on-campus recruiter access — connecting them with industry partners for interviews, feedback, and post-event hiring opportunities",
+    fullDescription: [
+      "CVBoost 2026 is a three-phase Recruitment Readiness Pipeline for Engineering and Computing undergraduates, organized by the IEEE Student Branch of Curtin University Colombo. It moves students from CV diagnosis through field-specific coaching to direct recruiter access — combining a technical CV masterclass, an ATS/interview prep session, and an on-campus Career Fair & CV Clinic with industry partners. The program closes with a post-event CV Partner pipeline that sends curated, pre-screened candidates directly to partner companies and tracks outcomes like shortlists and placements.",
+    ],
+    date: "4th September 2026",
+    time: "9:00 AM onwards",
+    participation: "Open to all university students",
+    location: "Curtin University Colombo Campus, Room LT201",
+    image: "/Events/CVBoost/hero.png",
+    featured: false,
+    category: ["Career Fair", "CV Clinic"],
+    capacity: 100,
+    status: "past",
+    isPast: true,
+    registrationLink: "https://forms.gle/xF7xcCcPd95v5gw59",
+    registrationClosingDate: "12 May 2026 at 11:59 PM",
+    agendaLink: "/temp/cvboost-agenda.html",
+    guidelinesLink: "/temp/cvboost-guidelines.html",
+  },
+  {
     id: "P1",
     title: "3-minute research challenge (3MRC)",
     slug: "3mrc",
@@ -93,7 +93,7 @@ export const pastEvents: Event[] = [
     time: "8:30 PM onwards",
     participation: "Inter-university",
     location: "Curtin University Colombo, Room LT105",
-    image: "/events/3mrc/hero.jpg",
+    image: "/Events/3mrc/hero.jpg",
     category: ["Competition", "Research"],
     status: "past",
     isPast: true,
@@ -110,7 +110,7 @@ export const pastEvents: Event[] = [
     time: "4:00 PM - 5:30 PM (IST)",
     participation: "Open to Public",
     location: "Online",
-    image: "/events/techxchange/ep1/hero.jpg",
+    image: "/Events/techxchange/ep1/hero.jpg",
     category: ["Webinar", "Series"],
     status: "past",
     isPast: true,
