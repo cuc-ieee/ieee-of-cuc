@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer";
 import { galleryEvents } from "../data/gallery";
 import { Button } from "@/components/ui/button";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
+import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 export default function GalleryContent() {
   return (
@@ -27,7 +28,11 @@ export default function GalleryContent() {
           <div className="max-w-3xl mx-auto text-center">
             
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              Photo <span className="text-primary">Gallery</span>
+              <span className="relative inline-block">
+                <SpearBurstEmblem />
+                <span className="relative z-10">Photo</span>
+              </span>{" "}
+              <span className="text-primary">Gallery</span>
             </h1>
 
             <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">

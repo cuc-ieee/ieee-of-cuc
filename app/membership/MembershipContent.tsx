@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Footer } from "../components/Footer";
+import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 const benefitCategories = [
   { id: "all", label: "All Privileges" },
@@ -193,7 +194,11 @@ export default function MembershipContent() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              IEEE <span className="text-primary">Membership</span>
+              <span className="relative inline-block">
+                <SpearBurstEmblem />
+                <span className="relative z-10">IEEE</span>
+              </span>{" "}
+              <span className="text-primary">Membership</span>
             </h1>
 
             <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">

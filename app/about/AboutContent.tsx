@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { Button } from "@/components/ui/button";
+import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 const pillars = [
   {
@@ -82,14 +83,18 @@ export default function AboutContent() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             
-            {/* Headline */}
+            {/* Headline with Rotating Porcupine Spear Emblem Behind First Word */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]"
             >
-              About <span className="text-primary">Us</span>
+              <span className="relative inline-block">
+                <SpearBurstEmblem />
+                <span className="relative z-10">About</span>
+              </span>{" "}
+              <span className="text-primary">Us</span>
             </motion.h1>
 
             {/* Subtitle */}

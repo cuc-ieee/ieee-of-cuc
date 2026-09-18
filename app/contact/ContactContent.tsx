@@ -26,6 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Footer } from "../components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 const CONTACT_EMAIL = "curtincolombo.ieee@gmail.com";
 const WHATSAPP_URL = "https://chat.whatsapp.com/BU6hIOWUhXLILTp0DaFPYZ";
@@ -239,7 +240,11 @@ export default function ContactContent() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              Contact <span className="text-primary">Us</span>
+              <span className="relative inline-block">
+                <SpearBurstEmblem />
+                <span className="relative z-10">Contact</span>
+              </span>{" "}
+              <span className="text-primary">Us</span>
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-8">
               Have questions, technical ideas, or looking to partner? Route your inquiry directly to
