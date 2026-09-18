@@ -84,19 +84,11 @@ export function EventsSection() {
             return (
               <motion.div
                 key={event.title}
-                initial={{ opacity: 0, y: 22, scale: 0.98 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 whileHover={{
                   y: -6,
                   transition: { type: "spring", stiffness: 400, damping: 25 },
                 }}
                 whileTap={{ scale: 0.99 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 320,
-                  damping: 26,
-                  delay: Math.min(index * 0.06, 0.2),
-                }}
                 className="w-full sm:w-[380px] md:w-[410px] flex-shrink-0"
               >
                 <SpotlightCard

@@ -19,11 +19,27 @@ import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 type SortOption = "newest" | "oldest" | "az" | "za";
 
 const parseEventDate = (date: string) => {
-  const match = date.match(/(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})/);
-  if (!match) return 0;
+  if (!date) return 0;
 
-  const parsed = new Date(`${match[3]} ${match[2]} ${match[1]}`);
-  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+  // Clean ordinal indicators (e.g. "4th September 2026" -> "4 September 2026")
+  const cleaned = date.replace(/(\d+)(st|nd|rd|th)/gi, "$1").trim();
+
+  // Standard Date parsing handles "4 September 2026", "29 Jul 2026", etc.
+  const parsedTime = new Date(cleaned).getTime();
+  if (!Number.isNaN(parsedTime)) {
+    return parsedTime;
+  }
+
+  // Fallback: parse "DD Month YYYY" with short or long month names
+  const match = cleaned.match(/(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/);
+  if (match) {
+    const fallbackTime = new Date(`${match[2]} ${match[1]}, ${match[3]}`).getTime();
+    if (!Number.isNaN(fallbackTime)) {
+      return fallbackTime;
+    }
+  }
+
+  return 0;
 };
 
 const sortEvents = <T extends { title: string; date: string }>(
