@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import { Footer } from "@/components/Footer";
 import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
@@ -107,13 +107,13 @@ export default function EventGalleryContent({
                   onClick={() => setSelectedImage(image)}
                   className="group rounded-2xl overflow-hidden cursor-pointer aspect-square bg-secondary/30 relative border border-border/40"
                 >
-                  <Image
+                  <SkeletonImage
                     src={getCloudinaryUrl(image, { width: 800 })}
                     alt={`${event.title} image ${index + 1}`}
                     width={500}
                     height={500}
                     priority={index < 8}
-                    loading={index < 8 ? "eager" : "lazy"}
+                    containerClassName="w-full h-full"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </motion.div>

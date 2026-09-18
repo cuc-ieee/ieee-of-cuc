@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -192,12 +192,13 @@ export function MemberFacepile() {
             className="group cursor-pointer"
             title={`${av.member.name} • ${av.member.role}`}
           >
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-background ring-1 ring-primary/40 shadow-[0_2px_8px_rgba(0,0,0,0.6)] group-hover:scale-110 group-hover:ring-primary group-hover:z-50 transition-all duration-200">
-              <Image
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-background ring-1 ring-primary/40 shadow-[0_2px_8px_rgba(0,0,0,0.6)] group-hover:scale-110 group-hover:ring-primary group-hover:z-50 transition-all duration-200 relative">
+              <SkeletonImage
                 src={av.member.image}
                 alt={av.member.name}
                 width={40}
                 height={40}
+                containerClassName="w-full h-full"
                 className="w-full h-full object-cover"
               />
             </div>

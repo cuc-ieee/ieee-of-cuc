@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Clock, ArrowRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import {
   Select,
   SelectContent,
@@ -178,11 +179,12 @@ export default function EventsContent() {
                     }`}
                   >
                     <div className="grid md:grid-cols-3 gap-0">
-                      <div className="aspect-video md:aspect-auto overflow-hidden">
-                        <img
+                      <div className="aspect-video md:aspect-auto overflow-hidden relative min-h-[220px]">
+                        <SkeletonImage
                           src={event.image}
                           alt={event.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
                       <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
@@ -266,11 +268,12 @@ export default function EventsContent() {
                   className="group rounded-2xl bg-card/60 border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-[0_12px_32px_-8px_hsl(210_100%_50%/0.28)] transition-all duration-300"
                 >
                   <Link href={`/events/${event.slug}`}>
-                    <div className="aspect-video overflow-hidden">
-                      <img
+                    <div className="aspect-video overflow-hidden relative">
+                      <SkeletonImage
                         src={event.image}
                         alt={event.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                     <div className="p-6">

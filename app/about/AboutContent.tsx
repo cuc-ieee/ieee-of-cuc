@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import {
   Target,
   Globe,
@@ -274,15 +274,15 @@ export default function AboutContent() {
               
               {/* Image with glass frame */}
               <div className="lg:col-span-6 relative rounded-2xl overflow-hidden border border-border/60 shadow-xl group">
-                <Image
+                <SkeletonImage
                   src="/Aboutus/Excom.jpg"
                   alt="IEEE Curtin University Colombo Executive Committee"
                   width={600}
                   height={400}
                   className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60" />
-                <div className="absolute bottom-3 left-4 right-4 text-xs font-medium text-foreground/90">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60 pointer-events-none" />
+                <div className="absolute bottom-3 left-4 right-4 text-xs font-medium text-foreground/90 pointer-events-none">
                   Curtin University Colombo Executive Board
                 </div>
               </div>

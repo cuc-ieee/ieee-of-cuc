@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import { ArrowRight, Images } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { galleryEvents } from "../data/gallery";
@@ -96,13 +96,13 @@ export default function GalleryContent() {
                           href={`/gallery/${event.slug}`}
                           className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-secondary/30 border border-border/40 shadow-sm block"
                         >
-                          <Image
+                          <SkeletonImage
                             src={imgUrl}
                             alt={`${event.title} - photo ${imgIndex + 1}`}
                             width={800}
                             height={600}
                             priority={isFirstRow}
-                            loading={isFirstRow ? "eager" : "lazy"}
+                            containerClassName="w-full h-full"
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
 

@@ -11,6 +11,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import { Footer } from "../../components/Footer";
 import type { Event } from "@/data/events";
 import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
@@ -30,12 +31,14 @@ export default function EventDetailContent({ event }: Props) {
       {/* Hero Section */}
       <section className="relative pt-24 md:pb-12 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <SkeletonImage
             src={event.image}
             alt={event.title}
-            className="w-full h-full object-cover opacity-20"
+            fill
+            priority
+            className="object-cover opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60 pointer-events-none" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -110,12 +113,14 @@ export default function EventDetailContent({ event }: Props) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
-                className="rounded-2xl overflow-hidden"
+                className="rounded-2xl overflow-hidden relative aspect-video"
               >
-                <img
+                <SkeletonImage
                   src={event.image}
                   alt={event.title}
-                  className="w-full aspect-video object-cover"
+                  fill
+                  priority
+                  className="object-cover"
                 />
               </motion.div>
 
@@ -176,12 +181,13 @@ export default function EventDetailContent({ event }: Props) {
                     {event.gallery.map((img, index) => (
                       <div
                         key={index}
-                        className="rounded-xl overflow-hidden aspect-video"
+                        className="rounded-xl overflow-hidden aspect-video relative"
                       >
-                        <img
+                        <SkeletonImage
                           src={img}
                           alt={`${event.title} gallery ${index + 1}`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          fill
+                          className="object-cover hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     ))}

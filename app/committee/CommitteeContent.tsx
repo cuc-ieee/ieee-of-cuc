@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Image from "next/image";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Mail, Search } from "lucide-react";
 import { Footer } from "../components/Footer";
@@ -160,18 +160,18 @@ export default function CommitteeContent() {
                   >
                     {/* Portrait Image Container */}
                     <div className="relative aspect-square w-full overflow-hidden bg-secondary/30">
-                      <Image
+                      <SkeletonImage
                         src={member.image}
                         alt={member.name}
                         width={400}
                         height={400}
                         priority={index < 8}
-                        loading={index < 8 ? "eager" : "lazy"}
+                        containerClassName="w-full h-full"
                         className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
 
                       {/* Subtle overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/10 to-transparent opacity-80" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/10 to-transparent opacity-80 pointer-events-none" />
 
                       {/* Role Pill Badge */}
                       <div className="absolute top-3 left-3">
