@@ -1,6 +1,14 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import sharp from "sharp";
+let sharp;
+try {
+  sharp = (await import("sharp")).default;
+} catch {
+  console.error(
+    "Error: 'sharp' is not installed as a project dependency to prevent GitHub CI lockfile issues.\nTo run image optimization locally, install sharp or run via bun/npx."
+  );
+  process.exit(1);
+}
 
 // Files to skip (e.g. data mask files used by scripts)
 const IGNORE_FILENAMES = new Set([
