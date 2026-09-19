@@ -9,7 +9,6 @@ import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { ANIMATION_CONFIG, transitionNormal, transitionFast } from "@/lib/animations";
-import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 export default function EventGalleryContent({
   event,
@@ -83,11 +82,7 @@ export default function EventGalleryContent({
               </Link>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              <span className="relative inline-block text-primary">
-                <SpearBurstEmblem />
-                <span className="relative z-10">{event.title}</span>
-              </span>{" "}
-              Gallery
+              <span className="text-primary">{event.title}</span> Gallery
             </h1>
           </motion.div>
         </div>

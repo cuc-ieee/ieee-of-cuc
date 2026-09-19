@@ -16,9 +16,9 @@ export function HeroSection() {
     >
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-6 items-center">
           {/* Left Column */}
-          <div className="lg:col-span-7 xl:col-span-8 text-left">
+          <div className="lg:col-span-7 xl:col-span-7 text-left">
             <motion.h1
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ export function HeroSection() {
               delay: ANIMATION_CONFIG.stagger.normal,
               ease: ANIMATION_CONFIG.ease.out,
             }}
-            className="lg:col-span-5 xl:col-span-4 flex items-center justify-center relative mt-6 lg:mt-0"
+            className="lg:col-span-5 xl:col-span-5 flex items-center justify-center relative mt-6 lg:mt-0"
           >
             <TechGlobe />
           </motion.div>

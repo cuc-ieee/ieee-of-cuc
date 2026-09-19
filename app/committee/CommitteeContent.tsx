@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Mail, Search } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { committeeMembers } from "@/data/committee";
-import { SpearBurstEmblem } from "@/components/ui/SpearBurstEmblem";
 
 const categories = [
   { id: "all", label: "All Members" },
@@ -63,11 +62,7 @@ export default function CommitteeContent() {
           <div className="max-w-3xl mx-auto text-center">
             
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
-              <span className="relative inline-block">
-                <SpearBurstEmblem />
-                <span className="relative z-10">Executive</span>
-              </span>{" "}
-              <span className="text-primary">Committee</span>
+              Executive <span className="text-primary">Committee</span>
             </h1>
 
             <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
