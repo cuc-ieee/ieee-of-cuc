@@ -25,57 +25,83 @@ const isNavItemActive = (pathname: string, href: string) => {
 export function DesktopNav() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [activeHref, setActiveHref] = useState(pathname);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    setActiveHref(pathname);
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 hidden lg:flex items-center justify-between px-8 py-5 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
-          : "bg-transparent"
-      }`}
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50 hidden lg:flex justify-center pt-4 px-6 pointer-events-none"
     >
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="flex items-center gap-3"
+      <div
+        className={`pointer-events-auto max-w-5xl w-full flex items-center justify-between px-6 py-2.5 rounded-full border transition-all duration-300 ${
+          scrolled
+            ? "bg-background/85 backdrop-blur-xl border-border/80 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_20px_rgba(56,189,248,0.1)]"
+            : "bg-background/60 backdrop-blur-lg border-border/40 shadow-[0_4px_24px_rgba(0,0,0,0.25)]"
+        }`}
       >
-        <img
-          src="/logo/logo.png"
-          alt="IEEE Curtin University Colombo"
-          className="w-auto h-10 rounded-lg"
-        />
-      </button>
-
-      <div className="flex items-center gap-8">
-        {navItems.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            className={`text-sm font-medium tracking-wide relative group transition-colors duration-300 ${
-              isNavItemActive(pathname, item.href)
-                ? "text-primary"
-                : "text-muted-foreground hover:text-primary"
-            }`}
-          >
-            {item.label}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-          </Link>
-        ))}
-        <Link
-          href="/membership"
-          className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium text-sm hover:shadow-[0_0_20px_hsl(210_100%_50%/0.4)] transition-all duration-300"
-        >
-          Join IEEE
+        {/* Left: Brand Logo */}
+        <Link href="/" onClick={() => setActiveHref("/")} className="flex items-center gap-3 group">
+          <img
+            src="/logo/logo.png"
+            alt="IEEE Curtin University Colombo"
+            className="w-auto h-8 xl:h-9 group-hover:opacity-90 transition-opacity"
+          />
         </Link>
+
+        {/* Center / Right: Nav Items + Rounded Join Button */}
+        <nav className="flex items-center gap-7">
+          {navItems.map((item) => {
+            const isActive = isNavItemActive(activeHref, item.href);
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setActiveHref(item.href)}
+                className={`text-sm font-medium tracking-wide relative py-1 transition-colors duration-200 ${
+                  isActive
+                    ? "text-primary font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <span>{item.label}</span>
+                {isActive && (
+                  <motion.span
+                    layoutId="activeDesktopNavIndicator"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full shadow-[0_0_10px_hsl(210_100%_50%/0.8)]"
+                    transition={{
+                      type: "spring",
+                      stiffness: 450,
+                      damping: 35,
+                    }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+
+          <Link
+            href="/membership"
+            onClick={() => setActiveHref("/membership")}
+            className="bg-primary text-primary-foreground px-5 py-2 rounded-full font-medium text-sm hover:shadow-[0_0_24px_hsl(210_100%_50%/0.5)] hover:bg-primary/90 transition-all duration-300"
+          >
+            Join IEEE
+          </Link>
+        </nav>
       </div>
-    </motion.nav>
+    </motion.header>
   );
 }
 
@@ -83,9 +109,14 @@ export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [activeHref, setActiveHref] = useState(pathname);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    setActiveHref(pathname);
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -104,31 +135,36 @@ export function MobileNav() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-4 transition-all duration-500 ${
-          scrolled
-            ? "bg-background/80 backdrop-blur-lg border-b border-border/50"
-            : "bg-transparent"
-        }`}
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="fixed top-3 left-3 right-3 z-50 lg:hidden"
       >
-        <Link href="/" className="flex items-center gap-2">
-          <img
-            src="/logo/logo-mobile.png"
-            alt="IEEE Curtin University Colombo"
-            className="w-auto h-8 rounded-lg"
-          />
-        </Link>
-
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2 text-foreground hover:text-primary transition-colors"
-          aria-label="Toggle menu"
+        <div
+          className={`flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 ${
+            scrolled || isOpen
+              ? "bg-background/90 backdrop-blur-xl border-border/80 shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
+              : "bg-background/60 backdrop-blur-md border-border/40 shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
+          }`}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </motion.nav>
+          <Link href="/" onClick={() => setActiveHref("/")} className="flex items-center gap-2">
+            <img
+              src="/logo/logo-mobile.png"
+              alt="IEEE Curtin University Colombo"
+              className="w-auto h-7"
+            />
+          </Link>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-1.5 text-foreground hover:text-primary transition-colors rounded-full border border-transparent hover:border-border"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </motion.header>
 
       <AnimatePresence>
         {isOpen && (
@@ -136,37 +172,67 @@ export function MobileNav() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 lg:hidden pt-16 bg-background/95 backdrop-blur-lg"
+            className="fixed inset-0 z-40 lg:hidden pt-24 pb-8 px-6 bg-background/95 backdrop-blur-xl flex flex-col justify-between"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
-              {navItems.map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={item.href}
-                    className="font-display text-2xl text-foreground hover:text-primary transition-colors"
+            <div className="flex flex-col items-center justify-center gap-6 my-auto">
+              {navItems.map((item, index) => {
+                const isActive = isNavItemActive(activeHref, item.href);
+
+                return (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="relative"
                   >
-                    {item.label}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navItems.length * 0.1 }}
-              >
-                <Link
-                  href="/membership"
-                  className="mt-4 bg-primary text-primary-foreground px-8 py-3 rounded-lg font-display font-semibold"
-                >
-                  Join IEEE
-                </Link>
-              </motion.div>
+                    <Link
+                      href={item.href}
+                      onClick={() => {
+                        setActiveHref(item.href);
+                        setIsOpen(false);
+                      }}
+                      className={`font-display text-2xl font-bold transition-colors relative py-1 inline-block ${
+                        isActive
+                          ? "text-primary"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {isActive && (
+                        <motion.span
+                          layoutId="activeMobileNavIndicator"
+                          className="absolute -bottom-1 left-0 right-0 h-1 bg-primary rounded-full shadow-[0_0_12px_hsl(210_100%_50%/0.8)]"
+                          transition={{
+                            type: "spring",
+                            stiffness: 450,
+                            damping: 35,
+                          }}
+                        />
+                      )}
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 }}
+              className="w-full max-w-sm mx-auto"
+            >
+              <Link
+                href="/membership"
+                onClick={() => {
+                  setActiveHref("/membership");
+                  setIsOpen(false);
+                }}
+                className="w-full block text-center bg-primary text-primary-foreground py-3.5 rounded-full font-semibold text-sm hover:shadow-[0_0_25px_hsl(210_100%_50%/0.5)] transition-all"
+              >
+                Join IEEE Student Branch
+              </Link>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

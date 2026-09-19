@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { DesktopNav, MobileNav } from "@/components/Navigation";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import { Footer } from "@/components/Footer";
 import { GalleryEvent } from "@/data/gallery";
 import Link from "next/link";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
+import { ANIMATION_CONFIG, transitionNormal, transitionFast } from "@/lib/animations";
 
 export default function EventGalleryContent({
   event,
@@ -18,23 +19,17 @@ export default function EventGalleryContent({
 
   // Preload adjacent images when viewing lightbox
   useEffect(() => {
-    if (selectedImage === null) return;
-
+    if (!selectedImage) return;
     const currentIndex = event.images.indexOf(selectedImage);
-    const prevIndex =
-      currentIndex > 0 ? currentIndex - 1 : event.images.length - 1;
-    const nextIndex =
-      currentIndex < event.images.length - 1 ? currentIndex + 1 : 0;
+    const nextImage = event.images[(currentIndex + 1) % event.images.length];
+    const prevImage =
+      event.images[(currentIndex - 1 + event.images.length) % event.images.length];
 
-    // Preload previous and next images
-    const preloadPrev = new Image();
-    preloadPrev.src = getCloudinaryUrl(event.images[prevIndex], {
-      width: 2000,
-    });
-
-    const preloadNext = new Image();
-    preloadNext.src = getCloudinaryUrl(event.images[nextIndex], {
-      width: 2000,
+    [nextImage, prevImage].forEach((img) => {
+      if (typeof window !== "undefined") {
+        const preload = new window.Image();
+        preload.src = getCloudinaryUrl(img, { width: 1200 });
+      }
     });
   }, [selectedImage, event.images]);
 
@@ -56,28 +51,26 @@ export default function EventGalleryContent({
 
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-28 pb-20 overflow-hidden grid-pattern">
+      <section className="relative pt-32 pb-20 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center opacity-25 scale-105"
           style={{
             backgroundImage: `url(${
-              event.heroImage && event.heroImage.startsWith("/")
-                ? event.heroImage
+              event.images[0].startsWith("http")
+                ? event.images[0]
                 : getCloudinaryUrl(event.images[0], { width: 1920 })
             })`,
             filter: "blur(7px)",
           }}
         />
-        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
             <div className="mb-6">
@@ -88,8 +81,8 @@ export default function EventGalleryContent({
                 &larr; Back to Gallery
               </Link>
             </div>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="gradient-text">{event.title}</span> Gallery
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
+              <span className="text-primary">{event.title}</span> Gallery
             </h1>
           </motion.div>
         </div>
@@ -103,15 +96,19 @@ export default function EventGalleryContent({
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  transition={{ duration: 0.25, delay: Math.min(index * 0.02, 0.25) }}
                   onClick={() => setSelectedImage(image)}
-                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-square"
+                  className="group rounded-2xl overflow-hidden cursor-pointer aspect-square bg-secondary/30 relative border border-border/40"
                 >
-                  <img
+                  <SkeletonImage
                     src={getCloudinaryUrl(image, { width: 800 })}
                     alt={`${event.title} image ${index + 1}`}
+                    width={500}
+                    height={500}
+                    priority={index < 8}
+                    containerClassName="w-full h-full"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </motion.div>

@@ -8,25 +8,60 @@ import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { upcomingEvents } from "@/data/events";
 
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
+
+function getEventStatus(dateStr: string, statusOverride?: "upcoming" | "past" | "ongoing"): {
+  label: string;
+  variant: "ongoing" | "upcoming" | "past";
+} {
+  if (statusOverride === "ongoing") {
+    return { label: "Live Now", variant: "ongoing" };
+  }
+  if (statusOverride === "past") {
+    return { label: "Past Event", variant: "past" };
+  }
+
+  const cleaned = dateStr.replace(/(\d+)(st|nd|rd|th)/i, "$1");
+  const eventDate = new Date(cleaned);
+
+  if (isNaN(eventDate.getTime())) {
+    return { label: "Upcoming", variant: "upcoming" };
+  }
+
+  const now = new Date();
+  const isSameDay =
+    eventDate.getFullYear() === now.getFullYear() &&
+    eventDate.getMonth() === now.getMonth() &&
+    eventDate.getDate() === now.getDate();
+
+  if (isSameDay) {
+    return { label: "Live Now", variant: "ongoing" };
+  }
+
+  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const eventMidnight = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
+
+  if (eventMidnight < todayMidnight) {
+    return { label: "Past Event", variant: "past" };
+  }
+
+  return { label: "Upcoming", variant: "upcoming" };
+}
+
 export function EventsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="events" ref={ref} className="relative flex items-center py-20">
-      {/* Background Accent */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-gradient-to-l from-primary/5 to-transparent rounded-l-full" />
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={transitionNormal(0)}
           className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-            Events
-          </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             Upcoming <span className="gradient-text">Events</span>
           </h2>
@@ -36,66 +71,102 @@ export function EventsSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {upcomingEvents.slice(0, 3).map((event, index) => (
-            <motion.div
-              key={event.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className={`group rounded-2xl overflow-hidden card-hover ${
-                event.featured
-                  ? "md:col-span-2 lg:col-span-1 bg-gradient-to-br from-primary/20 to-card border-primary/30"
-                  : "bg-card border-border/50"
-              } border`}
-            >
-              {event.featured && (
-                <div className="px-4 py-2 bg-primary/20 border-b border-primary/30">
-                  <span className="text-primary text-xs font-semibold tracking-wider uppercase">
-                    Featured Event
-                  </span>
-                </div>
-              )}
-              <Link href={`/events/${event.slug}`} className="block p-6">
-                <div className="flex flex-wrap items-center gap-2 mb-3">
-                  {event.category?.map((cat, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 rounded-full bg-secondary text-xs font-medium"
-                    >
-                      {cat}
-                    </span>
-                  ))}
-                </div>
-                <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-primary transition-colors">
-                  {event.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                  {event.description}
-                </p>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-primary" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-primary" />
-                    <span>{event.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    <span>{event.location}</span>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+        <div className="flex flex-wrap justify-center gap-6 mb-10">
+          {upcomingEvents.length === 0 && (
+            <p className="text-muted-foreground text-center max-w-md">
+              No upcoming events at the moment — check back soon or explore
+              our past events.
+            </p>
+          )}
+          {upcomingEvents.slice(0, 3).map((event, index) => {
+            const status = getEventStatus(event.date, event.status);
+
+            return (
+              <motion.div
+                key={event.title}
+                whileHover={{
+                  y: -6,
+                  transition: { type: "spring", stiffness: 400, damping: 25 },
+                }}
+                whileTap={{ scale: 0.99 }}
+                className="w-full sm:w-[380px] md:w-[410px] flex-shrink-0"
+              >
+                <SpotlightCard
+                  className={`group rounded-2xl overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-[0_16px_36px_-10px_hsl(210_100%_50%/0.25)] h-full flex flex-col justify-between ${
+                    event.featured
+                      ? "border-primary/40 bg-gradient-to-br from-primary/15 to-card"
+                      : "bg-card/70 border-border/50"
+                  }`}
+                  spotlightColor="rgba(56, 189, 248, 0.22)"
+                >
+                  <Link href={`/events/${event.slug}`} className="block p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      {/* Status and Category Row */}
+                      <div className="flex items-center justify-between gap-2 mb-4">
+                        <div className="flex flex-wrap items-center gap-2">
+                          {event.category?.map((cat, idx) => (
+                            <span
+                              key={idx}
+                              className="px-3 py-0.5 rounded-full bg-secondary/80 border border-border/40 text-xs font-medium text-foreground"
+                            >
+                              {cat}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Dynamic Status Badge */}
+                        {status.variant === "ongoing" && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                            {status.label}
+                          </span>
+                        )}
+                        {status.variant === "upcoming" && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-400 text-xs font-semibold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                            {status.label}
+                          </span>
+                        )}
+                        {status.variant === "past" && (
+                          <span className="inline-flex items-center px-3 py-1 rounded-full bg-muted/60 text-muted-foreground text-xs font-medium">
+                            {status.label}
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-primary transition-colors">
+                        {event.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm mb-6 line-clamp-3 leading-relaxed">
+                        {event.description}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2.5 text-sm text-muted-foreground border-t border-border/40 pt-4 mt-auto">
+                      <div className="flex items-center gap-2.5">
+                        <Calendar className="w-4 h-4 text-primary shrink-0" />
+                        <span className="text-foreground/90 font-medium">{event.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <Clock className="w-4 h-4 text-primary shrink-0" />
+                        <span>{event.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <MapPin className="w-4 h-4 text-primary shrink-0" />
+                        <span className="truncate">{event.location}</span>
+                      </div>
+                    </div>
+                  </Link>
+                </SpotlightCard>
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 4)}
           className="text-center"
         >
           <Link href="/events">

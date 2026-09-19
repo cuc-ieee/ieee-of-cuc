@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { DesktopNav, MobileNav } from "./components/Navigation";
 import { HeroSection } from "./components/sections/HeroSection";
+import { DomainMarquee } from "./components/DomainMarquee";
+import { SectionSeparator } from "./components/SectionSeparator";
 import { AboutSection } from "./components/sections/AboutSection";
 import { EventsSection } from "./components/sections/EventsSection";
 import { MembershipSection } from "./components/sections/MembershipSection";
-import { ContactSection } from "./components/sections/ContactSection";
+import { ConnectGatewaySection } from "./components/sections/ConnectGatewaySection";
+import { DotGridBackground } from "./components/DotGridBackground";
 import { Footer } from "./components/Footer";
 
 export const metadata: Metadata = {
@@ -25,16 +27,20 @@ export const metadata: Metadata = {
 // This page is statically generated at build time (SSG)
 export default function HomePage() {
   return (
-    <div className="min-h-screen w-full bg-background overflow-x-hidden">
-      <DesktopNav />
-      <MobileNav />
+    <div className="min-h-screen w-full bg-background overflow-x-hidden relative">
+      <DotGridBackground />
 
       <main>
         <HeroSection />
+        <DomainMarquee />
+        <SectionSeparator />
         <AboutSection />
+        <SectionSeparator />
         <EventsSection />
+        <SectionSeparator />
         <MembershipSection />
-        <ContactSection />
+        <SectionSeparator />
+        <ConnectGatewaySection />
         <Footer />
       </main>
     </div>

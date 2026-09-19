@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { DesktopNav, MobileNav } from "../components/Navigation";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
+import { ArrowRight, Images } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { galleryEvents } from "../data/gallery";
 import { Button } from "@/components/ui/button";
@@ -11,79 +11,110 @@ import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 export default function GalleryContent() {
   return (
-    <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
+    <div className="min-h-screen w-full bg-background overflow-x-hidden">
+      
+      {/* =================================================================
+          HERO SECTION
+          ================================================================= */}
+      <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div
+          aria-hidden="true"
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-primary/10 rounded-full blur-[110px] pointer-events-none -z-10"
+        />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden grid-pattern">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-              Gallery
-            </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Our <span className="gradient-text">Gallery</span>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
+              Photo <span className="text-primary">Gallery</span>
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
-              Relive the moments from our events, workshops, and community
-              activities.
+
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+              Relive the memorable milestones, technical hackathons, conferences, and student celebrations of the IEEE Curtin University Colombo Student Branch.
             </p>
-          </motion.div>
+
+          </div>
         </div>
       </section>
 
-      {/* Events Gallery Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="space-y-16">
-            {galleryEvents.map((event, eventIndex) => (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: eventIndex * 0.2 }}
-              >
-                <h2 className="font-display text-3xl font-bold mb-8 text-center">
-                  {event.title} 
-                </h2>
-                <div className="grid sm:grid-cols-3 gap-4">
-                  {event.images.slice(0, 3).map((image, imgIndex) => (
-                    <motion.div
-                      key={imgIndex}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, amount: 0.5 }}
-                      transition={{ duration: 0.4, delay: imgIndex * 0.1 }}
-                      className="group aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer relative"
-                    >
-                      <img
-                        src={getCloudinaryUrl(image, { width: 800, height: 600 })}
-                        alt={`${event.title} image ${imgIndex + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </motion.div>
-                  ))}
+      {/* =================================================================
+          EVENT ALBUMS SHOWCASE
+          ================================================================= */}
+      <section className="pb-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-20 max-w-6xl mx-auto">
+            {galleryEvents.map((event, eventIndex) => {
+              const previewImages = event.images.slice(0, 3);
+              const totalCount = event.images.length;
+
+              return (
+                <div
+                  key={event.id}
+                  className="rounded-3xl border border-border/50 bg-card/30 backdrop-blur-sm p-6 sm:p-8 hover:border-primary/30 transition-all duration-300 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+                >
+                  {/* Event Album Title Bar */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-border/40">
+                    <div>
+                      <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-1 block">
+                        Featured Event Album
+                      </span>
+                      <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground">
+                        {event.title}
+                      </h2>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-secondary/60 text-muted-foreground border border-border/50">
+                        <Images className="w-3.5 h-3.5 text-primary" />
+                        <span>{totalCount} Photos</span>
+                      </div>
+
+                      <Button variant="hero" size="sm" asChild className="group">
+                        <Link href={`/gallery/${event.slug}`} className="inline-flex items-center gap-1.5">
+                          <span>View Album</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* 3-Image Preview Grid (Reliable, eager load for row 1) */}
+                  <div className="grid sm:grid-cols-3 gap-4 sm:gap-5">
+                    {previewImages.map((image, imgIndex) => {
+                      const imgUrl = getCloudinaryUrl(image, { width: 800, height: 600 });
+                      const isFirstRow = eventIndex === 0;
+
+                      return (
+                        <Link
+                          key={image}
+                          href={`/gallery/${event.slug}`}
+                          className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-secondary/30 border border-border/40 shadow-sm block"
+                        >
+                          <SkeletonImage
+                            src={imgUrl}
+                            alt={`${event.title} - photo ${imgIndex + 1}`}
+                            width={800}
+                            height={600}
+                            priority={isFirstRow}
+                            containerClassName="w-full h-full"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+
+                          {/* Subtle hover gradient scrim */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span className="text-xs font-medium text-foreground inline-flex items-center gap-1">
+                              <span>Open in Album</span>
+                              <ArrowRight className="w-3 h-3" />
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="text-center mt-8">
-                  <Link href={`/gallery/${event.slug}`}>
-                    <Button variant="outline_glow" size="lg" className="group">
-                      View More
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

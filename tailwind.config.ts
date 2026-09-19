@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        display: ["Orbitron", "sans-serif"],
+        sans: ["var(--font-outfit)", "'Outfit'", "sans-serif"],
+        display: ["var(--font-chakra-petch)", "'Chakra Petch'", "sans-serif"],
+        chakra: ["var(--font-chakra-petch)", "'Chakra Petch'", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

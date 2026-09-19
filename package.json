@@ -7,8 +7,9 @@
     "dev": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next dev",
     "build": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next build && next-sitemap --config next-sitemap.config.cjs",
     "start": "NEXT_IGNORE_INCORRECT_LOCKFILE=1 next start",
-    "lint": "next lint",
+    "lint": "eslint ./app --ext .ts,.tsx",
     "fetch-gallery": "node scripts/fetch-cloudinary-images.js",
+    "optimize-images": "node scripts/optimize-images.mjs",
     "deploy": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
@@ -45,6 +46,7 @@
     "@supabase/supabase-js": "^2.89.0",
     "@tanstack/react-query": "^5.83.0",
     "@types/react-helmet": "^6.1.11",
+    "@types/three": "^0.186.0",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",
@@ -70,6 +72,7 @@
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "three": "^0.186.0",
     "vaul": "^0.9.9",
     "zod": "^3.25.76"
   },
@@ -87,6 +90,7 @@
     "globals": "^15.15.0",
     "lovable-tagger": "^1.1.13",
     "postcss": "^8.5.6",
+    "puppeteer-core": "^25.11.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",

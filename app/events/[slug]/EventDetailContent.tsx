@@ -11,9 +11,10 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DesktopNav, MobileNav } from "../../components/Navigation";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import { Footer } from "../../components/Footer";
 import type { Event } from "@/data/events";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 interface Props {
   event: Event;
@@ -26,25 +27,25 @@ export default function EventDetailContent({ event }: Props) {
 
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
       <section className="relative pt-24 md:pb-12 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <SkeletonImage
             src={event.image}
             alt={event.title}
-            className="w-full h-full object-cover opacity-20"
+            fill
+            priority
+            className="object-cover opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60 pointer-events-none" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={transitionNormal(0)}
           >
             <Link
               href="/events"
@@ -111,13 +112,15 @@ export default function EventDetailContent({ event }: Props) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="rounded-2xl overflow-hidden"
+                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 1)}
+                className="rounded-2xl overflow-hidden relative aspect-video"
               >
-                <img
+                <SkeletonImage
                   src={event.image}
                   alt={event.title}
-                  className="w-full aspect-video object-cover"
+                  fill
+                  priority
+                  className="object-cover"
                 />
               </motion.div>
 
@@ -125,7 +128,7 @@ export default function EventDetailContent({ event }: Props) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
                 className="prose prose-invert max-w-none"
               >
                 <h2 className="font-display text-2xl font-semibold mb-4">
@@ -148,7 +151,7 @@ export default function EventDetailContent({ event }: Props) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2.5)}
                 >
                   <h2 className="font-display text-2xl font-semibold mb-6">
                     Event Outcomes
@@ -169,7 +172,7 @@ export default function EventDetailContent({ event }: Props) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
                 >
                   <h2 className="font-display text-2xl font-semibold mb-6">
                     Event Gallery
@@ -178,12 +181,13 @@ export default function EventDetailContent({ event }: Props) {
                     {event.gallery.map((img, index) => (
                       <div
                         key={index}
-                        className="rounded-xl overflow-hidden aspect-video"
+                        className="rounded-xl overflow-hidden aspect-video relative"
                       >
-                        <img
+                        <SkeletonImage
                           src={img}
                           alt={`${event.title} gallery ${index + 1}`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          fill
+                          className="object-cover hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     ))}
@@ -194,84 +198,89 @@ export default function EventDetailContent({ event }: Props) {
 
             {/* Right Column - Sidebar */}
             <div className="space-y-6">
-              {/* Registration Card (for upcoming events) */}
-              {!event.isPast && (
+              {/* Event Resources — shown for upcoming and past events */}
+              {(event.agendaLink || event.guidelinesLink) && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
                   className="rounded-2xl bg-card border border-border/50 p-6"
                 >
-                  {event.agendaLink || event.guidelinesLink ? (
-                    <>
-                      <h3 className="font-display text-xl font-semibold mb-4">
-                        Event Resources
-                      </h3>
-                      <div className="space-y-3">
-                        {event.agendaLink && (
-                          <Button asChild variant="glow" className="w-full">
-                            <Link
-                              href={event.agendaLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View Agenda
-                            </Link>
-                          </Button>
-                        )}
-                        {event.guidelinesLink && (
-                          <Button asChild variant="outline" className="w-full">
-                            <Link
-                              href={event.guidelinesLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View Guidelines
-                            </Link>
-                          </Button>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <h3 className="font-display text-xl font-semibold mb-4">
-                        Register Now
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-6">
-                        Secure your spot for this exciting event. Limited
-                        seats available!
-                      </p>
-                      {event.registrationLink ? (
-                        <Button asChild variant="glow" className="w-full">
-                          <Link
-                            href={event.registrationLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Register for Event
-                          </Link>
-                        </Button>
-                      ) : (
-                        <Button variant="glow" className="w-full" disabled>
-                          Registration Opens Soon
-                        </Button>
-                      )}
-                      {event.registrationClosingDate && (
-                        <p className="text-red-500 text-sm mt-4 text-center font-semibold">
-                          Closes: {event.registrationClosingDate}
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <h3 className="font-display text-xl font-semibold mb-4">
+                    Event Resources
+                  </h3>
+                  <div className="space-y-3">
+                    {event.agendaLink && (
+                      <Button asChild variant="glow" className="w-full">
+                        <Link
+                          href={event.agendaLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View Agenda
+                        </Link>
+                      </Button>
+                    )}
+                    {event.guidelinesLink && (
+                      <Button asChild variant="outline" className="w-full">
+                        <Link
+                          href={event.guidelinesLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View Guidelines
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
                 </motion.div>
               )}
+              {/* Registration Card (for upcoming events without resource links) */}
+              {!event.isPast &&
+                !event.agendaLink &&
+                !event.guidelinesLink && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2)}
+                    className="rounded-2xl bg-card border border-border/50 p-6"
+                  >
+                    <h3 className="font-display text-xl font-semibold mb-4">
+                      Register Now
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-6">
+                      Secure your spot for this exciting event. Limited seats
+                      available!
+                    </p>
+                    {event.registrationLink ? (
+                      <Button asChild variant="glow" className="w-full">
+                        <Link
+                          href={event.registrationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Register for Event
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button variant="glow" className="w-full" disabled>
+                        Registration Opens Soon
+                      </Button>
+                    )}
+                    {event.registrationClosingDate && (
+                      <p className="text-red-500 text-sm mt-4 text-center font-semibold">
+                        Closes: {event.registrationClosingDate}
+                      </p>
+                    )}
+                  </motion.div>
+                )}
 
               {/* Speakers */}
               {event.speakers && event.speakers.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 2.5)}
                   className="rounded-2xl bg-card border border-border/50 p-6"
                 >
                   <div className="flex items-center gap-2 mb-4">
@@ -306,7 +315,7 @@ export default function EventDetailContent({ event }: Props) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={transitionNormal(ANIMATION_CONFIG.stagger.normal * 3)}
                 className="rounded-2xl bg-card border border-border/50 p-6"
               >
                 <h3 className="font-display text-xl font-semibold mb-4">

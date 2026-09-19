@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Clock, ArrowRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SkeletonImage } from "@/components/ui/SkeletonImage";
 import {
   Select,
   SelectContent,
@@ -12,18 +13,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DesktopNav, MobileNav } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { upcomingEvents, pastEvents } from "@/data/events";
+import { ANIMATION_CONFIG, transitionNormal } from "@/lib/animations";
 
 type SortOption = "newest" | "oldest" | "az" | "za";
 
 const parseEventDate = (date: string) => {
-  const match = date.match(/(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})/);
-  if (!match) return 0;
+  if (!date) return 0;
 
-  const parsed = new Date(`${match[3]} ${match[2]} ${match[1]}`);
-  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+  // Clean ordinal indicators (e.g. "4th September 2026" -> "4 September 2026")
+  const cleaned = date.replace(/(\d+)(st|nd|rd|th)/gi, "$1").trim();
+
+  // Standard Date parsing handles "4 September 2026", "29 Jul 2026", etc.
+  const parsedTime = new Date(cleaned).getTime();
+  if (!Number.isNaN(parsedTime)) {
+    return parsedTime;
+  }
+
+  // Fallback: parse "DD Month YYYY" with short or long month names
+  const match = cleaned.match(/(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/);
+  if (match) {
+    const fallbackTime = new Date(`${match[2]} ${match[1]}, ${match[3]}`).getTime();
+    if (!Number.isNaN(fallbackTime)) {
+      return fallbackTime;
+    }
+  }
+
+  return 0;
 };
 
 const sortEvents = <T extends { title: string; date: string }>(
@@ -62,28 +79,26 @@ export default function EventsContent() {
 
   return (
     <div className="min-h-screen w-full bg-background">
-      <DesktopNav />
-      <MobileNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-12 md:pb-20 overflow-hidden grid-pattern">
-        <div className="absolute inset-0">
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div
+          aria-hidden="true"
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-primary/10 rounded-full blur-[110px] pointer-events-none -z-10"
+        />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={transitionNormal(0)}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium tracking-wide mb-6">
-              Events
-            </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Our <span className="gradient-text">Events</span>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.12]">
+              Our <span className="text-primary">Events</span>
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
               Join our workshops, competitions, and networking sessions to
               enhance your skills and connect with fellow innovators.
             </p>
@@ -147,22 +162,24 @@ export default function EventsContent() {
                 {visibleEvents.map((event, index) => (
                   <motion.div
                     key={event.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className={`rounded-2xl overflow-hidden border card-hover ${
+                    whileHover={{
+                      y: -6,
+                      transition: { type: "spring", stiffness: 400, damping: 25 },
+                    }}
+                    whileTap={{ scale: 0.99 }}
+                    className={`group rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-[0_16px_36px_-10px_hsl(210_100%_50%/0.25)] hover:border-primary/50 ${
                       event.featured
                         ? "bg-gradient-to-br from-primary/10 to-card border-primary/30"
                         : "bg-card border-border/50"
                     }`}
                   >
                     <div className="grid md:grid-cols-3 gap-0">
-                      <div className="aspect-video md:aspect-auto overflow-hidden">
-                        <img
+                      <div className="aspect-video md:aspect-auto overflow-hidden relative min-h-[220px]">
+                        <SkeletonImage
                           src={event.image}
                           alt={event.title}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
                       <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
@@ -238,18 +255,20 @@ export default function EventsContent() {
               {visibleEvents.map((event, index) => (
                 <motion.div
                   key={event.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="rounded-2xl bg-card border border-border/50 overflow-hidden card-hover"
+                  whileHover={{
+                    y: -6,
+                    transition: { type: "spring", stiffness: 400, damping: 25 },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group rounded-2xl bg-card/60 border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-[0_12px_32px_-8px_hsl(210_100%_50%/0.28)] transition-all duration-300"
                 >
                   <Link href={`/events/${event.slug}`}>
-                    <div className="aspect-video overflow-hidden">
-                      <img
+                    <div className="aspect-video overflow-hidden relative">
+                      <SkeletonImage
                         src={event.image}
                         alt={event.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                     <div className="p-6">
